@@ -1,0 +1,787 @@
+FusionMain:
+
+    #小标题导航
+    #免费试玩
+    FREETRY  : 'x,//*[@id="root"]/div/div[1]/div/div[3]/div[1]/span'
+    #特殊代理
+    SPEAGENT    : 'x,//*[@id="root"]/div/div[1]/div/div[3]/div[2]/span'
+    #加入代理
+    ADDAGENT    : 'x,//*[@id="root"]/div/div[1]/div/div[3]/div[3]/span'
+    #帮助中心
+    HELP        : 'x,//*[@id="root"]/div/div[1]/div/div[3]/div[4]/a'
+    #玩法
+    PLAY        : 'x,//*[@id="root"]/div/div[1]/div/div[3]/div[5]/a'
+    #资讯
+    NEWS        : 'x,//*[@id="root"]/div/div[1]/div/div[3]/div[6]/a'
+    #快速充值通道
+    FASTCHANNEL : 'x,//*[@id="root"]/div/div[1]/div/div[3]/div[7]/a'
+    
+    
+    #登陆注册模块
+    #用户名
+    USERNAME  : 'x,//*[@id="root"]/div/div[2]/div[2]/div[1]/input'
+    #密码
+    PASSERROR : 'x,//*[@id="root"]/div/div[2]/div[2]/div[2]/input'
+    #验证码
+    YZM : 'x,//*[@id="root"]/div/div[2]/div[2]/div[3]/input'
+    #登陆按钮
+    LOGINBUTTON : 'x,//*[@id="root"]/div/div[2]/div[2]/button'  
+    #注册按钮
+    REGISTERED: 'x,//*[@id="root"]/div/div[2]/div[2]/a'
+    
+    
+    #登陆后状态
+    #刷新
+    REFRESL   : 'x,//*[@id="root"]/div/div[2]/div[2]/span[2]'
+    #会员中心
+    PERCENTER : 'x,//*[@id="root"]/div/div[2]/div[2]/a[1]'
+    #充值
+    DEPOIST   : 'x,//*[@id="root"]/div/div[2]/div[2]/a[2]'
+    #提现
+    WITHDRAW  : 'x,//*[@id="root"]/div/div[2]/div[2]/a[3]'
+    #投注记录
+    BETRECORD : 'x,//*[@id="root"]/div/div[2]/div[2]/a[4]'
+    #退出
+    DROPOUT   : 'x,//*[@id="root"]/div/div[2]/div[2]/span[3]'
+    
+    
+    
+    
+    #主标题栏
+    #首页
+    HOME      : 'x,//*[@id="root"]/div/div[3]/div/div[2]/div[1]/a'
+    #数字彩
+    LOTTERY   : 'x,//*[@id="root"]/div/div[3]/div/div[2]/div[2]/a'
+    #体彩
+    SPORT     : 'x,//*[@id="root"]/div/div[3]/div/div[2]/div[3]/a'
+    #电子游艺
+    GAME      : 'x,//*[@id="root"]/div/div[3]/div/div[2]/div[4]/a'
+    #手机购彩
+    PHONE     : 'x,//*[@id="root"]/div/div[3]/div/div[2]/div[5]/a'
+    #优惠活动
+    ACTIVITY  : 'x,//*[@id="root"]/div/div[3]/div/div[2]/div[6]/a'
+    #开奖公告
+    LOTTNOTE  : 'x,//*[@id="root"]/div/div[3]/div/div[2]/div[7]/a'  
+    #走势图表
+    TRENDCHART: 'x,//*[@id="root"]/div/div[3]/div/div[2]/div[8]/a'
+    
+    #请填写用户名
+    FILLNAME: 'x,//*[@id="root"]/div/div[6]/div'
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+FusionLotteryHall:
+
+    #主页点击数字彩后
+    #购彩大厅
+    LOTTERYHALL: 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[1]'
+    #低频彩
+    LOWCOLOR   : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[2]'
+    #六合彩
+    MARKSIX    : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[3]'
+    #时时彩
+    TIMOCOLOR  : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[4]'
+    #PK10
+    PK10       : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[5]'
+    #10选5
+    CHOICE     : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[6]'
+    #快3
+    FASTTHREE  : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[7]'
+    #PC蛋蛋
+    PCEGG      : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[8]'
+
+
+
+    #低频彩
+    #福彩3D
+    FULOTTERY: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div[3]/a/div'
+    #极速3D
+    SPEED    : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[1]/div[3]/a/div'
+    #排列三
+    ARRANGE  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[2]/div[3]/a/div'
+    
+    #六合彩
+    #五分六合彩
+    FIVEMARKSIX : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div[3]/a/div'
+    #分分六合彩
+    MIMARKSIX   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[1]/div[3]/a/div'
+    #香港六合彩
+    HKMARKSIX   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[2]/div[3]/a/div'
+    #三分六合彩
+    THREEMARKSIX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[2]/div[3]/a/div'
+    
+    #时时彩
+    #天津时时彩
+    TIANJINTIME: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div[3]/a/div'
+    #分分时时彩
+    MIMITIME   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[1]/div[3]/a/div'
+    #北京时时彩
+    BEIJINGTIME: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[3]/div/div[1]/div[3]/a/div'
+    #五分时时彩
+    FIVEMITIME : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[4]/div/div[1]/div[3]/a/div'
+    #重庆时时彩
+    CHONGQING  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[2]/div[3]/a/div'
+    #三分时时彩
+    THREETIME  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[2]/div[3]/a/div'
+    #新疆时时彩
+    XINJIANG   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[3]/div/div[2]/div[3]/a/div'
+    
+    
+    
+    
+    #PK10
+    #北京PK拾
+    BEIJINGPK10: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div[3]/a/div'
+    #幸运飞艇
+    LUCKYPK10  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[1]/div[3]/a/div'
+    #五分PK拾
+    FIVEMIPK10 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[3]/div/div[1]/div[3]/a/div'
+    #分分PK拾
+    MIMIPK10   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[2]/div[3]/a/div'
+    #三分PK拾
+    THREEPK10  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[2]/div[3]/a/div'
+    
+    #11选5
+    #广东11选5
+    GUANGDONGC: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div[3]/a/div'
+    #山东11选5
+    SHANDONGC : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[1]/div[3]/a/div'
+    #安徽11选5
+    ANHUIC    : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[3]/div/div[1]/div[3]/a/div'
+    #上海11选5
+    SHANGHAIC : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[2]/div[3]/a/div'
+    #江西11选5
+    SHANXIC   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[2]/div[3]/a/div'
+    #分分11选5
+    MIMICHOICE: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[3]/div/div[2]/div[3]/a/div'
+    
+    
+    
+    
+      
+    #快3
+    #安徽快3
+    AHFAST : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div[3]/a/div'
+    #广西快3
+    GXFAST : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[1]/div[3]/a/div'
+    #湖北快3
+    HBFAST : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[3]/div/div[1]/div[3]/a/div'
+    #三分快3
+    THFAST : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[4]/div/div[1]/div[3]/a/div'                  
+    #吉林快3
+    JLFAST : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[2]/div[3]/a/div'
+    #江苏快3
+    JSFAST : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[2]/div[3]/a/div'
+    #分分快3
+    MMFAST : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[3]/div/div[2]/div[3]/a/div'
+    #五分快3
+    FMFAST : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[4]/div/div[2]/div[3]/a/div'
+   
+   
+
+    #PC蛋蛋
+    #北京28
+    BJEGG : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div[3]/a/div'
+    #分分28
+    MMEGG : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[1]/div[3]/a/div'
+    #五分28
+    FMEGG : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[3]/div/div[1]/div[3]/a/div'
+    #幸运28
+    LCEGG : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[2]/div[3]/a/div'
+    #三分28
+    THEGG : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[2]/div[3]/a/div'
+    
+    #请你先登陆/注册
+    REGISTERTEXT : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div/div/div[3]'
+    
+    #手机购彩
+    PHONELOTTERY : 'x,//*[@id="root"]/div/div[1]/div/a[1]/div/span'
+    
+    #联系客服
+    SERVICE  : 'x,//*[@id="root"]/div/div[1]/div/div/div[1]/a'
+    #免费试玩
+    FREEPLAY : 'x,//*[@id="root"]/div/div[1]/div/div/div[2]'
+    
+    #跳转主页
+    SWITCHHOME : 'x,//*[@id="root"]/div/div[1]/div/a[2]/img'
+    
+    
+FusionHallLogin:
+
+    #登陆页面
+    LOGINPAGE: 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[2]/div[1]'
+    #用户账号
+    USERNAME1 : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[3]/form/div[1]/div/input'
+    #密码
+    PASSWORD1 : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[3]/form/div[2]/div/input'
+    #验证码
+    YZM1    : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[3]/form/div[3]/div[1]/input'
+    #登陆按钮
+    LOGINBUTTON: 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[3]/form/div[4]/button[1]'
+    
+    
+    
+    #会员注册页面
+    MEMBERPAGE: 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[2]/div[2]'
+    #用户账号
+    USERNAME2 : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[3]/form/div[1]/div/input'
+    #登陆密码
+    PASSWORD2 : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[3]/form/div[2]/div/input'
+    #邮箱
+    EMAL     : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[3]/form/div[3]/div/input'
+    #推荐人ID
+    REFFERID : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[3]/form/div[4]/div/input'
+    #QQ号码
+    QQNUMBER : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[3]/form/div[5]/div/input'
+    #验证码
+    YZM2     : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[3]/form/div[3]/div[1]/input'
+    #立即注册
+    SIGNUP: 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[9]/div[2]/div[2]/div[3]/form/div[7]/button'
+    
+    
+    #用户名或密码错误您还剩9次重试机会
+    ERRORTIPS01: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+    
+    #验证码错误
+    ERRORTIPS02: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+    
+    
+
+
+
+
+
+
+FusionLoginPage:
+    # 用户名
+    LOGIN_USERNAME : 'x,//*[@id="root"]/div/div[2]/div[2]/div[1]/input'
+    # 密码
+    LOGIN_PASSWORD : 'x,//*[@id="root"]/div/div[2]/div[2]/div[2]/input'
+
+    # 验证码
+    LOGIN_YZM : 'x,//*[@id="root"]/div/div[2]/div[2]/div[3]/input'
+    # 登录按钮
+    LOGIN_BUTTON : 'x,//*[@id="root"]/div/div[2]/div[2]/button'
+    # 注册按钮
+    SIGN_BUTTON : 'x,//*[@id="root"]/div/div[2]/div[2]/a'
+    #个人中心断言提示语
+    # 断言成功获取的会员中心
+    ASSERT_KUIYUANZHONGXIN : 'x,//*[@id="root"]/div/div[2]/div[2]/a[1]'
+    # 断言失败获取的提示语
+    ASSERT_TIPS : 'x,//*[@id="error"]/span'
+    # 退出系统按钮
+    LOGOUT_BUTTON : 'x,//*[@id="root"]/div/div[2]/div[2]/span[3]'
+    # 跳转添加商品框架
+    SWFRAME: "name,workspace"
+    # 点击添加商品
+    CLICK_ADDGOODS: 'xpath,/html/body/div[3]/div[3]/div[3]/div[1]/div/a/div'
+
+    #登陆密码断言模块
+    #旧密码不为空
+    OLDPASSWORD: 'x,/html/body/div[5]/div'
+    #密码不能为空
+    NEWPASSWORD: 'x,/html/body/div[5]/div/div/div/div[1]'
+    #密码确认不能为空
+    NEWPASSWORD1: 'x,/html/body/div[5]/div/div/div/div[1]'
+  
+ 
+
+
+LoginPassword:
+    #个人中心登陆密码页面
+    #登陆密码
+
+    LOGIN_PASSWORD: 'x,//*[@id="main"]/div/section/div[1]'
+    #资金密码
+    FUND_PASSWORD: 'x,//*[@id="main"]/div/section/div[2]'
+    #我的银行卡
+    MY_CARD       : 'x,//*[@id="main"]/div/section/div[3]'
+    
+
+    #登陆密码--登陆密码
+    #请输入原始密码
+    OLDPASSWORD   : 'x,//*[@id="main"]/div/section/div[1]/div[2]/form/input[1]'
+    #请输入登陆密码
+    NEWPASSWORD   : 'x,//*[@id="main"]/div/section/div[1]/div[2]/form/input[2]'
+    #请输入确认密码
+    NEWPASSWORD1  : 'x,//*[@id="main"]/div/section/div[1]/div[2]/form/input[3]'
+    
+    #确认按钮
+    SUMBITLOGIN : 'x,//*[@id="main"]/div/section/div[1]/div[2]/form/a'
+
+    #登陆密码断言模块
+    #旧密码不为空
+    OLDPASSWORD_TIP : 'x,/html/body/div[5]/div/div/div/div[1]'
+    #密码不能为空
+    NEWPASSWORD_TIPS : 'x,/html/body/div[5]/div/div/div/div[1]'
+    #密码确认不能为空
+    NEWPASSWORD1_TIPS: 'x,/html/body/div[5]/div/div/div/div[1]'
+    #两次输入密码不一样
+    NEWPASSWORD_TIP : 'x,/html/body/div[5]/div/div/div/div[1]'
+    #原密码不正确
+    OLDFAIL         : 'x,/html/body/div[5]/div/div/div/div[1]'
+    #修改成功
+    CHANGER_SUCCESS : 'x,/html/body/div[5]/div/div/div/div[1]'
+  
+
+FundPassword:
+    #资金密码
+    #密码规则：6位纯数字
+    #请输入新资金密码
+    NEWFUND         : 'x,//*[@id="main"]/div/section/div[2]/div[2]/form/input[3]'
+    #请再次输入新资金密码
+    AGENTFUND : 'x,//*[@id="main"]/div/section/div[2]/div[2]/form/input[4]'
+    #确认按钮
+    SUMBITFUND : 'x,//*[@id="main"]/div/section/div[2]/div[2]/form/a'
+    
+    #断言
+    #新资金密码不能为空
+    NEWNULL    : 'x,/html/body/div[3]/div/div/div/div[1]'
+    #旧密码不能为空
+    OLDNULL    : 'x,/html/body/div[3]/div/div/div/div[1]'
+    #旧密码错误
+    OLDERROR   : 'x,/html/body/div[3]/div/div/div/div[1]'
+    #两次输入密码不一致
+    PSDIFF     : 'x,/html/body/div[3]/div/div/div/div[1]'   
+    #修改成功
+    CH_SUCCESS : 'x,/html/body/div[3]/div/div/div/div[1]'
+                   
+  
+  
+Everyday :
+    #每日签到
+    EVERY : 'x,//*[@id="main"]/div/section/header/div[2]'
+    #立即签到
+    NOW   : 'x,/html/body/div[4]/div[2]/div/div/div[1]/div'
+    #第一天
+    ONE   : 'x,/html/body/div[4]/div[2]/div/div/div[2]/div/ul/li[1]'
+    #第二天
+    TWO   : 'x,/html/body/div[4]/div[2]/div/div/div[2]/div/ul/li[2]'
+    #第三天
+    THREE : 'x,/html/body/div[4]/div[2]/div/div/div[2]/div/ul/li[3]' 
+    #第四天
+    FORTH : 'x,/html/body/div[4]/div[2]/div/div/div[2]/div/ul/li[4]'   
+    #第五天
+    FIVE  : 'x,/html/body/div[4]/div[2]/div/div/div[2]/div/ul/li[5]'
+    #第六天
+    SIX   : 'x,/html/body/div[4]/div[2]/div/div/div[2]/div/ul/li[6]' 
+    #第七天
+    SEVERN: 'x,/html/body/div[4]/div[2]/div/div/div[2]/div/ul/li[7]'  
+    #第八天
+    EIGHT : 'x,/html/body/div[4]/div[2]/div/div/div[2]/div/ul/li[8]'
+
+    #断言 
+    #今日已签到
+    TODAY : 'x,/html/body/div[5]/div[2]/div/div/div[2]/div/div[2]/p'
+    
+    
+    
+Withdraw :
+    #财务中心---提现
+    #提现金额
+    WITHDRAW     : 'x,//*[@id="main"]/div/section/form/div[1]/div/input'
+    #资金密码
+    FUNDPASSWORD : 'x,//*[@id="main"]/div/section/form/div[3]/div/input'
+    #提现按钮
+    WITHDRAWBUTTON : 'x,//*[@id="main"]/div/section/button'
+    
+    
+    #断言
+    #金额格式错误
+    AMOUNTERROR : 'x,/html/body/div[4]/div/div/div/div[1]'
+    #余额不足
+    NOTENOUTH   : 'x,/html/body/div[4]/div/div/div/div[1]'
+    #资金密码为6个数字组成
+    PASSERROR   : 'x,/html/body/div[4]/div/div/div/div[1]'
+    #提现过于频繁或重复提交,1分钟后再试
+    PINFAN      : 'x,/html/body/div[4]/div/div/div/div[1]'
+    #当前用户最低可提现金额为10.00元
+    LOWEST      : 'x,/html/body/div[4]/div/div/div/div[1]'
+    #提现周期内次数限制
+    NUMLIMIT    : 'x,/html/body/div[4]/div/div/div/div[1]'
+    #提现成功！
+    WSUCCESS    : 'x,/html/body/div[4]/div/div/div/div[1]'
+    
+RechargeRecord :
+    #充值方式
+    #全部
+    ALL      : 'x,//*[@id="main"]/div/section/div/select/option[1]'
+    #在线充值
+    ONLINE   : 'x,//*[@id="main"]/div/section/div/select/option[2]'
+    #转账汇款
+    TRANSFER : 'x,//*[@id="main"]/div/section/div/select/option[3]'
+    #系统充值
+    SYSTEM   : 'x,//*[@id="main"]/div/section/div/select/option[4]'
+    # 红包领取   
+    REDBAG   : 'x,//*[@id="main"]/div/section/div/select/option[5]'
+
+    #请输入订单号
+    ORDERNUM : 'x,//*[@id="main"]/div/section/div/input'
+    
+    #请选择修改日期  
+    DATAR     : 'x,//*[@id="main"]/div/section/div/div/div[1]/div/input'
+    
+    #查询按钮
+    CHACKBUTTONR: 'x,//*[@id="main"]/div/section/div/button'
+    
+    #orderNo必须是数字
+    ORDERNO    : 'x,/html/body/div[3]/div/div/div/div[1]'
+    #没有更多的数据了
+    NODATAR     : 'x,//*[@id="main"]/div/section/table/tbody/tr/td'
+    
+    
+WithdrawRecord :
+    #充值方式
+    #全部
+    ALL      : 'x,//*[@id="main"]/div/section/div/select/option[1]'
+    #提交
+    SUBMIN   : 'x,//*[@id="main"]/div/section/div/select/option[2]'
+    #处理中
+    PROCESS : 'x,//*[@id="main"]/div/section/div/select/option[3]'
+    #确认
+    CONFIRM   : 'x,//*[@id="main"]/div/section/div/select/option[4]'
+    #取消   
+    CENCEL   : 'x,//*[@id="main"]/div/section/div/select/option[5]'
+    #拒绝   
+    REFUSE   : 'x,//*[@id="main"]/div/section/div/select/option[5]'
+
+    #请输入订单号
+    ORDERNUM : 'x,//*[@id="main"]/div/section/div/input'
+    
+    #请选择修改日期  
+    DATAW     : 'x,//*[@id="main"]/div/section/div/div/div[1]/div/input'
+    
+    #查询按钮
+    CHACKBUTTONW: 'x,//*[@id="main"]/div/section/div/button'
+    
+   
+    #没有更多的数据了
+    NODATAW     : 'x,//*[@id="main"]/div/section/table/tbody/tr/td'
+    
+    
+    
+CommonRecharge:
+    #财务中心-充值公用页面
+    #SUSU公司入款
+    SUSURECHARGE     : 'x,//*[@id="main"]/div/section/ul/li[1]'
+    #支付宝转账
+    ALIPAY           : 'x,//*[@id="main"]/div/section/ul/li[2]'
+    #公司入款
+    COMPANYDEPOSIT   : 'x,//*[@id="main"]/div/section/ul/li[3]'
+    #VIP代理充值
+    VIPAGENT         : 'x,//*[@id="main"]/div/section/ul/li[4]'
+    #下一步按钮
+    CONETBUTTON      : 'x,//*[@id="main"]/div/section/div[2]/button'
+    
+    #登陆注册模块
+    #用户名
+    USERNAME  : 'x,//*[@id="root"]/div/div[2]/div[2]/div[1]/input'
+    #密码
+    PASSWORD : 'x,//*[@id="root"]/div/div[2]/div[2]/div[2]/input'
+    #验证码
+    YZM : 'x,//*[@id="root"]/div/div[2]/div[2]/div[3]/input'
+    #登陆按钮
+    LOGINBUTTON : 'x,//*[@id="root"]/div/div[2]/div[2]/button'  
+    #注册按钮
+    REGISTERED: 'x,//*[@id="root"]/div/div[2]/div[2]/a'
+    #会员中心
+    PERCENTER : 'x,//*[@id="root"]/div/div[2]/div[2]/a[1]'
+    
+    #跳转定位，fusion后台
+    FUSIONBACK : 'x,//*[@id="main"]/header/div[2]'
+    
+    
+    #退出
+    QUICT : 'x,//*[@id="root"]/div/div[2]/div[2]/span[3]'
+    
+    
+    
+    
+    #财务中心
+    FINANCIAL : 'x,//*[@id="main"]/div/ul/li[2]/div'
+    #充值
+    RECHARGE : 'x,//*[@id="main"]/div/ul/li[2]/ul/li[1]'
+    
+    
+    TIXIAN : 'x,//*[@id="main"]/div/ul/li[2]/ul/li[2]'
+   
+    
+    
+SuSuDeposit:
+    #SuSu公司入款
+    #充值金额
+    #请输入金额
+    REAMOUNT : 'x,/html/body/div[3]/div/div/div/div[1]'
+    # 50元，100元，300,500,800,1000,2000,3000
+    50YUAN   : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[1]'
+    100YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[2]'
+    300YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[3]'
+    500YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[4]'
+    800YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[5]'
+    1000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[6]'
+    2000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[7]'
+    3000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[8]'
+    
+    #充值方式
+    #中国工商银行_susu
+    ICBC_SUSU  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[1]'
+    #中国工商银行我测试啊
+    ICBC_MYTEST: 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[2]'
+    #中国工商银行李洁
+    ICBC_LEEJIE: 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[3]'
+    #中国光大银行
+    EVERBRIGHT : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[4]'
+    #中国银行
+    CHINABANK  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[5]'
+    #江苏银行-123
+    JIANGSU    : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[6]'
+    #恒丰银行
+    HENGFENG   : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[7]'
+    
+    #下一步按钮
+    NEXTBUTTON  : 'x,//*[@id="main"]/div/section/div[2]/div/div[2]/button'
+    #优惠劵
+    COUPON      : 'x,//*[@id="main"]/div/section/div[2]/div/div[1]'
+    
+    #断言
+    #充值金额不符合！
+    AMOUNTMATCH : 'x,/html/body/div[3]/div/div/div/div[1]'
+    
+    #存入时间
+    DEPOISTTIME : 'x,//*[@id="main"]/div/section/div[3]/form/div[1]/div/div/div[1]/div/input'
+    #存款人姓名
+    DEPOISTNAME : 'x,//*[@id="main"]/div/section/div[3]/form/div[2]/div/input'
+    #存款金额
+    DEPOISTAMOUT : 'x,//*[@id="main"]/div/section/div[3]/form/div[3]/div/input'
+    
+    # 确认存款
+    SURE_MONEY_BUTTON : 'x,//*[@id="main"]/div/section/div[3]/form/button'
+  
+  
+  
+AlipayTransfer:
+    #充值金额
+    #请输入金额
+    REAMOUNT : 'x,/html/body/div[3]/div/div/div/div[1]'
+    # 50元，100元，300,500,800,1000,2000,3000
+    50YUAN   : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[1]'
+    100YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[2]'
+    300YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[3]'
+    500YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[4]'
+    800YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[5]'
+    1000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[6]'
+    2000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[7]'
+    3000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[8]'
+    
+    
+    #建设银行-戚念
+    BUILDBANK  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li/p[1]'
+    
+    #优惠劵
+    COUPON      : 'x,//*[@id="main"]/div/section/div[2]/div/div[1]'
+
+    #下一步按钮
+    NEXTBUTTON  : 'x,//*[@id="main"]/div/section/div[2]/div/div[2]/button'
+    
+    #二维码
+    QRCODE  : 'x,//*[@id="main"]/div/section/div/img'
+    
+VipAgent:
+    #充值金额
+    #请输入金额
+    REAMOUNT : 'x,/html/body/div[3]/div/div/div/div[1]'
+    # 50元，100元，300,500,800,1000,2000,3000
+    50YUAN   : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[1]'
+    100YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[2]'
+    300YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[3]'
+    500YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[4]'
+    800YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[5]'
+    1000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[6]'
+    2000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[7]'
+    3000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[8]'
+    
+    
+    #susususu000000
+    SUSU00  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li/p[1]'
+    
+    #优惠劵
+    COUPON      : 'x,//*[@id="main"]/div/section/div[2]/div/div[1]'
+
+    #下一步按钮
+    NEXTBUTTON  : 'x,//*[@id="main"]/div/section/div[2]/div/div[2]/button'
+    
+    #存款金额
+    SAVEMONEY  : 'x,//*[@id="main"]/div/section/div[3]/form/div[1]/div/input'
+    #存款时间
+    SAVETIME  : 'x,//*[@id="main"]/div/section/div[3]/form/div[2]/div/div/div[1]/div/input'
+    #转账备注  
+    TRANSFERNOTE: 'x,//*[@id="main"]/div/section/div[3]/form/div[3]/div/input'
+    #充值验证信息
+    TRANINFO: 'x,//*[@id="main"]/div/section/div[3]/form/div[4]/div/input'
+    #确认充值
+    VBUTTON: 'x,//*[@id="main"]/div/section/button'
+    
+    #断言
+    #日期选择错误！
+    DATAERROR : 'x,/html/body/div[3]/div/div/div/div[1]'
+    
+    #请填写充值验证信息！
+    FILLINNOTE: 'x,/html/body/div[3]/div/div/div/div[1]'
+    
+    #最小充值额度20.00元.
+    LOWEST20  : 'x,/html/body/div[3]/div/div/div/div[1]'
+    
+    
+    #最大充值额度100.00元
+    LARGEST   : 'x,/html/body/div[3]/div/div/div/div[1]'
+    
+    #提交成功
+    SUMBITSS   : 'x,/div/div/div/div[1]' 
+CompanyDeposit:
+    #充值金额
+    #请输入金额
+    REAMOUNT : 'x,/html/body/div[3]/div/div/div/div[1]'
+    # 50元，100元，300,500,800,1000,2000,3000
+    50YUAN   : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[1]'
+    100YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[2]'
+    300YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[3]'
+    500YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[4]'
+    800YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[5]'
+    1000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[6]'
+    2000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[7]'
+    3000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[8]'
+    
+    
+    #susususu000000
+    SUSU00  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li/p[1]'
+    
+    #优惠劵
+    COUPON      : 'x,//*[@id="main"]/div/section/div[2]/div/div[1]'
+
+    #下一步按钮
+    NEXTBUTTON  : 'x,//*[@id="main"]/div/section/div[2]/div/div[2]/button'
+    
+    #二维码
+    QRCODE  : 'x,//*[@id="main"]/div/section/div/img'
+    
+  
+  
+  
+
+Registered:
+    #注册
+    #用户名
+    USERNAME: 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[1]/div[1]/div[2]/input'
+    PASSWORD: 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[2]/div[1]/div[2]/input'
+    EMAIL   : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[3]/div[1]/div[2]/input'
+    TJID    : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[4]/div[1]/div[2]/input'
+    QQNAME  : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[5]/div[1]/div[2]/input'
+    YZM     : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[6]/div/div[2]/input'
+    BUTTON  : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[8]/button'
+    HYSIGN  : 'xpath,//*[@id="root"]/div/div[4]/div/div/h1'
+    YZMTPS  : 'class,Toast'
+
+  
+  
+
+
+FusionLoginADddMoney:
+    # SUSU公司入款
+    SUSUCOMPANYADDMONEY: 'x,//*[@id="main"]/div/section/ul/li[1]/p[1]'
+    #下一步按钮
+    NEXTBUTTON: 'x,//*[@id="main"]/div/section/div[2]/button'
+    # 输入金额
+    SHURUMONEY : 'x,//*[@id="main"]/div/section/div[2]/div/input'
+    # 50元，100元，300,500,800,1000,2000,3000
+    50YUAN   : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[1]'
+    100YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[2]'
+    300YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[3]'
+    500YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[4]'
+    800YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[5]'
+    1000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[6]'
+    2000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[7]'
+    3000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[8]'
+
+    # 中国工商银行susu
+    ICBC_SUSU : 'x,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[1]/p[1]'
+    #中国工商银行我测试
+    ICBC_WOCESHITA : 'x,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[2]/p[1]'
+    #中国工商银行李浩
+    ICBC_LEEHAO : 'x,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[3]/p[1]'
+    #中国银行
+    BOC : 'x,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[4]/p[1]'
+    #江苏银行
+    JSBANK : 'x,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[5]/p[1]'
+    #江苏银行
+    HENGFENGBANK : 'x,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[6]/p[1]'
+
+    # 存款人姓名
+    DEPO_NAME : 'x,//*[@id="main"]/div/section/div[3]/form/div[2]/div/input'
+    # 存款金额
+    GOODS_GYS : 'x,//*[@id="main"]/div/section/div[3]/form/div[3]/div/input'
+    # 确认存款
+    SURE_MONEY_BUTTON : 'x,//*[@id="main"]/div/section/div[3]/form/button'
+
+
+    #支付宝转账
+    ZHIFUBAO : 'x,//*[@id="main"]/div/section/ul/li[2]/p[1]'
+    #  # 50元，100元，300,500,800,1000,2000,3000
+    #  50YUAN: 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[1]'
+    #  100YUAN: 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[2]'
+    #  300YUAN: 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[3]'
+    #  500YUAN: 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[4]'
+    #  800YUAN: 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[5]'
+    #  1000YUAN: 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[6]'
+    #  2000YUAN: 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[7]'
+    #  3000YUAN: 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[8]'
+
+
+    #建设银行
+    JIANSHEBANK: 'x,//*[@id="main"]/div/section/div[2]/div/ul[2]/li/p[1]'
+
+    #下一步
+    ZFNEXTBUTTON: 'x,//*[@id="main"]/div/section/div[2]/div/div[2]/button'
+
+
+    #二维码
+    ERWEIMA: 'x,//*[@id="main"]/div/section/div/img'
+HuiYuanZhongXin :
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # 跳转进入文本
+    SWITCH_TOFRAME : 'xpath,//*[@id:"ueditor_0"]'
+
+    # 输入文本
+    TEXT : 'tag_name,body'
+
+    # self.base_driver.switch_to_parent_frame()
+    # 点击保存
+    TEXT_CLICK : 'xpath,//*[@id:"addEditGoodsForm"]/div[5]/div/a'
+
+    # 获取货号
+    SHANGPIN_HUOHAO : 'xpath,//*[@id:"ajax_return"]/table/tbody/tr[1]/td[5]/div'
+    # SHANGPIN_HUOHAO :'xpath,//*[@id:"ajax_return"]/table/tbody/tr[1]/td[4]/div'
+
+    # 商品名称必填
+    GETTPS : 's,.layui-layer-content.layui-layer-padding'

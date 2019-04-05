@@ -1,0 +1,5 @@
+msg,username,password,yzm,goods_name,goods_remark,goods_sn,SPU,SKU,gd_list_id01,gd_list_id02,gd_list_id03,gd_dif_id01,gd_dif_id02,gd_dif_id03,goods_brand,goods_sys,goods_this_price,goods_market_price,goods_cost_price,common,weight,store_count,give_interal,exchangel_interal,keywords
+success,lee123456789,lee123,111,,,,,,,,,,,,,,,,,,,,,,
+fail00,,123456,111,,,,,,,,,,,,,,,,,,,,,,
+fail01,ad,123456,111,,,,,,,,,,,,,,,,,,,,,,
+good,admin,123456,111,华为00,麒麟,tp20181119,spu,sku,1,12,100,1,12,101,1,0,111,122,66,22,11,1000,19,29,性价比高

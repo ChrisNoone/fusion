@@ -1,0 +1,20 @@
+TpAssertEquals :
+
+
+  '''登录模块'''
+  # 断言获取登录成功的用户名
+  ASSERT_USERNAME: 'x,/html/body/div[2]/div[5]/div/dl[2]/dt'
+
+  # 断言获取登录失败获取的提示语
+  ASSERT_TIPS: 'x,//*[@id="error"]/span'
+
+
+
+  '''添加商品模块'''
+  # 获取货号
+  SHANGPIN_HUOHAO : 'xpath,//*[@id:"ajax_return"]/table/tbody/tr[1]/td[5]/div'
+  # SHANGPIN_HUOHAO :'xpath,//*[@id:"ajax_return"]/table/tbody/tr[1]/td[4]/div'
+
+  # 商品名称必填
+  GETTPS : 's,.layui-layer-content.layui-layer-padding'
+
