@@ -1,0 +1,5 @@
+class,test,count,example
+HomeLoginTest,test_fail_registered_01,1,用例
+HomeLoginTest,test_success_registered_01,1,用例
+HomeRegisterTest,test_fail_registered_01,1,用例
+HomeRegisterTest,test_success_registered_01,1,用例

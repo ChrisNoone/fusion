@@ -1,0 +1,6 @@
+[2019-04-05 22:00:58,971]-[box.py]-[INFO]: 关闭CSV文件
+[2019-04-05 22:00:58,974]-[box.py]-[INFO]: 测试用例执行成功
+[2019-04-05 22:01:24,076]-[box.py]-[ERROR]: 测试用例执行异常：(<class 'selenium.common.exceptions.NoSuchElementException'>, NoSuchElementException('no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id="root"]/div/div[2]/div[2]/span[3]"}\n  (Session info: chrome=73.0.3683.86)\n  (Driver info: chromedriver=73.0.3683.68 (47787ec04b6e38e22703e856e101e840b65afe72),platform=Windows NT 10.0.17134 x86_64)', None, None), <traceback object at 0x0000019C3989ACC8>)
+[2019-04-05 22:01:59,505]-[box.py]-[INFO]: 关闭CSV文件
+[2019-04-05 22:02:01,688]-[box.py]-[INFO]: 测试用例执行成功
+[2019-04-05 22:02:16,235]-[box.py]-[ERROR]: 测试用例执行失败：(<class 'AssertionError'>, AssertionError("'注册' != '立即注册'\n- 注册\n+ 立即注册\n? ++\n : 注册失败"), <traceback object at 0x0000019C398C2FC8>)
