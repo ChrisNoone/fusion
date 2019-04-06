@@ -66,17 +66,7 @@ FusionMain:
     TRENDCHART: 'x,//*[@id="root"]/div/div[3]/div/div[2]/div[8]/a'
     
     #请填写用户名
-    FILLNAME: 'x,//*[@id="root"]/div/div[6]/div'
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    FILLNAME: 'x,//*[@id="root"]/div/div[6]/div'  
 FusionLotteryHall:
 
     #主页点击数字彩后
@@ -276,7 +266,7 @@ FusionLoginPage:
     ASSERT_KUIYUANZHONGXIN : 'x,//*[@id="root"]/div/div[2]/div[2]/a[1]'
     # 断言失败获取的提示语
     ASSERT_TIPS : 'x,//*[@id="error"]/span'
-    # 退出系统按钮
+    # 退出
     LOGOUT_BUTTON : 'x,//*[@id="root"]/div/div[2]/div[2]/span[3]'
     # 跳转添加商品框架
     SWFRAME: "name,workspace"
@@ -290,10 +280,6 @@ FusionLoginPage:
     NEWPASSWORD: 'x,/html/body/div[5]/div/div/div/div[1]'
     #密码确认不能为空
     NEWPASSWORD1: 'x,/html/body/div[5]/div/div/div/div[1]'
-  
- 
-
-
 LoginPassword:
     #个人中心登陆密码页面
     #登陆密码
@@ -407,7 +393,9 @@ Withdraw :
     #提现周期内次数限制
     NUMLIMIT    : 'x,/html/body/div[4]/div/div/div/div[1]'
     #提现成功！
-    WSUCCESS    : 'x,/html/body/div[4]/div/div/div/div[1]'
+    WSUCCESS    : 'x,/html/body/div[4]/div/div/div/div[1]' 
+    # 提现金额
+    TXlABEL : 'x,//*[@id="main"]/div/section/form/div[1]/label'
     
 RechargeRecord :
     #充值方式
@@ -493,6 +481,14 @@ CommonRecharge:
     REGISTERED: 'x,//*[@id="root"]/div/div[2]/div[2]/a'
     #会员中心
     PERCENTER : 'x,//*[@id="root"]/div/div[2]/div[2]/a[1]'
+    # 充值文字
+    CHONGZHI : 'x,//*[@id="root"]/div/div[2]/div[2]/a[2]'
+    # 提现文字
+    TIXIANWENZI : 'x,//*[@id="root"]/div/div[2]/div[2]/a[3]'
+   
+    
+    
+    
     
     #跳转定位，fusion后台
     FUSIONBACK : 'x,//*[@id="main"]/header/div[2]'
@@ -518,7 +514,7 @@ SuSuDeposit:
     #SuSu公司入款
     #充值金额
     #请输入金额
-    REAMOUNT : 'x,/html/body/div[3]/div/div/div/div[1]'
+    # REAMOUNT : 'x,/html/body/div[3]/div/div/div/div[1]'
     # 50元，100元，300,500,800,1000,2000,3000
     50YUAN   : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[1]'
     100YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[2]'
@@ -552,7 +548,11 @@ SuSuDeposit:
     
     #断言
     #充值金额不符合！
-    AMOUNTMATCH : 'x,/html/body/div[3]/div/div/div/div[1]'
+    #AMOUNTMATCH : 'x,/html/body/div[3]/div/div/div/div[1]'ti
+    
+    # 充值金额
+    TIPS01 : 'x,//*[@id="main"]/div/section/div[2]/p'
+    
     
     #存入时间
     DEPOISTTIME : 'x,//*[@id="main"]/div/section/div[3]/form/div[1]/div/div/div[1]/div/input'
@@ -563,10 +563,19 @@ SuSuDeposit:
     
     # 确认存款
     SURE_MONEY_BUTTON : 'x,//*[@id="main"]/div/section/div[3]/form/button'
+    
+    # 充值记录页面
+    RECHANGE50 : 'x,//*[@id="main"]/div/section/table/tbody/tr[1]/td[3]'
+    
+    SUMTIP01 : 'x,/html/body/div[3]/div/div/div/div[1]'
+    
+  
+  
   
   
   
 AlipayTransfer:
+    #支付宝转账
     #充值金额
     #请输入金额
     REAMOUNT : 'x,/html/body/div[3]/div/div/div/div[1]'
@@ -592,6 +601,11 @@ AlipayTransfer:
     
     #二维码
     QRCODE  : 'x,//*[@id="main"]/div/section/div/img'
+    
+    #捕捉 充值金额
+    TIPS01  : 'x,//*[@id="main"]/div/section/div[2]/p'
+    #订单号
+    DINGDANHAO  : 'x,//*[@id="main"]/div/section/div/div/p[1]'
     
 VipAgent:
     #充值金额
@@ -675,9 +689,9 @@ CompanyDeposit:
   
   
 
-Registered:
+HomeRegistered:
     #注册
-    #用户名
+    #用户名          
     USERNAME: 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[1]/div[1]/div[2]/input'
     PASSWORD: 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[2]/div[1]/div[2]/input'
     EMAIL   : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[3]/div[1]/div[2]/input'
@@ -685,9 +699,13 @@ Registered:
     QQNAME  : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[5]/div[1]/div[2]/input'
     YZM     : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[6]/div/div[2]/input'
     BUTTON  : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[8]/button'
-    HYSIGN  : 'xpath,//*[@id="root"]/div/div[4]/div/div/h1'
+    
+    HYSIGN  : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[8]/button'
     YZMTPS  : 'class,Toast'
-
+    
+    #断言
+    #退出
+    DROPOUT   : 'x,//*[@id="root"]/div/div[2]/div[2]/span[3]'
   
   
 
@@ -753,21 +771,6 @@ FusionLoginADddMoney:
     #二维码
     ERWEIMA: 'x,//*[@id="main"]/div/section/div/img'
 HuiYuanZhongXin :
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     # 跳转进入文本
     SWITCH_TOFRAME : 'xpath,//*[@id:"ueditor_0"]'

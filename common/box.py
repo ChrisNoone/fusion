@@ -1,34 +1,24 @@
 import contextlib
 import csv
-
 import logging
+import smtplib
 import time
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from enum import Enum, unique
 from unittest import TestCase as TC, SkipTest
 from unittest.case import _ShouldStop
 from unittest.suite import _DebugResult, _isnotsuite
 
-# import win32gui
-# import win32con
-import webbrowser
-# import pymongo
-
-
 import yaml
-# from ddt import ddt
 from selenium import webdriver
-
 from selenium.webdriver import ActionChains
-from selenium.webdriver import FirefoxProfile
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 
 class BoxDriver(object):
     """

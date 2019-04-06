@@ -5,6 +5,7 @@ class FusionHallLogin(BasePage):
     # 导入fusion.yaml中的FusionMain
     config_dict_fulottery = YamlHelper().get_config_dict('/fusion/fusion.yaml')['FusionHallLogin']
 
+    # 进入购彩大厅后的登陆注册
     def menu(self, menu):
         # 登陆页面、会员注册
         if menu == '登陆页面':
