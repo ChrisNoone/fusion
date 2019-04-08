@@ -4,7 +4,7 @@ from common.box import TestCase, BoxDriver, Browser
 from login.home_registered import HomeRegistered
 
 from membercenter.caiwucenter.recharge.commonrecharge import CommonRecharge
-from membercenter.caiwucenter.recharge.susudeposit import SuSuDeposit
+
 from membercenter.caiwucenter.withdraw.withdraw import Withdraw
 
 

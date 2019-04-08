@@ -409,9 +409,18 @@ RechargeRecord :
     SYSTEM   : 'x,//*[@id="main"]/div/section/div/select/option[4]'
     # 红包领取   
     REDBAG   : 'x,//*[@id="main"]/div/section/div/select/option[5]'
+    
+    
+    XIALAKUANG   : 'x,//*[@id="main"]/div/section/div/select'
+    
+    
+    
 
     #请输入订单号
     ORDERNUM : 'x,//*[@id="main"]/div/section/div/input'
+    
+    ORDERNUM1 : 'x,//*[@id="main"]/div/section/div/span[2]'
+    
     
     #请选择修改日期  
     DATAR     : 'x,//*[@id="main"]/div/section/div/div/div[1]/div/input'
@@ -423,6 +432,54 @@ RechargeRecord :
     ORDERNO    : 'x,/html/body/div[3]/div/div/div/div[1]'
     #没有更多的数据了
     NODATAR     : 'x,//*[@id="main"]/div/section/table/tbody/tr/td'
+    
+    #列表中的订单号
+    ORDERNUMLIST     : 'x,//*[@id="main"]/div/section/table/tbody/tr[1]/td[1]'
+    
+    
+    
+    
+    
+    # 充值方式
+    #全部
+    ALL : 'value, '
+    # 在线充值
+    GOODS_LIST_ID02 : 'value,1'
+    # 转账汇款
+    GOODS_LIST_ID03 : 'value,2'
+    # 系统充值
+    GOODS_LIST_ID03 : 'value,3'
+    # 红包领取
+    GOODS_LIST_ID03 : 'value,4'
+    
+    
+    
+    
+    #第二种进入充值记录方式
+    #用户名
+    UESE01     : 'x,//*[@id="app"]/main/section/form/input[1]'
+    PASS01     : 'x,//*[@id="app"]/main/section/form/input[2]'
+    YZM01      : 'x,//*[@id="app"]/main/section/form/div/input'
+   
+    
+    #普通会员登陆
+    BUTTON01      : 'x,//*[@id="app"]/main/section/form/a[1]'
+    #特殊代理登陆
+    BUTTON02      : 'x,//*[@id="app"]/main/section/form/a[2]'
+    
+    #财务中心
+    FINANCIAL  : 'x,//*[@id="main"]/div/ul/li[2]/div'
+    # 点击充值记录
+    RECODES: 'xpath,//*[@id="main"]/div/ul/li[2]/ul/li[3]'
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 WithdrawRecord :
@@ -449,9 +506,13 @@ WithdrawRecord :
     #查询按钮
     CHACKBUTTONW: 'x,//*[@id="main"]/div/section/div/button'
     
+    
    
     #没有更多的数据了
     NODATAW     : 'x,//*[@id="main"]/div/section/table/tbody/tr/td'
+    
+    #列表中的订单号
+    ORDERNUMLIST     : 'x,//*[@id="main"]/div/section/table/tbody/tr[1]/td[1]'
     
     
     
@@ -514,7 +575,7 @@ SuSuDeposit:
     #SuSu公司入款
     #充值金额
     #请输入金额
-    # REAMOUNT : 'x,/html/body/div[3]/div/div/div/div[1]'
+    REAMOUNT : 'x,//*[@id="main"]/div/section/div[2]/div/input'
     # 50元，100元，300,500,800,1000,2000,3000
     50YUAN   : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[1]'
     100YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[2]'
@@ -548,7 +609,7 @@ SuSuDeposit:
     
     #断言
     #充值金额不符合！
-    #AMOUNTMATCH : 'x,/html/body/div[3]/div/div/div/div[1]'ti
+    AMOUNTMATCH : 'x,html/body/div[4]/div/div/div/div[1]'
     
     # 充值金额
     TIPS01 : 'x,//*[@id="main"]/div/section/div[2]/p'
@@ -646,6 +707,9 @@ VipAgent:
     #日期选择错误！
     DATAERROR : 'x,/html/body/div[3]/div/div/div/div[1]'
     
+    # 充值金额
+    TIPS01 : 'x,//*[@id="main"]/div/section/div[2]/p'
+    
     #请填写充值验证信息！
     FILLINNOTE: 'x,/html/body/div[3]/div/div/div/div[1]'
     
@@ -658,6 +722,8 @@ VipAgent:
     
     #提交成功
     SUMBITSS   : 'x,/div/div/div/div[1]' 
+    
+    
 CompanyDeposit:
     #充值金额
     #请输入金额
@@ -672,6 +738,23 @@ CompanyDeposit:
     2000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[7]'
     3000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[8]'
     
+    #充值方式
+    #中国工商银行_susu
+    ICBC_SUSU  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[1]'
+    #中国工商银行我测试啊
+    ICBC_MYTEST: 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[2]'
+    #中国工商银行李洁
+    ICBC_LEEJIE: 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[3]'
+    #中国光大银行
+    EVERBRIGHT : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[4]'
+    #中国银行
+    CHINABANK  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[5]'
+    #江苏银行-123
+    JIANGSU    : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[6]'
+    #恒丰银行
+    HENGFENG   : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[7]'
+    
+    
     
     #susususu000000
     SUSU00  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li/p[1]'
@@ -684,6 +767,9 @@ CompanyDeposit:
     
     #二维码
     QRCODE  : 'x,//*[@id="main"]/div/section/div/img'
+    
+    #捕捉 充值金额
+    TIPS01  : 'x,//*[@id="main"]/div/section/div[2]/p'
     
   
   
@@ -706,6 +792,12 @@ HomeRegistered:
     #断言
     #退出
     DROPOUT   : 'x,//*[@id="root"]/div/div[2]/div[2]/span[3]'
+    
+    
+    
+    TIPS: 'x, //*[@id="root"]/div/div[6]'
+    
+    
   
   
 
@@ -788,3 +880,43 @@ HuiYuanZhongXin :
 
     # 商品名称必填
     GETTPS : 's,.layui-layer-content.layui-layer-padding'
+    
+Page:
+    #注册按钮
+    ZHUCHE : 'xpath,//*[@id="root"]/div/div[2]/div[2]/a'
+    #用户名
+    USERNAME : 'xpath,//*[@id="root"]/div/div[2]/div[2]/div[1]/input'
+    #密码
+    PASSWORD : 'xpath,//*[@id="root"]/div/div[2]/div[2]/div[2]/input'
+    YZM : 'xpath,//*[@id="root"]/div/div[2]/div[2]/div[3]/input'
+    
+    #充值
+    CHONGZHI : 'xpath,//*[@id="root"]/div/div[2]/div[2]/a[2]'
+    
+    # 点击 支付宝转账
+    ALIPAY: 'xpath,//*[@id="main"]/div/section/ul/li[2]/p[1]'
+    
+    # 选择50
+    FITY: 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[1]'
+    
+    #选择银行
+    BANK: 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li/p[1]'
+    #获取的订单号
+    DINGDAN: 'xpath,//*[@id="main"]/div/section/div/div/p[1]'
+    
+    
+    # 点击充值记录
+    RECODES: 'xpath,//*[@id="main"]/div/ul/li[2]/ul/li[3]'
+    
+    # 请输入订单号
+    SHURU: 'xpath,//*[@id="main"]/div/section/div/input'
+    
+    # 查询按钮
+    CHECK: 'xpath,//*[@id="main"]/div/section/div/input'
+    
+    # 列表中的订单号
+    DN: 'xpath,//*[@id="main"]/div/section/table/tbody/tr/td[1]'
+    
+    
+    dd : /html/body/div[4]/div/div/div/div[1]
+  

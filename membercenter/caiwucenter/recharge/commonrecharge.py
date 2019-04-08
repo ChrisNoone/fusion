@@ -17,7 +17,7 @@ class CommonRecharge(BasePage):
         self.base_driver.type(self.config_dict_commonre['YZM'], row['yzm'])
         self.base_driver.click(self.config_dict_commonre['LOGINBUTTON'])
         self.base_driver.forced_wait(2)
-        print('等待')
+        print('充值等待')
 
         # 点击会员中心
         self.base_driver.click(self.config_dict_commonre['PERCENTER'])
@@ -50,7 +50,7 @@ class CommonRecharge(BasePage):
         self.base_driver.type(self.config_dict_commonre['YZM'], row['yzm'])
         self.base_driver.click(self.config_dict_commonre['LOGINBUTTON'])
         self.base_driver.forced_wait(2)
-        print('等待')
+        print('点击充值等待')
 
         # 点击会员中心
         self.base_driver.click(self.config_dict_commonre['PERCENTER'])
@@ -76,14 +76,33 @@ class CommonRecharge(BasePage):
         print('开始进入登陆---直接点击充值')
         # 登陆
 
-        self.base_driver.type(self.config_dict_commonre['USERNAME'], 'lee1000000')
-        print(['username'])
+        self.base_driver.type(self.config_dict_commonre['USERNAME'], 'lee6281376')
+        print('输入的用户名是:lee6281376')
         self.base_driver.type(self.config_dict_commonre['PASSWORD'], 'lee123')
-        print(['password'])
+        print(['输入的密 码是:lee123'])
         self.base_driver.type(self.config_dict_commonre['YZM'], '1')
         self.base_driver.click(self.config_dict_commonre['LOGINBUTTON'])
         self.base_driver.forced_wait(2)
-        print('等待')
+        print('登陆等待')
+
+        # 点击充值文字
+        self.base_driver.click(self.config_dict_commonre['CHONGZHI'])
+        self.base_driver.switch_to_window_by_index(2)
+        self.base_driver.forced_wait(5)
+        print('跳转充值页面')
+
+    def login031(self):
+        print('开始进入登陆---直接点击充值')
+        # 登陆
+
+        self.base_driver.type(self.config_dict_commonre['USERNAME'], 'lee123456789')
+        print('输入的用户名是:lee6281376')
+        self.base_driver.type(self.config_dict_commonre['PASSWORD'], 'lee123')
+        print(['输入的密 码是:lee123'])
+        self.base_driver.type(self.config_dict_commonre['YZM'], '1')
+        self.base_driver.click(self.config_dict_commonre['LOGINBUTTON'])
+        self.base_driver.forced_wait(2)
+        print('登陆等待')
 
         # 点击充值文字
         self.base_driver.click(self.config_dict_commonre['CHONGZHI'])
@@ -102,7 +121,7 @@ class CommonRecharge(BasePage):
         self.base_driver.type(self.config_dict_commonre['YZM'], '1')
         self.base_driver.click(self.config_dict_commonre['LOGINBUTTON'])
         self.base_driver.forced_wait(2)
-        print('等待')
+        print('提现等待')
 
         # 点击提现文字
         self.base_driver.click(self.config_dict_commonre['TIXIANWENZI'])

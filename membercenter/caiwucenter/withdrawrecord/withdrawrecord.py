@@ -5,7 +5,7 @@ class WithdrawRecord(BasePage):
 
     # 提现记录
     # 导入fusion文件中WithdrawRecord
-    config_dict_withdrawrecord = YamlHelper().get_config_dict('/fusion/fusion.yaml')['WithdrawRecord']
+    config_dict_withdrawrecord = YamlHelper().get_config_dict('/fusion/yaml/fusion.yaml')['WithdrawRecord']
 
     def withdrawrecord(self):
         # 提款方式
@@ -34,5 +34,24 @@ class WithdrawRecord(BasePage):
         tips01 = self.base_driver.click(self.config_dict_withdrawrecord['NODATA'])
         return tips01
 
+    def ordernumber(self, row):
+        #  请输入订单号
+        order = row['ordernum']
+        print('没切片前是：      '+row['ordernum'])
+        # 切掉表格的第一为N
+        neworder = order[1:]
+        self.base_driver.type(self.config_dict_withdrawrecord['ORDERNUM'], neworder)
+        # self.base_driver.type(self.config_dict_rechargerecord['ORDERNUM'], row['ordernum'])
+        # print('输入中的订单号是' + row['ordernum'])
+        print('输入中的订单号是：   ' + neworder)
+        print(neworder)
+
+    def get_rech_tips03(self):
+        # 列表中的订单号
+        # 增加N跟数据表格匹配
+        tips02 = self.base_driver.get_text(self.config_dict_withdrawrecord['ORDERNUMLIST'])
+        tips03 = 'N' + tips02
+        print('列表中的订单号是' + tips03)
+        return tips03
 
 

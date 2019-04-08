@@ -10,8 +10,8 @@ class SuSuDeposit(BasePage):
         print("输入和选择金额")
         # self.base_driver.forced_wait(0.5)
         # 充值金额
-        if row['susuamount'] == '充值金额':
-            self.base_driver.get_text(self.config_dict_susudep['REAMOUNT'])
+        # if row['susuamount'] == '充值金额':
+        #     self.base_driver.type(self.config_dict_susudep['REAMOUNT'], row['susuamount'])
         # 50,100,300,500,800,1000,2000,3000
         if row['susuamount'] == '50':
             self.base_driver.click(self.config_dict_susudep['50YUAN'])
@@ -50,10 +50,12 @@ class SuSuDeposit(BasePage):
             self.base_driver.click(self.config_dict_susudep['HENGFENG'])
 
         print('选择银行' + row['rechargemethod'])
+        self.base_driver.forced_wait(0.5)
 
     def depoistname(self, row):
         print('进入存款信息')
         self.base_driver.forced_wait(5)
+
 
         # 存入时间
         # self.base_driver.type(self.config_dict_susudep['DEPOISTTIME'], row['depoisttime'])
@@ -66,7 +68,6 @@ class SuSuDeposit(BasePage):
         # 下一步
         nextbutton = self.base_driver.click(self.config_dict_susudep['NEXTBUTTON'])
         print('下一步')
-        self.base_driver.forced_wait(10)
         return nextbutton
 
     def coupon(self):
@@ -76,14 +77,14 @@ class SuSuDeposit(BasePage):
 
     def get_ckmoney(self):
         # 充值金额不符合！
-        ckmoney = self.base_driver.click(self.config_dict_susudep['AMOUNTMATCH'])
+        ckmoney = self.base_driver.get_text(self.config_dict_susudep['AMOUNTMATCH'])
         return ckmoney
 
     def rechgebutton(self):
         # 确认存款
         nextbutton = self.base_driver.click(self.config_dict_susudep['SURE_MONEY_BUTTON'])
         print('下一步')
-        self.base_driver.forced_wait(10)
+        # self.base_driver.forced_wait(10)
         return nextbutton
 
     def recharge_50(self):

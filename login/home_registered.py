@@ -42,4 +42,10 @@ class HomeRegistered(BasePage):
         hysign = self.base_driver.get_text(self.config_dict_regiseter['YZMTPS'])
         return hysign
 
+    def get_yzmtip01(self):
+        # 注册不成功 获取验证码
+        tips01 = self.base_driver.get_text(self.config_dict_regiseter['TIPS'])
+        return tips01
+
+
 
