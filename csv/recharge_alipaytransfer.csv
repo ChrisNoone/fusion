@@ -1,0 +1,9 @@
+msg,username,password,email,tjid,qq,yzm,,pymethod,susuamount,rechargemethod,tips01,depoisttime,depoistname,depoistamount
+fail01,lee123456763,lee123,,,,1,,支付宝转账,50,中国工商银行_susu,充值金额,,lee1,
+fail01,lee123456763,lee123,,,,2,,支付宝转账,100,中国工商银行_susu,充值金额,,lee1,
+fail01,lee123456763,lee123,,,,3,,支付宝转账,300,中国工商银行_susu,充值金额,,lee1,
+fail01,lee123456763,lee123,,,,4,,支付宝转账,500,中国工商银行_susu,充值金额,,lee3,
+fail01,lee123456763,lee123,,,,5,,支付宝转账,800,中国工商银行_susu,充值金额,,lee4,
+fail01,lee123456763,lee123,,,,6,,支付宝转账,1000,中国工商银行_susu,充值金额,,lee5,
+fail01,lee123456763,lee123,,,,7,,支付宝转账,2000,恒丰银行,充值金额,,lee6,
+fail01,lee123456763,lee123,,,,8,,支付宝转账,3000,中国工商银行_susu,充值金额,,lee7,
