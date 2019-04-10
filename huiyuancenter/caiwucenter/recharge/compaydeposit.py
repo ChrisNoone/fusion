@@ -4,7 +4,7 @@ from common.box import BasePage, YamlHelper
 class CompanyDeposit(BasePage):
     # 公司入款
     # 导入fusion文件中CommonRecharge
-    config_dict_companyde = YamlHelper().get_config_dict('/fusion/fusion.yaml')['CompanyDeposit']
+    config_dict_companyde = YamlHelper().get_config_dict('/fusion/fusion.yamlf')['CompanyDeposit']
 
     def companydeposit(self, companyde):
         # 充值金额

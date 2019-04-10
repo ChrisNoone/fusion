@@ -5,7 +5,7 @@ class VipAgent(BasePage):
     # vip代理充值
     # 导入fusion.yaml中VipAgent
 
-    config_dict_alipt = YamlHelper().get_config_dict('/fusion/fusion.yaml')['VipAgent']
+    config_dict_alipt = YamlHelper().get_config_dict('/fusion/fusion.yamlf')['VipAgent']
 
     def vipagent(self, aliaytr):
         # 充值金额

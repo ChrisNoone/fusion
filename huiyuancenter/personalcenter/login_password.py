@@ -3,7 +3,7 @@ from common.box import TestCase, YamlHelper, BasePage
 
 class LoginPassword(BasePage):
     # 导入fusion.yaml文件中的LoginPassword
-    config_dict_loginpassword = YamlHelper().get_config_dict('/fusion/fusion.yaml')['LoginPassword']
+    config_dict_loginpassword = YamlHelper().get_config_dict('/fusion/fusion.yamlf')['LoginPassword']
 
     def per_center(self, percenter):
         # 个人中心

@@ -1,9 +1,8 @@
 import csv
 import unittest
 from common.box import TestCase, BoxDriver, Browser
-from login.fusion_login_page import FusionLoginPage
-
-from login.registered import Registered
+# from login.fusion_login_page import FusionLoginPage
+# from login.registered import Registered
 from page.fusion_main import FusionMain
 
 

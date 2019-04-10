@@ -4,7 +4,7 @@ from common.box import TestCase, BasePage, YamlHelper
 class AlipayTransfer(BasePage):
     # 支付包转账
     # 导入fusion文件中AlipayTransfer
-    config_dict_alipt = YamlHelper().get_config_dict('/fusion/yaml/fusion.yaml')['AlipayTransfer']
+    config_dict_alipt = YamlHelper().get_config_dict('/fusion/yamlf/fusion.yamlf')['AlipayTransfer']
 
     def alipaytransfer(self, aliaytr):
         # 充值金额

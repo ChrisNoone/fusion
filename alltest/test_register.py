@@ -25,12 +25,15 @@ class RegisterTest(TestCase):
 
     # 测试用例
     def test_fail_registered_01(self):
-        ''' row[examples] '''
+        """
+        row[examples]
+        :return:
+        """
         # 点击注册按钮
         self.fusion_login_page = FusionLoginPage(self.base_driver)
         self.fusion_login_page.sign()
         # 打开csv文件
-        csv_file = open('/fusion/csv/Fusion_Register.csv', 'r', encoding='utf8')
+        csv_file = open('./csv/Fusion_Register.csv', 'r', encoding='utf8')
         # 读取csv文件
         csv_date = csv.DictReader(csv_file)
         for row in csv_date:

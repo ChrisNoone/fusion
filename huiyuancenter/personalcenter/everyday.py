@@ -3,7 +3,7 @@ from common.box import TestCase, BasePage, YamlHelper
 
 class Everyday(BasePage):
     # 导入fusion.yaml文件中Everyday
-    config_dict_everyday = YamlHelper().get_config_dict('/fusion/fusion.yaml')['Everyday']
+    config_dict_everyday = YamlHelper().get_config_dict('/fusion/fusion.yamlf')['Everyday']
 
     def personalcenter(self):
         # 每日签到

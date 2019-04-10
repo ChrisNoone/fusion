@@ -3,7 +3,7 @@ from common.box import TestCase, BasePage, YamlHelper
 
 class Withdraw(BasePage):
     # 导入fusion文件中Withdraw
-    config_dict_withdraw = YamlHelper().get_config_dict('/fusion/fusion.yaml')['Withdraw']
+    config_dict_withdraw = YamlHelper().get_config_dict('/fusion/fusion.yamlf')['Withdraw']
 
     def withdraw(self, row):
        # 提现金额

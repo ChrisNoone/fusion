@@ -3,7 +3,7 @@ from common.box import YamlHelper, BasePage
 
 class FusionLoginPage(BasePage):
 
-    config_dict_loginpage = YamlHelper().get_config_dict('/fusion/yaml/fusion.yaml')['FusionLoginPage']
+    config_dict_loginpage = YamlHelper().get_config_dict('./yamlf/fusion.yaml')['FusionLoginPage']
     print('进入FusionLoginPage')
 
     def login(self, row):

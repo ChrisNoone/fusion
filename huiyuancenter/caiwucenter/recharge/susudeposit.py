@@ -4,7 +4,7 @@ from common.box import TestCase, BasePage, YamlHelper
 class SuSuDeposit(BasePage):
     # susu公司入款
     # 导入fusion文件中SuSuDeposit
-    config_dict_susudep = YamlHelper().get_config_dict('/fusion/yaml/fusion.yaml')['SuSuDeposit']
+    config_dict_susudep = YamlHelper().get_config_dict('/fusion/yamlf/fusion.yamlf')['SuSuDeposit']
 
     def susudeposit(self, row):
         print("输入和选择金额")

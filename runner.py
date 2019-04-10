@@ -38,8 +38,8 @@ class Runner(object):
         suite = TestSuite()
         # 读取要运行的用例所在的类和方法名称等，获取出来的形式是列表，列表里面有多个字典。如：
         # [{'a':'1','b':'2'},{'c':'3','d':'4'},{'e':'5','f':'6'}]
-        csv_data = CsvHelper().read_data_as_dict("csv/TestAll.csv")
-        csv_data1 = CsvHelper().read_data_as_dict("/fusion/csv/Fusion_Register.csv")
+        csv_data = CsvHelper().read_data_as_dict("./csv/TestAll.csv")
+        # csv_data1 = CsvHelper().read_data_as_dict("./csv/Fusion_Register.csv")
         # 获取一个本地时间，格式是年月日，时分秒
 
         test_time = time.strftime("%Y%m%d_%H%M%S", time.localtime())

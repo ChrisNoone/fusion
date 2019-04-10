@@ -5,7 +5,7 @@ from common.box import BasePage, YamlHelper
 
 class Registered(BasePage):
     # 导入fusion.yaml中Registered
-    config_dict_regiseter = YamlHelper().get_config_dict('/fusion/yaml/fusion.yaml')['Registered']
+    config_dict_regiseter = YamlHelper().get_config_dict('./yamlf/fusion.yaml')['Registered']
 
     def registered(self, row):
         print('进入注册页面')

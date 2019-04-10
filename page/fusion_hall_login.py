@@ -3,7 +3,7 @@ from common.box import BasePage, YamlHelper
 
 class FusionHallLogin(BasePage):
     # 导入fusion.yaml中的FusionMain
-    config_dict_fulottery = YamlHelper().get_config_dict('/fusion/fusion.yaml')['FusionHallLogin']
+    config_dict_fulottery = YamlHelper().get_config_dict('/fusion/fusion.yamlf')['FusionHallLogin']
 
     def menu(self, menu):
         # 登陆页面、会员注册

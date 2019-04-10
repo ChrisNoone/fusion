@@ -5,7 +5,7 @@ from common.box import TestCase, YamlHelper
 
 class GeRenZhongXin(TestCase):
 
-    config_dict_hyzx = YamlHelper().get_config_dict('/fusion/fusion.yaml')['HuiYuanZhongXin']
+    config_dict_hyzx = YamlHelper().get_config_dict('/fusion/fusion.yamlf')['HuiYuanZhongXin']
     def hyzx_menu(self,hyzx_menus):
         # 个人中心、财务中心、代理中心、电子游艺、交易记录、信息公告、帮助反馈、我的优惠劵
         if hyzx_menus == '个人中心':

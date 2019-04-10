@@ -1,9 +1,11 @@
 from common.box import BasePage, YamlHelper
+import os
 
 
 class FusionMain(BasePage):
     # 导入fusion.yaml中的FusionMain
-    config_dict_fusionmain = YamlHelper().get_config_dict('/fusion/yaml/fusion.yaml')['FusionMain']
+    print(os.getcwd())
+    config_dict_fusionmain = YamlHelper().get_config_dict('./yamlf/fusion.yaml')['FusionMain']
 
     def main_menu(self, menus):
 
@@ -27,7 +29,7 @@ class FusionMain(BasePage):
             self.base_driver.click(self.config_dict_fusionmain['TRENDCHART'])
             self.base_driver.forced_wait(1)
 
-    def mian_items(self, items):
+    def main_items(self, items):
         # 小标题导航
         # 免费试玩
         if items == '免费试玩':

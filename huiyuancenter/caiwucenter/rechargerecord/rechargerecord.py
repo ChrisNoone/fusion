@@ -3,7 +3,7 @@ from common.box import TestCase, BasePage, YamlHelper
 
 class RechargeRecord(BasePage):
     # 导入fusion文件中RechargeRecord
-    config_dict_rechargerecord = YamlHelper().get_config_dict('/fusion/fusion.yaml')['RechargeRecord']
+    config_dict_rechargerecord = YamlHelper().get_config_dict('/fusion/fusion.yamlf')['RechargeRecord']
 
     def rechargerecord(self):
         # 充值方式

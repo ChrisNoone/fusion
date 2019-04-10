@@ -3,7 +3,7 @@ from common.box import BasePage, YamlHelper
 
 class FusionLotteryHall(BasePage):
     # 导入fusion.yaml中的FusionMain
-    config_dict_fulottery = YamlHelper().get_config_dict('/fusion/fusion.yaml')['FusionLotteryHall']
+    config_dict_fulottery = YamlHelper().get_config_dict('/fusion/fusion.yamlf')['FusionLotteryHall']
 
     def hall_menu(self, menu):
         # 点击数字彩

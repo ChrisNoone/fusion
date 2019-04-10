@@ -4,7 +4,7 @@ from common.box import  BasePage, YamlHelper
 class CommonRecharge(BasePage):
     # 充值公共页面
     # 导入fusion文件中CommonRecharge
-    config_dict_commonre = YamlHelper().get_config_dict('/fusion/yaml/fusion.yaml')['CommonRecharge']
+    config_dict_commonre = YamlHelper().get_config_dict('/fusion/yamlf/fusion.yamlf')['CommonRecharge']
 
     def login(self, row):
         print('开始进入登陆')

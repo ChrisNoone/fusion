@@ -1,6 +1,5 @@
 import contextlib
 import csv
-
 import logging
 import time
 from enum import Enum, unique
@@ -11,15 +10,11 @@ from unittest.suite import _DebugResult, _isnotsuite
 # import win32gui
 # import win32con
 import webbrowser
-# import pymongo
-
-
 import yaml
 # from ddt import ddt
 from selenium import webdriver
 
 from selenium.webdriver import ActionChains
-from selenium.webdriver import FirefoxProfile
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
@@ -29,6 +24,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
 
 class BoxDriver(object):
     """
@@ -44,8 +40,7 @@ class BoxDriver(object):
     """
     构造方法
     """
-    
-    
+
 
     def __init__(self, browser_type=0, download_path="c:\\Users\\tester\\Downloads", by_char=",", profile=None):
         """
@@ -273,7 +268,6 @@ class BoxDriver(object):
         :return:
         """
         self._base_driver.close()
-
 
     """
     基本元素相关方法

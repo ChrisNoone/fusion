@@ -3,7 +3,7 @@ from common.box import TestCase, BasePage, YamlHelper
 
 class FundPassword(BasePage):
     # 导入fusion文件中FundPassword
-    config_dict_fundpassword = YamlHelper().get_config_dict('/fusion/fusion.yaml')['FundPassword']
+    config_dict_fundpassword = YamlHelper().get_config_dict('/fusion/fusion.yamlf')['FundPassword']
 
     def fundpassword(self, row):
         # 资金密码
