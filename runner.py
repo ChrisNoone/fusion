@@ -1,9 +1,8 @@
 import time
 
-from alltest.test_home_login import HomeLoginTest
+from alltest.home.test_home_login import HomeLoginTest
 from common.box import TestSuite, CsvHelper, TestRunner
-from alltest.test.fusion_test import FusionTest
-from alltest.test_home_register import HomeRegisterTest
+from alltest.home.test_home_register import HomeRegisterTest
 
 
 class Runner(object):

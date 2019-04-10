@@ -33,22 +33,21 @@ class CompanyDeposit(BasePage):
 
     def comde_bank(self, row):
         # 充值银行
-        # self.base_driver.forced_wait(0.5)
-        if row['rechargemethod'] == '中国工商银行_susu':
-            self.base_driver.click(self.config_dict_companyde['ICBC_SUSU'])
         if row['rechargemethod'] == '中国工商银行我测试啊':
             self.base_driver.click(self.config_dict_companyde['ICBC_MYTEST'])
         if row['rechargemethod'] == '中国工商银行李洁':
             self.base_driver.click(self.config_dict_companyde['ICBC_LEEJIE'])
         if row['rechargemethod'] == '中国光大银行':
             self.base_driver.click(self.config_dict_companyde['EVERBRIGHT'])
+        if row['rechargemethod'] == '中国工商银行_susu':
+            self.base_driver.click(self.config_dict_companyde['ICBC_SUSU'])
         if row['rechargemethod'] == '中国银行':
             self.base_driver.click(self.config_dict_companyde['CHINABANK'])
         if row['rechargemethod'] == '江苏银行-123':
             self.base_driver.click(self.config_dict_companyde['JIANGSU'])
         if row['rechargemethod'] == '恒丰银行':
             self.base_driver.click(self.config_dict_companyde['HENGFENG'])
-
+        self.base_driver.forced_wait(0.5)
         print('选择银行' + row['rechargemethod'])
 
     def depoistname(self, row):
@@ -63,6 +62,7 @@ class CompanyDeposit(BasePage):
     def next_buttion(self):
         # 下一步按钮
         nextbutton = self.base_driver.click(self.config_dict_companyde['NEXTBUTTON'])
+        print('点击下一步')
         return nextbutton
 
     def coupon(self):
@@ -75,10 +75,17 @@ class CompanyDeposit(BasePage):
         ckmoney = self.base_driver.click(self.config_dict_companyde['AMOUNTMATCH'])
         return ckmoney
 
-    def get_tips01(self):
+    def get_tips(self):
+        # 捕捉提示信息
+        # self.base_driver.forced_wait(10)
+        sumtip = self.base_driver.get_text(self.config_dict_companyde['TIPS'])
+        print('下一步')
+        return sumtip
+
+    def get_tips02(self):
         # 捕捉 充值金额
         # self.base_driver.forced_wait(10)
-        sumtip = self.base_driver.get_text(self.config_dict_companyde['TIPS01'])
+        sumtip = self.base_driver.get_text(self.config_dict_companyde['TIPS02'])
         print('下一步')
         return sumtip
 

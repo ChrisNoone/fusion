@@ -40,7 +40,7 @@ class RechargeSuSuTest(TestCase):
             if row['msg'] == 'fail01':
                 print('进入数据循环')
                 # 登陆模块，调用CommonRecharge中的login()
-                self.base_driver.forced_wait(1)
+                self.base_driver.forced_wait(3)
                 self.base_driver.susude = SuSuDeposit(self.base_driver)
                 self.base_driver.susude.susudeposit(row)
                 self.base_driver.susude.rechargemethod(row)

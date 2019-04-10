@@ -3,17 +3,32 @@ from common.box import TestCase, BasePage, YamlHelper
 
 class FundPassword(BasePage):
     # 导入fusion文件中FundPassword
-    config_dict_fundpassword = YamlHelper().get_config_dict('/fusion/fusion.yaml')['FundPassword']
+    config_dict_fundpassword = YamlHelper().get_config_dict('/fusion/yaml/fusion.yaml')['FundPassword']
 
     def fundpassword(self, row):
         # 资金密码
         # 密码规则：6位纯数字
         # 请输入新资金密码
+        print('进入资金密码填写')
+        print(row['tips'])
+        self.base_driver.type(self.config_dict_fundpassword['NOWFUND'], row['nowfund'])
         self.base_driver.type(self.config_dict_fundpassword['NEWFUND'], row['newfund'])
         # 请再次输入新资金密码
-        self.base_driver.type(self.config_dict_fundpassword['AGENTFUND    '], row['agentfund'])
+        self.base_driver.type(self.config_dict_fundpassword['AGENTFUND'], row['agentfund'])
+        print('请输入新资金密码：' + row['nowfund'])
+        print('请输入新资金密码：' + row['newfund'])
+        print('请再次输入新资金密码：' + row['agentfund'])
 
+    def sub_button(self):
+        # 确认按钮
+        sub = self.base_driver.click(self.config_dict_fundpassword['SUMBITFUND'])
+        return sub
 
+    def get_tips(self):
+        # 获取提示
+        tps0 = self.base_driver.get_text(self.config_dict_fundpassword['ALLTIPS'])
+        print('获取的提示' + tps0)
+        return tps0
 
     def get_lp_tips0(self):
 
@@ -41,3 +56,7 @@ class FundPassword(BasePage):
         tps4 = self.base_driver.get_text(self.config_dict_fundpassword['CH_SUCCESS'])
         return tps4
 
+    def click_login(self):
+        # 再次点击资金密码
+        cl = self.base_driver.click(self.config_dict_fundpassword['FUND_PASSWORD'])
+        return cl

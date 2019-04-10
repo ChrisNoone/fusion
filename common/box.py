@@ -264,6 +264,21 @@ class BoxDriver(object):
         """
         self._base_driver.close()
 
+    def back(self):
+        """
+        后退浏览器
+        :return:
+        """
+        self._base_driver.back()
+
+    def forward(self):
+        """
+        后退浏览器
+        :return:
+        """
+        self._base_driver.forward()
+
+
 
     """
     基本元素相关方法
@@ -291,9 +306,20 @@ class BoxDriver(object):
         el = self._locate_element(selector)
         el.click()
 
-    def click_last_one(self,selector):
+    def click_last_one(self, selector):
+        # 点击倒数第一个
         eles = self._locate_elements(selector)
         eles[-1].click()
+
+    def click_first(self, selector):
+        # 点击数组第一个，通常是默认
+        eles = self._locate_elements(selector)
+        eles[0].click()
+
+    def click_second(self, selector):
+        # 点击数组第二个，
+        eles = self._locate_elements(selector)
+        eles[1].click()
 
     def click_by_enter(self, selector):
         """

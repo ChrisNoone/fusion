@@ -303,6 +303,8 @@ LoginPassword:
     SUMBITLOGIN : 'x,//*[@id="main"]/div/section/div[1]/div[2]/form/a'
 
     #登陆密码断言模块
+    #提示
+    ALLTIPS : 'x,/html/body/div[5]/div/div/div/div[1]'
     #旧密码不为空
     OLDPASSWORD_TIP : 'x,/html/body/div[5]/div/div/div/div[1]'
     #密码不能为空
@@ -318,10 +320,20 @@ LoginPassword:
   
 
 FundPassword:
+    #个人中心登陆密码页面
+    #登陆密码
+
+    LOGIN_PASSWORD: 'x,//*[@id="main"]/div/section/div[1]'
+    #资金密码
+    FUND_PASSWORD: 'x,//*[@id="main"]/div/section/div[2]'
+    #我的银行卡
+    MY_CARD       : 'x,//*[@id="main"]/div/section/div[3]'
     #资金密码
     #密码规则：6位纯数字
+    #请当前新资金密码
+    NOWFUND   : 'x,//*[@id="main"]/div/section/div[2]/div[2]/form/input[2]'
     #请输入新资金密码
-    NEWFUND         : 'x,//*[@id="main"]/div/section/div[2]/div[2]/form/input[3]'
+    NEWFUND   : 'x,//*[@id="main"]/div/section/div[2]/div[2]/form/input[3]'
     #请再次输入新资金密码
     AGENTFUND : 'x,//*[@id="main"]/div/section/div[2]/div[2]/form/input[4]'
     #确认按钮
@@ -338,7 +350,13 @@ FundPassword:
     PSDIFF     : 'x,/html/body/div[3]/div/div/div/div[1]'   
     #修改成功
     CH_SUCCESS : 'x,/html/body/div[3]/div/div/div/div[1]'
-                   
+    
+    
+    
+    #断言
+    #提示
+    ALLTIPS : 'x,/html/body/div[5]/div/div/div/div[1]'
+   
   
   
 Everyday :
@@ -573,6 +591,14 @@ CommonRecharge:
     
 SuSuDeposit:
     #SuSu公司入款
+    SUSUCOMPANYADDMONEY : 'x,//*[@id="main"]/div/section/ul/li[1]/p[1]'
+    ALIPAY              : 'x,//*[@id="main"]/div/section/ul/li[2]/p[1]'
+    COMPANYDEPOSIT      : 'x,//*[@id="main"]/div/section/ul/li[3]/p[1]'
+    SUSUCOMPANYADDMONEY : 'x,//*[@id="main"]/div/section/ul/li[4]/p[1]'
+    
+    #公司入款方式数组
+    COMMETHOD           : 'x,//*[@id="main"]/div/section/ul/li[i]/p[1]'
+   
     #充值金额
     #请输入金额
     REAMOUNT : 'x,//*[@id="main"]/div/section/div[2]/div/input'
@@ -623,7 +649,7 @@ SuSuDeposit:
     DEPOISTAMOUT : 'x,//*[@id="main"]/div/section/div[3]/form/div[3]/div/input'
     
     # 确认存款
-    SURE_MONEY_BUTTON : 'x,//*[@id="main"]/div/section/div[3]/form/button'
+    SURE_MONEY_BUTTON : 'x,//*[@id="main"]/div/section/div[3]/form/button/span'
     
     # 充值记录页面
     RECHANGE50 : 'x,//*[@id="main"]/div/section/table/tbody/tr[1]/td[3]'
@@ -638,8 +664,8 @@ SuSuDeposit:
 AlipayTransfer:
     #支付宝转账
     #充值金额
-    #请输入金额
-    REAMOUNT : 'x,/html/body/div[3]/div/div/div/div[1]'
+     #请输入金额
+    REAMOUNT : 'x,//*[@id="main"]/div/section/div[2]/div/input'
     # 50元，100元，300,500,800,1000,2000,3000
     50YUAN   : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[1]'
     100YUAN  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[2]'
@@ -652,7 +678,7 @@ AlipayTransfer:
     
     
     #建设银行-戚念
-    BUILDBANK  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li/p[1]'
+    BUILDBANK  : 'x,//*[@id="main"]/div/section/div[2]/div/ul[2]/li/p[1]'
     
     #优惠劵
     COUPON      : 'x,//*[@id="main"]/div/section/div[2]/div/div[1]'
@@ -663,10 +689,15 @@ AlipayTransfer:
     #二维码
     QRCODE  : 'x,//*[@id="main"]/div/section/div/img'
     
+    #捕捉 充值金额不符合！    
+    TIPS  : 'x,/html/body/div[4]/div/div/div/div[1]'
     #捕捉 充值金额
     TIPS01  : 'x,//*[@id="main"]/div/section/div[2]/p'
     #订单号
     DINGDANHAO  : 'x,//*[@id="main"]/div/section/div/div/p[1]'
+    #订单提交成功，请扫描以下二维码付款！
+    ORDERTIPS  : 'x,//*[@id="main"]/div/section/div/div/h2'
+    
     
 VipAgent:
     #充值金额
@@ -726,6 +757,7 @@ VipAgent:
     
 CompanyDeposit:
     #充值金额
+    
     #请输入金额
     REAMOUNT : 'x,/html/body/div[3]/div/div/div/div[1]'
     # 50元，100元，300,500,800,1000,2000,3000
@@ -739,14 +771,15 @@ CompanyDeposit:
     3000YUAN : 'x,//*[@id="main"]/div/section/div[2]/div/ul[1]/li[8]'
     
     #充值方式
-    #中国工商银行_susu
-    ICBC_SUSU  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[1]'
+    
     #中国工商银行我测试啊
     ICBC_MYTEST: 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[2]'
     #中国工商银行李洁
     ICBC_LEEJIE: 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[3]'
     #中国光大银行
     EVERBRIGHT : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[4]'
+    #中国工商银行_susu
+    ICBC_SUSU  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[1]'
     #中国银行
     CHINABANK  : 'xpath,//*[@id="main"]/div/section/div[2]/div/ul[2]/li[5]'
     #江苏银行-123
@@ -770,6 +803,9 @@ CompanyDeposit:
     
     #捕捉 充值金额
     TIPS01  : 'x,//*[@id="main"]/div/section/div[2]/p'
+    
+    #充值页面提示信息
+    TIPS  : 'x,/html/body/div[3]/div/div/div/div[1]'
     
   
   

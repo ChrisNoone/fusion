@@ -3,7 +3,7 @@ from common.box import TestCase, YamlHelper, BasePage
 
 class LoginPassword(BasePage):
     # 导入fusion.yaml文件中的LoginPassword
-    config_dict_loginpassword = YamlHelper().get_config_dict('/fusion/fusion.yaml')['LoginPassword']
+    config_dict_loginpassword = YamlHelper().get_config_dict('/fusion/yaml/fusion.yaml')['LoginPassword']
 
     def per_center(self, percenter):
         # 个人中心
@@ -23,6 +23,24 @@ class LoginPassword(BasePage):
         self.base_driver.type(self.config_dict_loginpassword['NEWPASSWORD'], row['newpassword'])
         # 请输入确认密码':
         self.base_driver.type(self.config_dict_loginpassword['NEWPASSWORD1'], row['newpassword1'])
+        print('请输入原始密码' + row['oldpassword'])
+        print('请输入登陆密码' + row['newpassword'])
+        print('请输入确认密码' + row['newpassword1'])
+
+    def sub_button(self):
+        sub = self.base_driver.click(self.config_dict_loginpassword['SUMBITLOGIN'])
+        return sub
+
+    def click_login(self):
+        cl = self.base_driver.click(self.config_dict_loginpassword['LOGIN_PASSWORD'])
+        return cl
+
+    def get_tips(self):
+        # 获取提示
+        print('进入获取')
+        tps0 = self.base_driver.get_text(self.config_dict_loginpassword['ALLTIPS'])
+        print('获取到的提示是' + tps0)
+        return tps0
 
     def get_lp_tips0(self):
 

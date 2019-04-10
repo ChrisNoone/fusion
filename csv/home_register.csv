@@ -1,4 +1,4 @@
-msg,examples,username,password,email,tjid,qq,yzm,tips01,,,
+﻿msg,examples,username,password,email,tjid,qq,yzm,tips01,,,
 fail01,用户名空,,,,,,1,立即注册,,,
 fail01,用户名少于6位,123,,,,,2,立即注册,,6-16之间，由字母/数字/下划线组成6-16个字符,小于6位
 fail01,用户名多16位,lee1234567890123456,,,,,3,立即注册,,,大于16位

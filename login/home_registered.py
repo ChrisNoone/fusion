@@ -1,10 +1,12 @@
 
 
 from common.box import BasePage, YamlHelper
+import os
 
 
 class HomeRegistered(BasePage):
     # 导入fusion.yaml中Registered
+    # print(os.getcwd())
     config_dict_regiseter = YamlHelper().get_config_dict('/fusion/yaml/fusion.yaml')['HomeRegistered']
 
     def homeregistered(self, row):

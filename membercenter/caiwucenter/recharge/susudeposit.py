@@ -36,6 +36,8 @@ class SuSuDeposit(BasePage):
         # self.base_driver.forced_wait(0.5)
         if row['rechargemethod'] == '中国工商银行_susu':
             self.base_driver.click(self.config_dict_susudep['ICBC_SUSU'])
+        if row['rechargemethod'] == '中国工商银行_susu':
+            self.base_driver.click(self.config_dict_susudep['ICBC_SUSU'])
         if row['rechargemethod'] == '中国工商银行我测试啊':
             self.base_driver.click(self.config_dict_susudep['ICBC_MYTEST'])
         if row['rechargemethod'] == '中国工商银行李洁':
@@ -54,15 +56,14 @@ class SuSuDeposit(BasePage):
 
     def depoistname(self, row):
         print('进入存款信息')
-        self.base_driver.forced_wait(5)
-
+        #self.base_driver.forced_wait(5)
 
         # 存入时间
-        # self.base_driver.type(self.config_dict_susudep['DEPOISTTIME'], row['depoisttime'])
+        #self.base_driver.type(self.config_dict_susudep['DEPOISTTIME'], row['depoisttime'])
         # 存款人姓名
         self.base_driver.type(self.config_dict_susudep['DEPOISTNAME'], row['depoistname'])
         # 存款金额
-        # self.base_driver.type(self.config_dict_susudep['DEPOISTAMOUNT'], row['depoistamount'])
+        #self.base_driver.type(self.config_dict_susudep['DEPOISTAMOUNT'], row['depoistamount'])
 
     def next_buttion(self):
         # 下一步
@@ -83,7 +84,7 @@ class SuSuDeposit(BasePage):
     def rechgebutton(self):
         # 确认存款
         nextbutton = self.base_driver.click(self.config_dict_susudep['SURE_MONEY_BUTTON'])
-        print('下一步')
+        print('确认存款')
         # self.base_driver.forced_wait(10)
         return nextbutton
 
@@ -92,6 +93,8 @@ class SuSuDeposit(BasePage):
         self.base_driver.forced_wait(10)
         re50 = self.base_driver.get_text(self.config_dict_susudep['RECHANGE50'])
         print('下一步')
+        return re50
+
 
     def sum_tips(self):
         # 提交成功
