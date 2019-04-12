@@ -1,10 +1,12 @@
 from common.box import YamlHelper, BasePage
+import os
 
 
 class FusionLoginPage(BasePage):
 
-    config_dict_loginpage = YamlHelper().get_config_dict('./yamlf/fusion.yaml')['FusionLoginPage']
-    print('进入FusionLoginPage')
+    path = os.path.split(os.path.abspath(__file__))[0]
+    config_dict_loginpage = YamlHelper().get_config_dict('../yamlf/fusion.yaml')['FusionLoginPage']
+    # print('进入FusionLoginPage')
 
     def login(self, row):
         # '''登录业务流程'''
@@ -17,11 +19,9 @@ class FusionLoginPage(BasePage):
         print("获取数据完毕")
 
     def sign(self):
-        print('注册111aaaaa')
-        '''注册流程'''
+        # 注册流程
         self.base_driver.click(self.config_dict_loginpage['SIGN_BUTTON'])
         self.base_driver.forced_wait(2)
-        print('注册111')
 
     def swtframe(self):
         # 跳转

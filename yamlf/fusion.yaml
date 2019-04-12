@@ -678,7 +678,8 @@ CompanyDeposit:
 Registered:
     #注册
     #用户名
-    USERNAME: 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[1]/div[1]/div[2]/input'
+#    USERNAME: 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[1]/div[1]/div[2]/input'
+    USERNAME: 'xpath,//*[@class="from"]/div[1]/div[1]/div[2]/input'
     PASSWORD: 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[2]/div[1]/div[2]/input'
     EMAIL   : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[3]/div[1]/div[2]/input'
     TJID    : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[4]/div[1]/div[2]/input'

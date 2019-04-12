@@ -6,9 +6,9 @@ from enum import Enum, unique
 from unittest import TestCase as TC, SkipTest
 from unittest.case import _ShouldStop
 from unittest.suite import _DebugResult, _isnotsuite
-
-# import win32gui
-# import win32con
+import pymysql
+import win32gui
+import win32con
 import webbrowser
 import yaml
 # from ddt import ddt
@@ -99,7 +99,7 @@ class BoxDriver(object):
                 'unicodeKeyboard': True,
                 'resetKeyboard': True
             }
-            driver = webdriver_app.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
+            driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
         else:
             driver = webdriver.PhantomJS()
         try:
@@ -282,6 +282,7 @@ class BoxDriver(object):
         """
         el = self._locate_element(selector)
         el.clear()
+        ActionChains(self._base_driver).double_click(el).perform()
         el.send_keys(text)
 
     def click(self, selector):
@@ -484,12 +485,12 @@ class BoxDriver(object):
         return el.is_displayed()
 
     def get_exist(self, selector):
-        '''
+        """
         该方法用来确认元素是否存在，如果存在返回flag=true，否则返回false
         :param self:
         :param selector: 元素定位，如'id,account'
         :return: 布尔值
-        '''
+        """
         flag = True
         try:
             self._locate_element(selector)
@@ -499,11 +500,11 @@ class BoxDriver(object):
             return flag
 
     def get_enabled(self,selector):
-        '''
+        """
         判断页面元素是否可点击
         :param selector: 元素定位
         :return: 布尔值
-        '''
+        """
         if self._locate_element(selector).is_enabled():
             return True
         else:
@@ -556,12 +557,12 @@ class BoxDriver(object):
     """
 
     def accept_alert(self):
-        '''
+        """
             Accept warning box.
 
             Usage:
             driver.accept_alert()
-            '''
+            """
         self._base_driver.switch_to.alert.accept()
 
     def dismiss_alert(self):
@@ -914,6 +915,7 @@ class CsvHelper(object):
 
         return data_ret
 
+
 class DbHelper(object):
     """
     MySQ 数据库帮助类
@@ -987,8 +989,8 @@ class DbHelper(object):
         """
         self.connect.close()
 
-class YamlHelper(object):
 
+class YamlHelper(object):
     def get_config_dict(self, f):
         """
         获取所有配置
@@ -998,6 +1000,7 @@ class YamlHelper(object):
         with open(f, mode='r', encoding='utf8') as file_config:
             config_dict = yaml.load(file_config.read())
             return config_dict
+
 
 class Email(object):
 
@@ -1976,6 +1979,7 @@ class _TestResult(TestResult):
             sys.stderr.write('\n')
         else:
             sys.stderr.write('F')
+
 
 class TestRunner(_TemplateReport):
     """
