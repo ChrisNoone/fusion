@@ -1,13 +1,14 @@
-import time
+# coding: utf-8
 
-from alltest.test_home_login import HomeLoginTest
+import time
 from common.box import TestSuite, CsvHelper, TestRunner
-from alltest.fusion_test import FusionTest
-from alltest.test_register import RegisterTest
+from TestCase import *
 
 
 class Runner(object):
-    def run_test(self):
+
+    @staticmethod
+    def run_test():
         """
         运行测试
         :return:
@@ -34,31 +35,38 @@ class Runner(object):
         # 实例化测试套件,用来装用例
         suite = TestSuite()
         # 读取要运行的用例所在的类和方法名称等，获取出来的形式是列表，列表里面有多个字典。如：
-        csv_data = CsvHelper().read_data_as_dict("./csv/TestAll.csv")
-        # 获取一个本地时间，格式是年月日，时分秒
-        test_time = time.strftime("%Y%m%d_%H%M%S", time.localtime())
+        csv_data = CsvHelper().read_data_as_dict("./csv_test/all_test.csv")
+        # 获取一个本地时间，格式是年月日
+        test_time = time.strftime("%Y%m%d", time.localtime())
         # 创建一个新的日志文件
-        logger_file = "./report/fusion_automate_log_%s.log" % test_time
+        logger_file = "./log/fusion_automate_log_%s.log" % test_time
 
         for row in csv_data:
-            # row其实就是每一个dict
-            test_class = row["class"]
-            test_method = row["test"]
+            test_class = row['class']
+            test_method = row['method']
+            test_status = int(row['status'])
+            if test_status == 1:
+                if test_class == "RegisterTest":
+                    suite.add_test(test_register.RegisterTest(test_method, logger_file))
+                elif test_class == "HomeLoginTest":
+                    suite.add_test(test_home_login.HomeLoginTest(test_method, logger_file))
+            else:
+                continue
+            """
             test_count = int(row["count"])
-
+            
             for i in range(test_count):
                 # 增加测试用例，这里要增加
                 # 注册register用例
                 if test_class == "RegisterTest":
-                    suite.add_test(RegisterTest(test_method, logger_file))
-                #
-                # if test_class == "HomeLoginTest":
-                #     suite.add_test(HomeLoginTest(test_method, logger_file))
-                #
+                    suite.add_test(test_register.RegisterTest(test_method, logger_file))
+                elif test_class == "HomeLoginTest":
+                    suite.add_test(test_home_login.HomeLoginTest(test_method, logger_file))
+
                 # # Fusion Test测试用例
                 # if test_class == "FusionTest":
                 #     suite.add_test(FusionTest(test_method, logger_file))
-
+            """
         # 创建测试报告的文件
         report_file = "./report/fusion_automate_report_%s.html" % test_time
         # 实例化TestRunner类，用来运行用例和生成测试报告
@@ -70,4 +78,3 @@ class Runner(object):
 
         # 发送测试报告到指定邮箱
         # Email().email_attachment(report_file)
-

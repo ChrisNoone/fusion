@@ -41,7 +41,6 @@ class BoxDriver(object):
     构造方法
     """
 
-
     def __init__(self, browser_type=0, download_path="c:\\Users\\tester\\Downloads", by_char=",", profile=None):
         """
         构造方法：实例化 BoxDriver 时候使用
@@ -66,7 +65,6 @@ class BoxDriver(object):
 
             driver = webdriver.Chrome(chrome_options=profile)
             # driver = webdriver.Chrome(executable_path='D:\\chromedriver.exe', chrome_options=options)
-
 
         elif browser_type == 1 or browser_type == Browser.Firefox:
             # if profile is not None:
@@ -1059,6 +1057,7 @@ class Browser(Enum):
     Firefox = 1
     Ie = 2
 
+
 class TestLogger:
     def __init__(self, log_path):
         # log_path：日志存放路径
@@ -1258,7 +1257,7 @@ class TestCase(TC):
     def read_csv_as_dict(self, file_name):
         """
         读 CSV 作为 DICT 类型
-        :type file_name: csv 文件路径 和名字
+        :type file_name: csv_case 文件路径 和名字
         :return:
         """
         return CsvHelper().read_data_as_dict(file_name)
@@ -1864,6 +1863,7 @@ function showOutput(id, name) {
 
 TestResult = unittest.TestResult
 
+
 class _TestResult(TestResult):
     # note: _TestResult is a pure representation of results.
     # It lacks the output and reporting ability compares to unittest._TextTestResult.
@@ -2282,6 +2282,7 @@ class TestSuite(unittest.TestSuite):
         :return:
         """
         self.addTests(tests)
+
 
 main = TestProgram
 

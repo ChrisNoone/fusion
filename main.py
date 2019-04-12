@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from runner import Runner
 
 
@@ -5,8 +7,8 @@ class Main(object):
     """
     自动化测试方案的唯一执行入口
     """
-
-    def run_test(self):
+    @staticmethod
+    def run_test():
         """
         静态的执行方法
         static method
