@@ -36,7 +36,7 @@ class RegisterTest(TestCase):
         :return:
         """
         # 打开csv文件
-        csv_file = open('./csv_case/register_case.csv', 'r', encoding='utf8')
+        csv_file = open('./TestData/csv_case/register_case.csv', 'r', encoding='utf8')
         # 读取csv文件
         csv_data = csv.DictReader(csv_file)
 

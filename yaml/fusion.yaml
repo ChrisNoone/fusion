@@ -24,7 +24,7 @@ FusionMain:
     #验证码
     YZM : 'x,//*[@id="root"]/div/div[2]/div[2]/div[3]/input'
     #登陆按钮
-    LOGINBUTTON : 'x,//*[@id="root"]/div/div[2]/div[2]/button'  
+    LOGINBUTTON : 'x,//*[@id="root"]/div/div[2]/div[2]/button'
     #注册按钮
     REGISTERED: 'x,//*[@id="root"]/div/div[2]/div[2]/a'
     

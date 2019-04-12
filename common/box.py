@@ -294,7 +294,7 @@ class BoxDriver(object):
         el = self._locate_element(selector)
         el.click()
 
-    def click_last_one(self,selector):
+    def click_last_one(self, selector):
         eles = self._locate_elements(selector)
         eles[-1].click()
 
@@ -1059,15 +1059,17 @@ class Browser(Enum):
 
 
 class TestLogger:
-    def __init__(self, log_path):
-        # log_path：日志存放路径
-        # 文件命名
+    log_path = './TestData/log/fusion_automate_log_%s.log' % time.strftime("%Y%m%d", time.localtime())
 
+    def __init__(self, log_path=log_path):
+        # log_path：日志存放路径
         self.file_name = log_path
         self.logger = logging.getLogger()
+        # 日志输出的级别
         self.logger.setLevel(logging.DEBUG)
         # 日志输出格式
-        self.formatter = logging.Formatter('[%(asctime)s]-[%(filename)s]-[%(levelname)s]: %(message)s')
+        self.formatter = logging.Formatter('%(asctime)s [%(levelname)s] : %(message)s',
+                                           datefmt='%Y-%m-%d %H:%M:%S')
 
     def info(self, message):
         """
@@ -1147,8 +1149,7 @@ class TestCase(TC):
         if logger_file is not None:
             self.logger = TestLogger(logger_file)
         else:
-            test_time = time.strftime("%Y%m%d_%H%M%S", time.localtime())
-            self.logger = TestLogger("test_log_%s.log" % test_time)
+            self.logger = TestLogger()
 
     def set_up(self):
         """

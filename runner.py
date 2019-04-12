@@ -35,11 +35,11 @@ class Runner(object):
         # 实例化测试套件,用来装用例
         suite = TestSuite()
         # 读取要运行的用例所在的类和方法名称等，获取出来的形式是列表，列表里面有多个字典。如：
-        csv_data = CsvHelper().read_data_as_dict("./csv_test/all_test.csv")
+        csv_data = CsvHelper().read_data_as_dict("./TestData/csv_test/all_test.csv")
         # 获取一个本地时间，格式是年月日
         test_time = time.strftime("%Y%m%d", time.localtime())
         # 创建一个新的日志文件
-        logger_file = "./log/fusion_automate_log_%s.log" % test_time
+        logger_file = "./TestData/log/fusion_automate_log_%s.log" % test_time
 
         for row in csv_data:
             test_class = row['class']
@@ -68,7 +68,7 @@ class Runner(object):
                 #     suite.add_test(FusionTest(test_method, logger_file))
             """
         # 创建测试报告的文件
-        report_file = "./report/fusion_automate_report_%s.html" % test_time
+        report_file = "./TestData/report/fusion_automate_report_%s.html" % test_time
         # 实例化TestRunner类，用来运行用例和生成测试报告
         runner = TestRunner(file_name=report_file,
                             verbosity=2,
