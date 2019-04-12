@@ -1,34 +1,24 @@
 import contextlib
 import csv
-
 import logging
+import smtplib
 import time
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from enum import Enum, unique
 from unittest import TestCase as TC, SkipTest
 from unittest.case import _ShouldStop
 from unittest.suite import _DebugResult, _isnotsuite
 
-# import win32gui
-# import win32con
-import webbrowser
-# import pymongo
-
-
 import yaml
-# from ddt import ddt
 from selenium import webdriver
-
 from selenium.webdriver import ActionChains
-from selenium.webdriver import FirefoxProfile
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 
 class BoxDriver(object):
     """
@@ -274,6 +264,21 @@ class BoxDriver(object):
         """
         self._base_driver.close()
 
+    def back(self):
+        """
+        后退浏览器
+        :return:
+        """
+        self._base_driver.back()
+
+    def forward(self):
+        """
+        后退浏览器
+        :return:
+        """
+        self._base_driver.forward()
+
+
 
     """
     基本元素相关方法
@@ -301,9 +306,20 @@ class BoxDriver(object):
         el = self._locate_element(selector)
         el.click()
 
-    def click_last_one(self,selector):
+    def click_last_one(self, selector):
+        # 点击倒数第一个
         eles = self._locate_elements(selector)
         eles[-1].click()
+
+    def click_first(self, selector):
+        # 点击数组第一个，通常是默认
+        eles = self._locate_elements(selector)
+        eles[0].click()
+
+    def click_second(self, selector):
+        # 点击数组第二个，
+        eles = self._locate_elements(selector)
+        eles[1].click()
 
     def click_by_enter(self, selector):
         """

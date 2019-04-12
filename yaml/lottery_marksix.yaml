@@ -1,0 +1,406 @@
+MarkSix:
+  # 主导航栏
+  MENU : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]'
+  
+  
+  #----------------------------------------------------------------------------------------------------------------
+  #两面------------------------------------------------------------------------------------------------------------
+  TWOSIDES  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[1]'
+
+
+  #两面---特双
+  TESHUANG  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[2]/div[3]/div/input'
+  #两面---特单
+  TEDAN     : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[3]/div[3]/div/input'
+  #两面---特大
+  TESDA     : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[4]/div[3]/div/input'
+  #两面---特小
+  TEXIAO    : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[5]/div[3]/div/input'
+  #两面---特合单
+  TEHEDAN   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[6]/div[3]/div/input'
+
+  #两面---特合双
+  TEHESHUANG: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[2]/div[3]/div/input'
+  #两面---特合大
+  TEHEDA    : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[3]/div[3]/div/input'
+  #两面---特合小
+  TEHEXIAO  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[4]/div[3]/div/input'
+  #两面---特尾大
+  TEHTAILDA : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[5]/div[3]/div/input'
+  #两面---特尾小
+  TETAILXIAO: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[6]/div[3]/div/input'
+
+  #两面---特天肖
+  TIANXIAO  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[3]/div[2]/div[3]/div/input'
+  #两面---特地肖
+  DIXIAO    : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[3]/div[3]/div[3]/div/input'
+  #两面---特前肖
+  QIANXIAO  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[3]/div[4]/div[3]/div/input'
+  #两面---特后肖
+  HOUXIAO   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[3]/div[5]/div[3]/div/input'
+  #两面---特家肖
+  JIAXIAO   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[3]/div[6]/div[3]/div/input'
+
+  #两面---特野肖
+  YEXIAO    : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[4]/div[2]/div[3]/div/input'
+  #两面---总单
+  ZONGDAN   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[4]/div[3]/div[3]/div/input'
+  #两面---总双
+  ZONGSHUANG: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[4]/div[4]/div[3]/div/input'
+  #两面---总大
+  ZONGDA    : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[4]/div[5]/div[3]/div/input'
+  #两面---总小
+  ZONGXIAO  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[4]/div[6]/div[3]/div/input'
+
+
+
+
+
+  #--------------------------------------------------------------------------------------------------------------------
+  #七码五行
+  SEVENYARDS  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]'
+  
+  #七码
+  SEVENY      : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div'
+  
+  
+  #七码五行---七码---单0双7
+  DS07: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[2]/div[3]/div/input'
+  DS16: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[3]/div[3]/div/input'
+  DS25: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[4]/div[3]/div/input'
+  DS34: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[5]/div[3]/div/input'
+  DS43: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[6]/div[3]/div/input'
+  DS52: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[7]/div[3]/div/input'
+  DS61: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[8]/div[3]/div/input'
+  DS70: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[9]/div[3]/div/input'
+  
+  
+  #七码五行---七码---大0双7
+  DX07: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[2]/div[3]/div/input'
+  DX16: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[3]/div[3]/div/input'
+  DX25: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[4]/div[3]/div/input'
+  DX34: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[5]/div[3]/div/input'
+  DX43: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[6]/div[3]/div/input'
+  DX52: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[7]/div[3]/div/input'
+  DX61: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[8]/div[3]/div/input'
+  DX70: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[9]/div[3]/div/input'
+  
+  
+  
+  
+  #七码五行---五行
+  FIVEPATH    : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div'
+  #七码五行---五行---金
+  JIN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[2]/div[4]/div/input'
+  #七码五行---五行---木
+  MU   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[3]/div[4]/div/input'
+  #七码五行---五行---水
+  SHUI : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[4]/div[4]/div/input'
+  #七码五行---五行---火
+  HUO  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[5]/div[4]/div/input'
+  #七码五行---五行---土
+  TU   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[6]/div[4]/div/input'
+  
+
+
+
+  #----------------------------------------------------------------------------------------------------------------
+  #尾数
+  TAILNUM : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[3]'
+  #尾数---头尾数
+  HTNUM   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div'
+  #尾数---头0
+  H0   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[2]/div[3]/div/input'
+  #尾数---头1
+  H1   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[3]/div[3]/div/input'
+  #尾数---头2
+  H2   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[4]/div[3]/div/input'
+  
+  #尾数---头3
+  H3   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[2]/div[3]/div/input'
+  #尾数---头4
+  H4   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[3]/div[3]/div/input'
+  #尾数---尾0
+  T0   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[4]/div[3]/div/input'
+  
+  
+  #尾数---尾1
+  T1   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[3]/div[2]/div[3]/div/input'
+  #尾数---尾2
+  T2   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[3]/div[3]/div[3]/div/input'
+  #尾数---尾3
+  T3   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[3]/div[4]/div[3]/div/input'
+   
+  #尾数---尾4
+  T4   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[4]/div[2]/div[3]/div/input'
+  #尾数---尾5
+  T5   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[4]/div[3]/div[3]/div/input'
+  #尾数---尾6
+  T6   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[4]/div[4]/div[3]/div/input' 
+ 
+  #尾数---尾7
+  T7   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[5]/div[2]/div[3]/div/input'
+  #尾数---尾8
+  T8   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[5]/div[3]/div[3]/div/input'
+  #尾数---尾9
+  T9   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[5]/div[4]/div[3]/div/input'
+  
+  
+  
+  
+  
+  #正特尾数
+  POTNUM  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div'
+  
+  #正特尾数---尾0
+  PT0  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[2]/div[3]/div/input'
+  PT1  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[3]/div[3]/div/input'
+  PT2  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[4]/div[3]/div/input'
+  PT3  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[5]/div[3]/div/input'
+  PT4  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[6]/div[3]/div/input'
+  
+  PT5  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[2]/div[3]/div/input'
+  PT6  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[3]/div[3]/div/input'
+  PT7  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[4]/div[3]/div/input'
+  PT8  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[5]/div[3]/div/input'
+  PT9  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[6]/div[3]/div/input'
+  
+  
+  
+  #----------------------------------------------------------------------------------------------------------------
+  #色波
+  SEBO  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[4]'
+  
+  #色波---三色波
+  SEBO3  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div'
+  #色波---三色波---红波
+  SEBO3R  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[2]/div[3]/div/input'
+  #色波---三色波---蓝波
+  SEBO3B  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[2]/div[3]/div/input'
+  #色波---三色波---绿波
+  SEBO3G  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[3]/div[2]/div[3]/div/input'
+  
+  
+  
+  #色波---半波
+  SEBOH  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div'
+  #色波---半波---红单
+  SEBOHRDAN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[2]/div[3]/div/input'
+  #色波---半波---红双
+  SEBOHRSHU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[3]/div[3]/div/input'
+  #色波---半波---红大
+  SEBOHRDA  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[4]/div[3]/div/input'
+  #色波---半波---红小
+  SEBOHRXIAO : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[5]/div[3]/div/input'
+  
+  #色波---半波---绿单 
+  SEBOHGDAN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[6]/div[3]/div/input'
+  #色波---半波---绿双  
+  SEBOHGSHU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[7]/div[3]/div/input'
+  #色波---半波---绿大
+  SEBOHGDA  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[8]/div[3]/div/input'
+  #色波---半波---绿小
+  SEBOHGXIAO : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[9]/div[3]/div/input'
+  
+  #色波---半波---蓝单
+  SEBOHBDAN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[10]/div[3]/div/input'
+  #色波---半波---蓝双 
+  SEBOHBSHU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[11]/div[3]/div/input'
+  #色波---半波---蓝大 
+  SEBOHBDA  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[12]/div[3]/div/input'
+  #色波---半波---蓝小 
+  SEBOHBXIAO : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[13]/div[3]/div/input'
+  
+  
+  
+  
+  
+  #色波---半半波
+  SEBOHH  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[3]/div'
+  #色波---半半波---红大单
+  SEBOHHRDAN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[2]/div[3]/div/input'
+  #色波---半半波---红大双
+  SEBOHHRSHU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[3]/div[3]/div/input'
+  #色波---半半波---红小单
+  SEBOHHRXDAN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[4]/div[3]/div/input'
+  #色波---半半波---红小双
+  SEBOHHRXIAO : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[5]/div[3]/div/input'
+  
+  #色波---半半波---绿大单 
+  SEBOHHGDAN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[6]/div[3]/div/input'
+  #色波---半半波---绿大双  
+  SEBOHHGSHU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[7]/div[3]/div/input'
+  #色波---半半波---绿小单
+  SEBOHHGXDAN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[8]/div[3]/div/input'
+  #色波---半半波---绿小双
+  SEBOHHGXIAO : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[9]/div[3]/div/input'
+  
+  #色波---半半波---蓝大单
+  SEBOHHBDAN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[10]/div[3]/div/input'
+  #色波---半半波---蓝大双 
+  SEBOHHBSHU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[11]/div[3]/div/input'
+  #色波---半半波---蓝小单 
+  SEBOHHBXDAN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[12]/div[3]/div/input'
+  #色波---半半波---蓝小双
+  SEBOHHBXIAO : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div/div[13]/div[3]/div/input'
+  
+
+  
+  
+  #色波---七色波
+  SEBO37  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[4]/div'
+  #色波---七色波---红波
+  SEBO37R  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[1]/div[2]/div[3]/div/input'
+  #色波---七色波---蓝波
+  SEBO37B  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[2]/div[2]/div[3]/div/input'
+  #色波---七色波---绿波
+  SEBO37G  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[3]/div[2]/div[3]/div/input'
+  #色波---七色波---和局
+  SEBO37H  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[6]/div/div[4]/div[2]/div[3]/div/input'
+  
+  
+  
+  #----------------------------------------------------------------------------------------------------------------
+  #合肖
+  HEXIAO  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[6]'  
+  #野兽
+  YESHOU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[1]'
+  #家禽
+  JIAQIN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[2]'
+  #单
+  DAN     : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[3]'
+  #双
+  SHUANG  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[4]'
+  #前肖
+  QIANXIAO: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[5]'
+  #后肖
+  HOUXIAO : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[6]'
+  #天肖
+  TIANXIAO: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[7]'
+  #地肖
+  DIXIAO  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[1]/div[8]'
+  
+  #鼠
+  SHU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  #牛
+  NIU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  #虎
+  HU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  #兔
+  TU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  #龙
+  LONG  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  #蛇
+  SHE  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  #马
+  MA  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  #羊
+  YANG  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  #猴
+  HOU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  #鸡
+  JI  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  #狗
+  GOU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  #猪
+  ZHU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[5]/div/div[2]/div[1]/div[2]/div[1]/i'
+  
+  
+  
+  
+  
+  
+  
+
+ 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  #点击添加注单按钮
+  ADDNOTE  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[3]/button'
+  
+  
+  #随机1注
+  RANDOM1  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[1]'
+  #随机5注
+  RANDOM5  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[2]'
+  
+  #全部删除
+  ALLDELETE: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[3]'
+  
+  #确认投注
+  SUREBET  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[4]'
+  
+  
+  
+  #请先添加投注内容
+  TIPS : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  
+  #请先添加投注内容
+  TIPS01 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #下注成功
+  TIPS02 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #您还没有选择号码或所选号码不全
+  TIPS03 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  
+  #是否删除全部注单？
+  TIPS04 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+
+
+
+
+Lottery:
+
+  #登陆注册模块
+  # 用户名
+  USERNAME : 'x,//*[@id="root"]/div/div[2]/div[2]/div[1]/input'
+  #密码
+  PASSWORD : 'x,//*[@id="root"]/div/div[2]/div[2]/div[2]/input'
+  #验证码
+  YZM : 'x,//*[@id="root"]/div/div[2]/div[2]/div[3]/input'
+  #登陆按钮
+  LOGINBUTTON : 'x,//*[@id="root"]/div/div[2]/div[2]/button'
+  #点击数字彩
+  LOTTERY : 'x,//*[@id="root"]/div/div[3]/div/div[2]/div[2]/a'
+
+  #点击六合彩
+  MARKSIX : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[3]'
+
+  #点击分分六合彩
+  MARKSIX_MIN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[2]/div[3]/a/div'
+
+  
+  
+  
+  

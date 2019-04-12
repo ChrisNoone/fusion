@@ -1,9 +1,8 @@
 import time
 
-from alltest.test_home_login import HomeLoginTest
+from alltest.home.test_home_login import HomeLoginTest
 from common.box import TestSuite, CsvHelper, TestRunner
-from alltest.fusion_test import FusionTest
-from alltest.test_register import RegisterTest
+from alltest.home.test_home_register import HomeRegisterTest
 
 
 class Runner(object):
@@ -56,15 +55,15 @@ class Runner(object):
             for i in range(test_count):
                 # 增加测试用例，这里要增加
                 # 注册register用例
-                if test_class == "RegisterTest":
-                    suite.add_test(RegisterTest(test_method, logger_file))
+                if test_class == "HomeRegisterTest":
+                    suite.add_test(HomeRegisterTest(test_method, logger_file))
 
                 if test_class == "HomeLoginTest":
                     suite.add_test(HomeLoginTest(test_method, logger_file))
 
                 # Fusion Test测试用例
-                if test_class == "FusionTest":
-                    suite.add_test(FusionTest(test_method, logger_file))
+                # if test_class == "FusionTest":
+                #     suite.add_test(FusionTest(test_method, logger_file))
 
         # 创建测试报告的文件
         report_file = "fusion_automate_report_%s.html" % test_time

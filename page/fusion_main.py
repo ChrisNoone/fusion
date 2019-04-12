@@ -1,4 +1,4 @@
-from common.box import BasePage, YamlHelper
+from common.box import YamlHelper, BasePage
 
 
 class FusionMain(BasePage):
@@ -49,20 +49,26 @@ class FusionMain(BasePage):
         # 登陆注册前
     def login_before(self, row):
         # 用户名
-
         self.base_driver.type(self.config_dict_fusionmain['USERNAME'], row['username'])
-        print("username")
+        print('输入的用户名是：' + row['username'])
         # 密码
         self.base_driver.type(self.config_dict_fusionmain['PASSERROR'], row['password'])
         # 验证码
+        print('输入的密码是：' + row['password'])
         self.base_driver.type(self.config_dict_fusionmain['YZM'], row['yzm'])
         # 登陆按钮
         self.base_driver.click(self.config_dict_fusionmain['LOGINBUTTON'])
+        self.base_driver.forced_wait(3)
 
     def login_buttin(self, lb):
         # 注册按钮
         if lb == '注册':
             self.base_driver.click(self.config_dict_fusionmain['REGISTERED'])
+        self.base_driver.forced_wait(1)
+        print("登陆注册期前")
+
+    def login_drop(self):
+        self.base_driver.click(self.config_dict_fusionmain['DROPOUT'])
         self.base_driver.forced_wait(1)
         print("登陆注册期前")
 
@@ -99,5 +105,12 @@ class FusionMain(BasePage):
         tip02 = self.base_driver.get_text(self.config_dict_fusionmain['LOGINBUTTON'])
         print(tip02)
         return tip02
+
+    def get_login_tips03(self):
+        # 退出
+        tip03 = self.base_driver.get_text(self.config_dict_fusionmain['DROPOUT'])
+        print(tip03)
+        return tip03
+
 
 
