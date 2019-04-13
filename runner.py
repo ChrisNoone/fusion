@@ -33,14 +33,10 @@ class Runner(object):
         方法2：单个指定添加
         '''
         # 实例化测试套件,用来装用例
-        TestLogger().info(message='--------------------------------------------\n测试开始，准备初始化测试套件...')
+        TestLogger().info('================== 测试开始 ==================')
         suite = TestSuite()
         # 读取要运行的用例所在的类和方法名称等，获取出来的形式是列表，列表里面有多个字典。如：
         csv_data = CsvHelper().read_data_as_dict("./TestData/csv_test/all_test.csv")
-        # 获取一个本地时间，格式是年月日
-        log_time = time.strftime("%Y%m%d", time.localtime())
-        # 创建一个新的日志文件
-        logger_file = "./TestData/log/fusion_automate_log_%s.log" % log_time
 
         for row in csv_data:
             test_class = row['class']
@@ -48,9 +44,9 @@ class Runner(object):
             test_status = int(row['status'])
             if test_status == 1:
                 if test_class == "RegisterTest":
-                    suite.add_test(test_register.RegisterTest(test_method, logger_file))
+                    suite.add_test(test_register.RegisterTest(test_method))
                 elif test_class == "HomeLoginTest":
-                    suite.add_test(test_home_login.HomeLoginTest(test_method, logger_file))
+                    suite.add_test(test_home_login.HomeLoginTest(test_method))
             else:
                 continue
 

@@ -1071,6 +1071,14 @@ class TestLogger:
         self.formatter = logging.Formatter('%(asctime)s [%(levelname)s] : %(message)s',
                                            datefmt='%Y-%m-%d %H:%M:%S')
 
+    def debug(self, message):
+        """
+        添加信息日志
+        :param message:
+        :return:
+        """
+        self._console("debug", message)
+
     def info(self, message):
         """
         添加信息日志
@@ -2022,7 +2030,7 @@ class TestRunner(_TemplateReport):
             test(result)
             self.stopTime = datetime.datetime.now()
             self.generate_report(test, result)
-            print('Time Elapsed 花费时间: %s' % (self.stopTime - self.startTime))
+            TestLogger().info('Time Elapsed 花费时间: %s' % (self.stopTime - self.startTime))
 
         return result
 
@@ -2206,6 +2214,7 @@ class TestRunner(_TemplateReport):
     def _generate_ending(self):
         return self.ENDING_TMPL
 
+
 class TestProgram(unittest.TestProgram):
     """
     A variation of the unittest.TestProgram. Please refer to the base
@@ -2219,6 +2228,7 @@ class TestProgram(unittest.TestProgram):
         if self.testRunner is None:
             self.testRunner = TestRunner(verbosity=self.verbosity)
         unittest.TestProgram.runTests(self)
+
 
 class TestSuite(unittest.TestSuite):
     """A test suite is a composite test consisting of a number of TestCases.

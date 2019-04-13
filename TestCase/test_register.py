@@ -13,7 +13,7 @@ class RegisterTest(TestCase):
     url = 'https://fusion.spmobileapi.net/#/home'
 
     def set_up(self):
-        self.logger.info('RegisterTest初始化浏览器')
+        self.logger.info('>>>RegisterTest开始执行，初始化浏览器')
         # 启动浏览器
         self.base_driver = BoxDriver(Browser.Chrome)
 
@@ -28,8 +28,8 @@ class RegisterTest(TestCase):
 
     def tear_down(self):
         self.base_driver.quit()
+        self.logger.info('>>>RegisterTest执行结束，清除数据')
 
-    # 测试用例
     def test_fail_registered_01(self):
         """
         row[examples]
@@ -37,6 +37,7 @@ class RegisterTest(TestCase):
         """
         # 打开csv文件
         csv_file = open('./TestData/csv_case/register_case.csv', 'r', encoding='utf8')
+        self.logger.info('打开CSV文件')
         # 读取csv文件
         csv_data = csv.DictReader(csv_file)
 
@@ -44,12 +45,14 @@ class RegisterTest(TestCase):
         self.home_page = home_page.HomePageElement(self.base_driver)
         self.home_page.sign()
         for row in csv_data:
+            self.logger.debug('用例数据：%s' % row)
             if row['msg'] == 'fail':
                 self.register_page = register_page.RegisterPageElement(self.base_driver)
                 self.register_page.register(row)
                 # 获取注册操作之后的“会员注册”标题
                 get_text_hy_sign = self.register_page.get_text_hy_sign()
-                self.assertEqual(get_text_hy_sign, row['tips'], '注册失败')
+                self.assertEqual(get_text_hy_sign, row['tips'], '预期结果：%s，实际结果：%s' % (row['tips'], get_text_hy_sign))
+                self.logger.debug('预期结果：%s，  --->  实际结果：%s' % (row['tips'], get_text_hy_sign))
                 self.base_driver.refresh()
                 time.sleep(1)
                 # 截屏
@@ -57,6 +60,3 @@ class RegisterTest(TestCase):
         # 关闭csv文件
         csv_file.close()
         self.logger.info('关闭CSV文件')
-        # 关闭浏览器
-        self.base_driver.quit()
-        self.logger.info('关闭浏览器')
