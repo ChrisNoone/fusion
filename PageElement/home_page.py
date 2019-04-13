@@ -7,8 +7,11 @@ class HomePageElement(BasePage):
     config_dict_login = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionLoginPage']
 
     def login(self, row):
-        # '''登录业务流程'''
-        self.base_driver.clear_cookies(self.config_dict_login['LOGIN_USERNAME'])
+        """
+        登录流程
+        :param row: 用例数据字典dict
+        """
+        self.base_driver.clear_cookies()
         self.base_driver.type(self.config_dict_login['LOGIN_USERNAME'], row['username'])
         self.base_driver.type(self.config_dict_login['LOGIN_PASSWORD'], row['password'])
         self.base_driver.type(self.config_dict_login['LOGIN_YZM'], row['yzm'])
@@ -16,33 +19,50 @@ class HomePageElement(BasePage):
         self.base_driver.forced_wait(4)
 
     def sign(self):
-        # 注册流程
+        """
+        点击注册按钮
+        """
         self.base_driver.click(self.config_dict_login['SIGN_BUTTON'])
         self.base_driver.forced_wait(2)
 
     def swt_frame(self):
-        # 跳转
+        """
+        跳转frame
+        :return: 跳转之后的frame对象
+        """
         swf = self.base_driver.switch_to_frame(self.config_dict_login['SWFRAME'])
         self.base_driver.forced_wait(3)
         return swf
 
     def logout(self):
-        # 退出系统
+        """
+        退出登录（登录状态下）
+        """
         self.base_driver.click(self.config_dict_login['LOGOUT_BUTTON'])
         self.base_driver.forced_wait(4)
 
-    def get_username(self):
-        # 获取登录成功后的会员中心
-        name = self.base_driver.get_text(self.config_dict_login['ASSERT_KUIYUANZHONGXIN'])
+    def get_user_center_text(self):
+        """
+        获取会员中心按钮的文案（登录状态下）
+        :return: 会员中心按钮文案
+        """
+        try:
+            name = self.base_driver.get_text(self.config_dict_login['ASSERT_KUIYUANZHONGXIN'])
+        except:
+            name = ''
         return name
 
     def get_tips(self):
-        # 获取登录失败提示语
+        """
+        获取登录失败的提示文案
+        :return: 登录失败提示文案
+        """
         tips = self.base_driver.get_text(self.config_dict_login['ASSERT_TIPS'])
         self.base_driver.forced_wait(1)
         return tips
 
 
+"""
 class HomeMainElement(BasePage):
     config_dict_fusion_main = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionMain']
 
@@ -137,3 +157,4 @@ class HomeMainElement(BasePage):
         # 登陆按钮
         tip02 = self.base_driver.get_text(self.config_dict_fusion_main['LOGINBUTTON'])
         return tip02
+"""

@@ -26,11 +26,11 @@ class HomeLoginTest(TestCase):
 
         for row in csv_data:
             if row['msg'] == 'fail':
-                self.home_page = home_page.HomeMainElement(self.base_driver)
-                self.home_page.login_before(row)
+                self.home_page = home_page.HomePageElement(self.base_driver)
+                self.home_page.login(row)
                 # 获取登录操作之后的登录按钮
-                get_login_tips02 = self.home_page.get_login_tips02()
-                self.assertEqual(get_login_tips02, row['tips'], '登陆失败')
+                get_text = self.home_page.get_user_center_text()
+                self.assertEqual(get_text, row['expectation'], '预期结果：%s，实际结果：%s' % (row['expectation'], get_text))
                 time.sleep(1)
         csv_file.close()
         self.logger.info('关闭CSV文件')

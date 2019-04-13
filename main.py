@@ -18,7 +18,7 @@ class Main(object):
         需要 Main().run_ranzhi()
         :return:
         """
-        print("start-test")
+        print("Start Test ...")
         Runner().run_test()
 
 

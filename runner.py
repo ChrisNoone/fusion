@@ -1,7 +1,7 @@
 # coding: utf-8
 
 import time
-from common.box import TestSuite, CsvHelper, TestRunner
+from common.box import TestSuite, CsvHelper, TestRunner, TestLogger
 from TestCase import *
 
 
@@ -33,13 +33,14 @@ class Runner(object):
         方法2：单个指定添加
         '''
         # 实例化测试套件,用来装用例
+        TestLogger().info(message='--------------------------------------------\n测试开始，准备初始化测试套件...')
         suite = TestSuite()
         # 读取要运行的用例所在的类和方法名称等，获取出来的形式是列表，列表里面有多个字典。如：
         csv_data = CsvHelper().read_data_as_dict("./TestData/csv_test/all_test.csv")
         # 获取一个本地时间，格式是年月日
-        test_time = time.strftime("%Y%m%d", time.localtime())
+        log_time = time.strftime("%Y%m%d", time.localtime())
         # 创建一个新的日志文件
-        logger_file = "./TestData/log/fusion_automate_log_%s.log" % test_time
+        logger_file = "./TestData/log/fusion_automate_log_%s.log" % log_time
 
         for row in csv_data:
             test_class = row['class']
@@ -52,23 +53,10 @@ class Runner(object):
                     suite.add_test(test_home_login.HomeLoginTest(test_method, logger_file))
             else:
                 continue
-            """
-            test_count = int(row["count"])
-            
-            for i in range(test_count):
-                # 增加测试用例，这里要增加
-                # 注册register用例
-                if test_class == "RegisterTest":
-                    suite.add_test(test_register.RegisterTest(test_method, logger_file))
-                elif test_class == "HomeLoginTest":
-                    suite.add_test(test_home_login.HomeLoginTest(test_method, logger_file))
 
-                # # Fusion Test测试用例
-                # if test_class == "FusionTest":
-                #     suite.add_test(FusionTest(test_method, logger_file))
-            """
         # 创建测试报告的文件
-        report_file = "./TestData/report/fusion_automate_report_%s.html" % test_time
+        report_time = time.strftime("%Y%m%d%H%M%S", time.localtime())
+        report_file = "./TestData/report/fusion_automate_report_%s.html" % report_time
         # 实例化TestRunner类，用来运行用例和生成测试报告
         runner = TestRunner(file_name=report_file,
                             verbosity=2,
