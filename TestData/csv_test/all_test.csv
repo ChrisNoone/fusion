@@ -1,3 +1,4 @@
 class,method,status,example
-RegisterTest,test_fail_registered_01,1,主页注册用例
-HomeLoginTest,test_fail_login,1,主页登录用例
+RegisterTest,test_register_check,1,主页注册用例
+HomeLoginTest,test_login_check,1,主页登录用例
+HomeLoginTest,test_free_trial,1,主页免费试玩

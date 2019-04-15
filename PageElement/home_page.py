@@ -1,28 +1,27 @@
 # coding: utf-8
 
 from common.box import YamlHelper, BasePage
+import time
 
 
 class HomePageElement(BasePage):
-    config_dict_login = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionLoginPage']
+    config_dict_login = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionHome']
 
-    def login(self, row):
-        """
-        登录流程
-        :param row: 用例数据字典dict
-        """
-        self.base_driver.clear_cookies()
-        self.base_driver.type(self.config_dict_login['LOGIN_USERNAME'], row['username'])
-        self.base_driver.type(self.config_dict_login['LOGIN_PASSWORD'], row['password'])
-        self.base_driver.type(self.config_dict_login['LOGIN_YZM'], row['yzm'])
-        self.base_driver.click(self.config_dict_login['LOGIN_BUTTON'])
-        self.base_driver.forced_wait(4)
+    def free_trial(self):
+        self.base_driver.click(self.config_dict_login['FREE_TRIAL']['A'])
+        self.base_driver.click(self.config_dict_login['FREE_TRIAL']['BUTTON'])
+        time.sleep(2)
+        try:
+            user_info = self.base_driver.get_text(self.config_dict_login['USERINFO'])
+        except:
+            user_info = ''
+        return user_info
 
     def sign(self):
         """
         点击注册按钮
         """
-        self.base_driver.click(self.config_dict_login['SIGN_BUTTON'])
+        self.base_driver.click(self.config_dict_login['SIGNUPBUTTON'])
         self.base_driver.forced_wait(2)
 
     def swt_frame(self):
@@ -60,6 +59,23 @@ class HomePageElement(BasePage):
         tips = self.base_driver.get_text(self.config_dict_login['ASSERT_TIPS'])
         self.base_driver.forced_wait(1)
         return tips
+
+    def login(self, row):
+        """
+        登录流程
+        :param row: 用例数据字典dict
+        """
+        self.base_driver.clear_cookies()
+        self.base_driver.type(self.config_dict_login['USERNAME'], row['username'])
+        self.base_driver.type(self.config_dict_login['PASSWORD'], row['password'])
+        self.base_driver.type(self.config_dict_login['RECCODE'], row['yzm'])
+        self.base_driver.click(self.config_dict_login['LOGINBUTTON'])
+        self.base_driver.forced_wait(2)
+        try:
+            user_info = self.base_driver.get_text(self.config_dict_login['LOGINBUTTON'])
+        except:
+            user_info = ''
+        return user_info
 
 
 """

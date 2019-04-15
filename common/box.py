@@ -120,8 +120,8 @@ class BoxDriver(object):
         if self._by_char not in selector:
             return By.ID, selector
 
-        selector_by = selector.split(self._by_char)[0].strip()
-        selector_value = selector.split(self._by_char)[1].strip()
+        selector_by = selector.split(self._by_char, 1)[0].strip()
+        selector_value = selector.split(self._by_char, 1)[1].strip()
         if selector_by == "i" or selector_by == 'id':
             locator = (By.ID, selector_value)
         elif selector_by == "n" or selector_by == 'name':
@@ -847,6 +847,7 @@ class BoxDriver(object):
         except Exception:
             return False
 
+
 class BasePage(object):
     """
     测试系统的最基础的页面类，是所有其他页面的基类
@@ -883,9 +884,10 @@ class BasePage(object):
         if self.logger is not None:
             self.logger.info(msg)
 
-class CsvHelper(object):
 
-    def read_data(self, f,encoding="utf-8-sig"):
+class CsvHelper(object):
+    @staticmethod
+    def read_data(f, encoding="utf-8-sig"):
         """
         读csv文件作为普通list
         :param f:
@@ -899,7 +901,8 @@ class CsvHelper(object):
 
         return data_ret
 
-    def read_data_as_dict(self, f, encoding="utf-8-sig"):
+    @staticmethod
+    def read_data_as_dict(f, encoding="utf-8-sig"):
         """
         读csv文件作为普通list
         :param f:
