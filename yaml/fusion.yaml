@@ -71,3 +71,7 @@ FusionHelp:
 
 FusionRules:
     CQSSC   : 'x, //div[@class="first"]'
+
+
+FusionIntomation:
+    SUBNAV      : 'x, //div[@class="breadcrumb sub-nav"]/span[2]'
