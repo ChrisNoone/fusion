@@ -8,7 +8,11 @@ FusionHome:
         A       : 'x, //*[@class="ToolBar"]//*[contains(text(), "免费试玩")]'
         BUTTON  : 'x, //button[contains(text(), "立即试玩")]'
     # 特殊代理登录
-    SPEAGENT    : 'x, //*[@class="ToolBar"]//*[contains(text(), "特殊代理登录")]'
+    SPEAGENT    :
+        A       : 'x, //*[@class="ToolBar"]//*[contains(text(), "特殊代理登录")]'
+        USERNAME: 'x, //div[@class="SpecialAgent"]/div/div[2]/div[1]/input'
+        PASSWORD: 'x, //div[@class="SpecialAgent"]/div/div[2]/div[2]/input'
+        BUTTON  : 'x, //div[@class="SpecialAgent"]/div/div[3]/button'
     # 加入代理
     ADDAGENT    : 'x, //*[@class="ToolBar"]//*[contains(text(), "加入代理")]'
     # 帮助中心
@@ -59,3 +63,11 @@ FusionReg:
     QQ          : 'x, //*[@class="from"]/div[6]/div[1]/div[2]/input'
     VERIFYCODE  : 'x, //*[@class="from"]/div[7]/div[1]/div[2]/input'
     REGBUTTON   : 'x, //*[@class="register"]/button'
+
+
+FusionHelp:
+    SUBNAV  : 'x, //div[@class="sub-nav"]/a[2]'
+
+
+FusionRules:
+    CQSSC   : 'x, //div[@class="first"]'

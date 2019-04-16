@@ -5,23 +5,64 @@ import time
 
 
 class HomePageElement(BasePage):
-    config_dict_login = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionHome']
+    cd_home = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionHome']
+    cd_help = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionHelp']
+    cd_rules = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionRules']
 
     def free_trial(self):
-        self.base_driver.click(self.config_dict_login['FREE_TRIAL']['A'])
-        self.base_driver.click(self.config_dict_login['FREE_TRIAL']['BUTTON'])
-        time.sleep(2)
+        """
+        免费试玩注册-登录流程
+        :return: 登录后的用户栏信息
+        """
+        self.base_driver.click(self.cd_home['FREE_TRIAL']['A'])
+        self.base_driver.click(self.cd_home['FREE_TRIAL']['BUTTON'])
+        self.base_driver.explicitly_wait(self.cd_home['USERINFO'], 5)
         try:
-            user_info = self.base_driver.get_text(self.config_dict_login['USERINFO'])
+            user_info = self.base_driver.get_text(self.cd_home['USERINFO'])
         except:
             user_info = ''
         return user_info
+
+    def special_agent(self):
+        """
+        特殊代理登录流程
+        :return: 登录后的用户栏信息
+        """
+        self.base_driver.click(self.cd_home['SPEAGENT']['A'])
+        self.base_driver.type(self.cd_home['SPEAGENT']['USERNAME'], 'specialsuper')
+        self.base_driver.type(self.cd_home['SPEAGENT']['PASSWORD'], 'a123456')
+        time.sleep(1)
+        self.base_driver.click(self.cd_home['SPEAGENT']['BUTTON'])
+        self.base_driver.explicitly_wait(self.cd_home['USERINFO'], 5)
+        try:
+            user_info = self.base_driver.get_text(self.cd_home['USERINFO'])
+        except:
+            user_info = ''
+        return user_info
+
+    def help_center(self):
+        self.base_driver.click(self.cd_home['HELP'])
+        self.base_driver.explicitly_wait(self.cd_help['SUBNAV'], 5)
+        try:
+            info = self.base_driver.get_text(self.cd_help['SUBNAV'])
+        except:
+            info = ''
+        return info
+
+    def play_rules(self):
+        self.base_driver.click(self.cd_home['PLAY'])
+        self.base_driver.explicitly_wait(self.cd_rules['CQSSC'], 5)
+        try:
+            info = self.base_driver.get_text(self.cd_rules['CQSSC'])
+        except:
+            info = ''
+        return info
 
     def sign(self):
         """
         点击注册按钮
         """
-        self.base_driver.click(self.config_dict_login['SIGNUPBUTTON'])
+        self.base_driver.click(self.cd_home['SIGNUPBUTTON'])
         self.base_driver.forced_wait(2)
 
     def swt_frame(self):
@@ -29,7 +70,7 @@ class HomePageElement(BasePage):
         跳转frame
         :return: 跳转之后的frame对象
         """
-        swf = self.base_driver.switch_to_frame(self.config_dict_login['SWFRAME'])
+        swf = self.base_driver.switch_to_frame(self.cd_home['SWFRAME'])
         self.base_driver.forced_wait(3)
         return swf
 
@@ -37,7 +78,7 @@ class HomePageElement(BasePage):
         """
         退出登录（登录状态下）
         """
-        self.base_driver.click(self.config_dict_login['LOGOUT_BUTTON'])
+        self.base_driver.click(self.cd_home['LOGOUT_BUTTON'])
         self.base_driver.forced_wait(4)
 
     def get_user_center_text(self):
@@ -46,7 +87,7 @@ class HomePageElement(BasePage):
         :return: 会员中心按钮文案
         """
         try:
-            name = self.base_driver.get_text(self.config_dict_login['ASSERT_KUIYUANZHONGXIN'])
+            name = self.base_driver.get_text(self.cd_home['ASSERT_KUIYUANZHONGXIN'])
         except:
             name = ''
         return name
@@ -56,7 +97,7 @@ class HomePageElement(BasePage):
         获取登录失败的提示文案
         :return: 登录失败提示文案
         """
-        tips = self.base_driver.get_text(self.config_dict_login['ASSERT_TIPS'])
+        tips = self.base_driver.get_text(self.cd_home['ASSERT_TIPS'])
         self.base_driver.forced_wait(1)
         return tips
 
@@ -66,13 +107,13 @@ class HomePageElement(BasePage):
         :param row: 用例数据字典dict
         """
         self.base_driver.clear_cookies()
-        self.base_driver.type(self.config_dict_login['USERNAME'], row['username'])
-        self.base_driver.type(self.config_dict_login['PASSWORD'], row['password'])
-        self.base_driver.type(self.config_dict_login['RECCODE'], row['yzm'])
-        self.base_driver.click(self.config_dict_login['LOGINBUTTON'])
+        self.base_driver.type(self.cd_home['USERNAME'], row['username'])
+        self.base_driver.type(self.cd_home['PASSWORD'], row['password'])
+        self.base_driver.type(self.cd_home['RECCODE'], row['yzm'])
+        self.base_driver.click(self.cd_home['LOGINBUTTON'])
         self.base_driver.forced_wait(2)
         try:
-            user_info = self.base_driver.get_text(self.config_dict_login['LOGINBUTTON'])
+            user_info = self.base_driver.get_text(self.cd_home['LOGINBUTTON'])
         except:
             user_info = ''
         return user_info

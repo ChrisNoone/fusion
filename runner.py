@@ -39,8 +39,8 @@ class Runner(object):
         csv_data = CsvHelper().read_data_as_dict("./TestData/csv_test/all_test.csv")
 
         for row in csv_data:
-            test_class = row['class']
-            test_method = row['method']
+            test_class = row['class'].strip()
+            test_method = row['method'].strip()
             test_status = int(row['status'])
             if test_status == 1:
                 if test_class == "RegisterTest":
@@ -51,7 +51,7 @@ class Runner(object):
                 continue
 
         # 创建测试报告的文件
-        report_time = time.strftime("%Y%m%d%H%M%S", time.localtime())
+        report_time = time.strftime("%Y%m%d%H", time.localtime())
         report_file = "./TestData/report/fusion_automate_report_%s.html" % report_time
         # 实例化TestRunner类，用来运行用例和生成测试报告
         runner = TestRunner(file_name=report_file,
