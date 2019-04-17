@@ -1143,8 +1143,7 @@ class TestLogger:
 
 class TestCase(TC):
     """
-    测试用例类
-
+    TestCase类
     """
     images = None
     base_driver = None
@@ -1178,7 +1177,7 @@ class TestCase(TC):
 
     def run(self, result=None):
         orig_result = result
-        if result is None:
+        if result is None:  #如果没有传入result对象自己实例化一个TestResult对象
             result = self.defaultTestResult()
             startTestRun = getattr(result, 'startTestRun', None)
             if startTestRun is not None:
@@ -1193,7 +1192,7 @@ class TestCase(TC):
             try:
                 skip_why = (getattr(self.__class__, '__unittest_skip_why__', '')
                             or getattr(testMethod, '__unittest_skip_why__', ''))
-                self._addSkip(result, self, skip_why)
+                self._addSkip(result, self, skip_why)   #调用addSkip
             finally:
                 result.stopTest(self)
             return
@@ -1286,6 +1285,7 @@ class TestCase(TC):
         # 用[1]报错，数组超出界限，报告是空的，改为[0]就可以了
         # return doc and doc.split("\n")[0].strip() or None
 
+
 class _Outcome(object):
     def __init__(self, result=None):
         self.expecting_failure = False
@@ -1327,8 +1327,10 @@ class _Outcome(object):
         finally:
             self.success = self.success and old_success
 
+
 """
-A TestRunner for use with the Python unit testing framework. It generates a HTML report to show the result at a glance.
+A TestRunner for use with the Python unit testing framework.
+It generates a HTML report to show the result at a glance.
 
 The simplest way to use this is to invoke its main method. E.g.
 
@@ -1424,11 +1426,10 @@ class OutputRedirect(object):
     def flush(self):
         self.fp.flush()
 
+
 stdout_redirect = OutputRedirect(sys.stdout)
 stderr_redirect = OutputRedirect(sys.stderr)
 
-# ----------------------------------------------------------------------
-# Template
 
 class _TemplateReport(object):
     """
@@ -1478,9 +1479,6 @@ class _TemplateReport(object):
 
     DEFAULT_TITLE = 'Unit Test Report'
     DEFAULT_DESCRIPTION = ''
-
-    # ------------------------------------------------------------------------
-    # HTML Template
 
     HTML_TMPL = r"""<!DOCTYPE html>
 <html lang="zh-cn">
@@ -1547,10 +1545,34 @@ function showClassDetail(cid, count) {
             toHide = 0;
         }
     }
+    /*
+    cButton = document.getElementById(cid)
+    if (cButton.getAttribute["status"] == 1) {
+        for (var i = 0; i < count; i++) {
+            tid = id_list[i];
+            document.getElementById('div_' + tid).style.display = 'none';
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+    }
+    else {
+        for (var i = 0; i < count; i++) {
+            tid = id_list[i];
+            if (toHide) {
+                document.getElementById('div_' + tid).style.display = 'none';
+                document.getElementById(tid).className = 'hiddenRow';
+            }
+            else {
+                document.getElementById(tid).className = '';
+            }
+            document.getElementById(cid).status = 1
+        }
+    }
+    */
     for (var i = 0; i < count; i++) {
         tid = id_list[i];
         if (toHide) {
-            document.getElementById('div_'+tid).style.display = 'none'
+            // 这一行不知道干嘛的，注释后，测试报告中详情按钮才可正常点击打开与关闭详情信息
+            //document.getElementById('div_'+tid).style.display = 'none'
             document.getElementById(tid).className = 'hiddenRow';
         }
         else {
@@ -1673,19 +1695,19 @@ function showOutput(id, name) {
 <style type="text/css" media="screen">
 
 .img{
-	height: 100%;
-	border-collapse: collapse;
+    height: 100%;
+    border-collapse: collapse;
     border: 2px solid #777;
 }
 
 .screenshots {
     z-index: 100;
-	position:absolute;
-	height: 80%;
+    position:absolute;
+    height: 80%;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-	display: none;
+    display: none;
 }
 
 .imgyuan{
@@ -1768,7 +1790,7 @@ function showOutput(id, name) {
 
 """  # variables: (title, parameters, description)
 
-    HEADING_ATTRIBUTE_TMPL = """<p><strong>%(name)s:</strong> %(value)s</p>
+    HEADING_ATTRIBUTE_TMPL = """<p><strong>%(name)s :</strong> %(value)s</p>
 """  # variables: (name, value)
 
     # ------------------------------------------------------------------------
@@ -1784,12 +1806,20 @@ function showOutput(id, name) {
 <table id='result_table' class="table">
     <thead>
         <tr id='header_row'>
-            <th>Test Suite/Test Case 测试套件/用例</td>
-            <th>Count 个数</td>
-            <th>Pass 通过</td>
-            <th>Fail 不通过</td>
-            <th>Error 测试程序异常</td>
-            <th>View 查看</td>
+            <!--
+            <th>Test Suite/Test Case</td>
+            <th>Count</td>
+            <th>Pass</td>
+            <th>Fail</td>
+            <th>Error</td>
+            <th>View</td>
+            -->
+            <th>测试套件/用例</td>
+            <th>个数</td>
+            <th>通过</td>
+            <th>不通过</td>
+            <th>测试程序异常</td>
+            <th>详情</td>
         </tr>
     </thead>
     <tbody>
@@ -1797,7 +1827,8 @@ function showOutput(id, name) {
     </tbody>
     <tfoot>
         <tr id='total_row'>
-            <td>Total 总共</td>
+            <!-- <td>Total</td> -->
+            <td>总共</td>
             <td>%(count)s</td>
             <td class="text text-success">%(Pass)s</td>
             <td class="text text-danger">%(fail)s</td>
@@ -1815,7 +1846,7 @@ function showOutput(id, name) {
     <td>%(Pass)s</td>
     <td>%(fail)s</td>
     <td>%(error)s</td>
-    <td><a class="btn btn-xs btn-primary"href="javascript:showClassDetail('%(cid)s',%(count)s)">Detail 详情</a></td>
+    <td><a status="0" class="btn btn-xs btn-primary"href="javascript:showClassDetail('%(cid)s',%(count)s)">详情</a></td>
 </tr>
 """  # variables: (style, desc, count, Pass, fail, error, cid)
 
@@ -1869,9 +1900,8 @@ function showOutput(id, name) {
         """
 
     ENDING_TMPL = """<div id='ending'>&nbsp;</div>"""
-
-
 # -------------------- The end of the Template class -------------------
+
 
 TestResult = unittest.TestResult
 
@@ -2001,13 +2031,11 @@ class TestRunner(_TemplateReport):
 
     def __init__(self, file_name, verbosity=1, title=None, description=None):
         """
-        initialize
-        :param stream:
+        :param file_name:
         :param verbosity:
         :param title:
         :param description:
         """
-
         self.file_name = file_name
         self.verbosity = verbosity
         if title is None:
@@ -2032,50 +2060,11 @@ class TestRunner(_TemplateReport):
             result = _TestResult(self.verbosity)
             test(result)
             self.stopTime = datetime.datetime.now()
-            self.generate_report(test, result)
+            self.generate_report(result)
             TestLogger().info('Time Elapsed 花费时间: %s' % (self.stopTime - self.startTime))
-
         return result
 
-    def sort_result(self, result_list):
-        # unittest does not seems to run in any particular order.
-        # Here at least we want to group them together by class.
-        rmap = {}
-        classes = []
-        for n, t, o, e in result_list:
-            cls = t.__class__
-            if not cls in rmap:
-                rmap[cls] = []
-                classes.append(cls)
-            rmap[cls].append((n, t, o, e))
-        r = [(cls, rmap[cls]) for cls in classes]
-        return r
-
-    def get_report_attributes(self, result):
-        """
-        Return report attributes as a list of (name, value).
-        Override this to add custom attributes.
-        """
-        startTime = str(self.startTime)[:19]
-        duration = str(self.stopTime - self.startTime)
-        status = []
-        if result.success_count: status.append(
-            '<span class="text text-success">Pass <strong>%s</strong></span>' % result.success_count)
-        if result.failure_count: status.append(
-            '<span class="text text-danger">Failure <strong>%s</strong></span>' % result.failure_count)
-        if result.error_count:   status.append(
-            '<span class="text text-warning">Error <strong>%s</strong></span>' % result.error_count)
-        if status:
-            status = ' '.join(status)
-        else:
-            status = 'none'
-        return [
-            ('Start Time 开始时间', startTime),
-            ('Duration 用时', duration),
-            ('Status 状态', status),
-        ]
-
-    def generate_report(self, test, result):
+    def generate_report(self, result):
         report_attrs = self.get_report_attributes(result)
         generator = 'HtmlTestRunner %s' % __version__
         stylesheet = self._generate_stylesheet()
@@ -2091,6 +2080,30 @@ class TestRunner(_TemplateReport):
             ending=ending,
         )
         self.stream.write(output.encode())
+
+    def get_report_attributes(self, result):
+        """
+        Return report attributes as a list of (name, value).
+        Override this to add custom attributes.
+        """
+        start_time = str(self.startTime)[:19]
+        duration = str(self.stopTime - self.startTime)
+        status = []
+        if result.success_count:
+            status.append('<span class="text text-success">Pass <strong>%s</strong></span>' % result.success_count)
+        if result.failure_count:
+            status.append('<span class="text text-danger">Failure <strong>%s</strong></span>' % result.failure_count)
+        if result.error_count:
+            status.append('<span class="text text-warning">Error <strong>%s</strong></span>' % result.error_count)
+        if status:
+            status = ' '.join(status)
+        else:
+            status = 'none'
+        return [
+            ('Start Time', start_time),
+            ('Duration', duration),
+            ('Status', status),
+        ]
 
     def _generate_stylesheet(self):
         return self.STYLESHEET_TMPL
@@ -2114,8 +2127,8 @@ class TestRunner(_TemplateReport):
 
     def _generate_report(self, result):
         rows = []
-        sortedResult = self.sort_result(result.result)
-        for cid, (cls, cls_results) in enumerate(sortedResult):
+        sorted_result = self.sort_result(result.result)
+        for cid, (cls, cls_results) in enumerate(sorted_result):
             # subtotal for a class
             np = nf = ne = 0
             for n, t, o, e in cls_results:
@@ -2133,7 +2146,6 @@ class TestRunner(_TemplateReport):
                 name = "%s.%s" % (cls.__module__, cls.__name__)
             doc = cls.__doc__ and cls.__doc__.split("\n")[0] or ""
             desc = doc and '%s: %s' % (name, doc) or name
-
 
             row = self.REPORT_CLASS_TMPL % dict(
                 style=ne > 0 and 'text text-warning' or nf > 0 and 'text text-danger' or 'text text-success',
@@ -2157,6 +2169,21 @@ class TestRunner(_TemplateReport):
             error=str(result.error_count),
         )
         return report
+
+    @staticmethod
+    def sort_result(result_list):
+        # unittest does not seems to run in any particular order.
+        # Here at least we want to group them together by class.
+        r_map = {}
+        classes = []
+        for n, t, o, e in result_list:
+            cls = t.__class__
+            if cls not in r_map:
+                r_map[cls] = []
+                classes.append(cls)
+            r_map[cls].append((n, t, o, e))
+        r = [(cls, r_map[cls]) for cls in classes]
+        return r
 
     def _generate_report_test(self, rows, cid, tid, n, t, o, e):
         # e.g. 'pt1.1', 'ft1.1', etc
@@ -2244,9 +2271,10 @@ class TestSuite(unittest.TestSuite):
     """
 
     def run(self, result, debug=False):
-        topLevel = False
+        top_level = False
+        # getattr()函数，返回result对象的_testRunEntered属性值，默认值是False
         if getattr(result, '_testRunEntered', False) is False:
-            result._testRunEntered = topLevel = True
+            result._testRunEntered = top_level = True
 
         for index, test in enumerate(self):
             if result.shouldStop:
@@ -2270,7 +2298,7 @@ class TestSuite(unittest.TestSuite):
             if self._cleanup:
                 self._removeTestAtIndex(index)
 
-        if topLevel:
+        if top_level:
             self._tearDownPreviousClass(None, result)
             self._handleModuleTearDown(result)
             result._testRunEntered = False

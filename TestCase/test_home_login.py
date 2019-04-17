@@ -68,7 +68,7 @@ class HomeLoginTest(TestCase):
         self.home_page = home_page.HomePageElement(self.base_driver)
         info = self.home_page.play_rules()
         # 断言：点击帮助中心跳转成功，成功获取该页面某信息
-        self.assertIn('所有彩票', info, '玩法页面跳转失败')
+        self.assertIn('所有彩票1', info, '玩法页面跳转失败')
         self.logger.debug('test_play_rules断言：')
 
     def test_information(self):
