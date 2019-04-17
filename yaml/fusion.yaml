@@ -69,7 +69,7 @@ FusionHelp:
     SUBNAV  : 'x, //div[@class="sub-nav"]/a[2]'
 
 
-FusionRules:
+FusionRule:
     CQSSC   : 'x, //div[@class="first"]'
 
 

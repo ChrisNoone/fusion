@@ -2,5 +2,8 @@
 
 __all__ = [
     'home_page',
-    'register_page'
+    'register_page',
+    'rule_page',
+    'help_page',
+    'infomation_page'
 ]

@@ -6,9 +6,6 @@ import time
 
 class HomePageElement(BasePage):
     cd_home = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionHome']
-    cd_help = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionHelp']
-    cd_rules = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionRules']
-    cd_news = YamlHelper().get_config_dict('./yaml/fusion.yaml')['FusionIntomation']
 
     def free_trial(self):
         """
@@ -43,30 +40,12 @@ class HomePageElement(BasePage):
 
     def help_center(self):
         self.base_driver.click(self.cd_home['HELP'])
-        self.base_driver.explicitly_wait(self.cd_help['SUBNAV'], 5)
-        try:
-            info = self.base_driver.get_text(self.cd_help['SUBNAV'])
-        except:
-            info = ''
-        return info
 
-    def play_rules(self):
+    def play_rule(self):
         self.base_driver.click(self.cd_home['PLAY'])
-        self.base_driver.explicitly_wait(self.cd_rules['CQSSC'], 5)
-        try:
-            info = self.base_driver.get_text(self.cd_rules['CQSSC'])
-        except:
-            info = ''
-        return info
 
     def infomation(self):
         self.base_driver.click(self.cd_home['NEWS'])
-        self.base_driver.explicitly_wait(self.cd_news['SUBNAV'], 5)
-        try:
-            info = self.base_driver.get_text(self.cd_news['SUBNAV'])
-        except:
-            info = ''
-        return info
 
     def sign(self):
         """
