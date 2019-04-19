@@ -83,7 +83,3 @@ class RegisterPageElement(BasePage):
             return True
         else:
             return False
-
-
-if __name__ == '__main__':
-    print(RegisterPageElement(BasePage).random_username())
