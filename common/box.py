@@ -244,7 +244,6 @@ class BoxDriver(object):
         """
         self._base_driver.maximize_window()
 
-
     def navigate(self, url):
         """
         打开 URL
@@ -426,6 +425,14 @@ class BoxDriver(object):
         el = self._locate_element(selector)
         Select(el).select_by_value(value)
 
+    def select_by_element(self, selector, xpath_path):
+        el1 = self._locate_element(selector)
+        try:
+            el2 = el1.find_element_by_xpath(xpath_path)
+        except:
+            el2 = None
+        return el2
+
     """
     JavaScript 相关
     """
@@ -592,8 +599,6 @@ class BoxDriver(object):
             el = self._locate_element(selector)
             self._base_driver.switch_to.frame(el)
 
-
-
     def switch_to_default(self):
         """
         Returns the current form machine form at the next higher level.
@@ -668,7 +673,8 @@ class BoxDriver(object):
     等待方法
     """
 
-    def forced_wait(self, seconds):
+    @staticmethod
+    def forced_wait(seconds):
         """
         强制等待
         :param seconds:
@@ -699,7 +705,7 @@ class BoxDriver(object):
         WebDriverWait(self._base_driver, seconds).until(expected_conditions.presence_of_element_located(locator))
 
     """上传"""
-    def upload_input(self,selector,file):
+    def upload_input(self, selector, file):
         '''
         上传文件 （ 标签为 input 类型，此类型最常见，最简单）
         :param selector: 上传按钮定位
@@ -708,8 +714,9 @@ class BoxDriver(object):
         '''
         self._locate_element(selector).send_keys(file)
 
-    def upload_not_input(self,file,browser_type='Chrome'):
-        '''
+    @staticmethod
+    def upload_not_input(self, file, browser_type='Chrome'):
+        """
         上传文件 （ 标签不是 input 类型，使用 win32gui,得先安装 pywin32 依赖包）
                                                 pip install pywin32
         :param browser_type: 浏览器类型（Chrome浏览器和Firefox浏览器的有区别）
@@ -717,7 +724,7 @@ class BoxDriver(object):
         单个文件：file1 = 'C:\\Users\\list_tuple_dict_test.py'
         同时上传多个文件：file2 = '"C:\\Users\\list_tuple_dict_test.py" "C:\\Users\\class_def.py"'
         :return: 无
-        '''
+        """
         # Chrome 浏览器是'打开'
         # 对话框
         # 下载个 Spy++ 工具，定位“打开”窗口，定位到窗口的类(L):#32770, '打开'为窗口标题
@@ -740,7 +747,6 @@ class BoxDriver(object):
         win32gui.SendMessage(dialog, win32con.WM_COMMAND, 1, button)
         # 获取属性
         # print(upload.get_attribute('value'))
-
 
     """
     表单数据提交:
@@ -819,8 +825,9 @@ class BoxDriver(object):
             print("页面表单中无此数据，原因：(1)请查询待验证的数据是否输入正确？(2)或者'下页'翻页定位是否正确？")
             return False
 
-    def assert_new_record_exist_mysql(self, db_yaml_path, db_yaml_name,sql_file_path, select_field_num,expected_td_value):
-        '''
+    @staticmethod
+    def assert_new_record_exist_mysql(db_yaml_path, db_yaml_name, sql_file_path, select_field_num, expected_td_value):
+        """
         数据库校验，True为数据库中存在该数据
         :param db_yaml_path: 数据库的yaml格式的配置文件路径
         :param db_yaml_name: 数据库的yaml格式的配置文件中设置的数据库名（默认是在'DbConfig'下面）
@@ -828,7 +835,7 @@ class BoxDriver(object):
         :param select_field_num: 查询语句中第几个字段（默认0表示第1个字段）
         :param expected_td_value: 期望要断言的值
         :return: True / False
-        '''
+        """
         ydata = YamlHelper().get_config_dict(db_yaml_path)
         host = ydata['DbConfig'][db_yaml_name]['host']
         port = ydata['DbConfig'][db_yaml_name]['port']
@@ -862,8 +869,7 @@ class BasePage(object):
         :param driver: 指定了参数类型，BoxDriver
         """
         self.base_driver = driver
-
-        self.logger = logger
+        self.logger = TestLogger()
 
     def open(self, url):
         """
@@ -874,15 +880,6 @@ class BasePage(object):
         self.base_driver.navigate(url)
         self.base_driver.maximize_window()
         self.base_driver.forced_wait(2)
-
-    def log(self, msg):
-        """
-        记录日志
-        :param msg:
-        :return:
-        """
-        if self.logger is not None:
-            self.logger.info(msg)
 
 
 class CsvHelper(object):
@@ -1069,7 +1066,7 @@ class TestLogger:
         self.file_name = log_path
         self.logger = logging.getLogger()
         # 日志输出的级别
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.setLevel(logging.INFO)
         # 日志输出格式
         self.formatter = logging.Formatter('%(asctime)s [%(levelname)s] : %(message)s',
                                            datefmt='%Y-%m-%d %H:%M:%S')
@@ -1255,15 +1252,6 @@ class TestCase(TC):
         :return:
         """
         self.images.append(self.base_driver.save_window_snapshot_by_io())
-
-    def log(self, msg):
-        """
-        添加日志
-        :param msg:
-        :return:
-        """
-        if self.logger is not None:
-            self.logger.info(msg)
 
     def read_csv_as_dict(self, file_name):
         """

@@ -44,11 +44,11 @@ class RegisterTest(TestCase):
 
         self.home_page = home_page.HomePageElement(self.base_driver)
         self.home_page.sign()
+        self.register_page = register_page.RegisterPageElement(self.base_driver)
         for row in csv_data:
             self.logger.debug('用例数据：%s' % row)
             if row['msg'] == 'fail':
-                self.register_page = register_page.RegisterPageElement(self.base_driver)
-                self.register_page.register(row)
+                self.register_page.register_data(row)
                 get_text_hy_sign = self.register_page.get_text_hy_sign()
                 # 断言：注册失败，页面中找到“会员注册”title
                 self.assertEqual(get_text_hy_sign, row['tips'], '预期结果：%s，实际结果：%s' % (row['tips'], get_text_hy_sign))
@@ -60,3 +60,13 @@ class RegisterTest(TestCase):
         # 关闭csv文件
         csv_file.close()
         self.logger.info('关闭CSV文件')
+
+    def test_register_success(self):
+        self.logger.info('>>>>>> 执行test_register_success')
+        self.home_page = home_page.HomePageElement(self.base_driver)
+        self.home_page.sign()
+        self.register_page = register_page.RegisterPageElement(self.base_driver)
+        self.register_page.register()
+        info = self.home_page.get_userinfo()
+        self.assertIn('可用余额', info, '注册失败')
+        self.logger.debug('test_register_success断言：')

@@ -106,3 +106,11 @@ class HomePageElement(BasePage):
         except:
             user_info = ''
         return user_info
+
+    def get_userinfo(self):
+        self.base_driver.explicitly_wait(self.cd_home['USERINFO'], 5)
+        try:
+            info = self.base_driver.get_text(self.cd_home['USERINFO'])
+        except:
+            info = ''
+        return info
