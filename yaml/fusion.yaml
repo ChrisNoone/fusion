@@ -1,5 +1,4 @@
 FusionHome:
-
     ## 导航栏
     # 欢迎语
     WELCOME     : 'x, //*[@class="activity-gif"]/following-sibling::div[1]'

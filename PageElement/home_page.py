@@ -39,12 +39,21 @@ class HomePageElement(BasePage):
         return user_info
 
     def help_center(self):
+        """
+        点击帮助中心
+        """
         self.base_driver.click(self.cd_home['HELP'])
 
     def play_rule(self):
+        """
+        点击玩法
+        """
         self.base_driver.click(self.cd_home['PLAY'])
 
     def infomation(self):
+        """
+        点击资讯
+        """
         self.base_driver.click(self.cd_home['NEWS'])
 
     def sign(self):
@@ -54,14 +63,22 @@ class HomePageElement(BasePage):
         self.base_driver.click(self.cd_home['SIGNUPBUTTON'])
         self.base_driver.forced_wait(2)
 
-    def swt_frame(self):
+    def login(self, row):
         """
-        跳转frame
-        :return: 跳转之后的frame对象
+        登录流程
+        :param row: 用例数据字典dict
         """
-        swf = self.base_driver.switch_to_frame(self.cd_home['SWFRAME'])
-        self.base_driver.forced_wait(3)
-        return swf
+        self.base_driver.clear_cookies()
+        self.base_driver.type(self.cd_home['USERNAME'], row['username'])
+        self.base_driver.type(self.cd_home['PASSWORD'], row['password'])
+        self.base_driver.type(self.cd_home['RECCODE'], row['yzm'])
+        self.base_driver.click(self.cd_home['LOGINBUTTON'])
+        self.base_driver.forced_wait(2)
+        try:
+            user_info = self.base_driver.get_text(self.cd_home['LOGINBUTTON'])
+        except:
+            user_info = ''
+        return user_info
 
     def logout(self):
         """
@@ -69,6 +86,22 @@ class HomePageElement(BasePage):
         """
         self.base_driver.click(self.cd_home['LOGOUT_BUTTON'])
         self.base_driver.forced_wait(4)
+
+    def get_userinfo(self):
+        """
+        获取登录后的用户信息一栏
+        :return:
+        """
+        self.base_driver.explicitly_wait(self.cd_home['USERINFO'], 5)
+        try:
+            info = self.base_driver.get_text(self.cd_home['USERINFO'])
+        except:
+            info = ''
+        return info
+
+    def user_center(self):
+        self.base_driver.click(self.cd_home['PERCENTER'])
+        time.sleep(2)
 
     def get_user_center_text(self):
         """
@@ -90,27 +123,11 @@ class HomePageElement(BasePage):
         self.base_driver.forced_wait(1)
         return tips
 
-    def login(self, row):
+    def swt_frame(self):
         """
-        登录流程
-        :param row: 用例数据字典dict
+        跳转frame
+        :return: 跳转之后的frame对象
         """
-        self.base_driver.clear_cookies()
-        self.base_driver.type(self.cd_home['USERNAME'], row['username'])
-        self.base_driver.type(self.cd_home['PASSWORD'], row['password'])
-        self.base_driver.type(self.cd_home['RECCODE'], row['yzm'])
-        self.base_driver.click(self.cd_home['LOGINBUTTON'])
-        self.base_driver.forced_wait(2)
-        try:
-            user_info = self.base_driver.get_text(self.cd_home['LOGINBUTTON'])
-        except:
-            user_info = ''
-        return user_info
-
-    def get_userinfo(self):
-        self.base_driver.explicitly_wait(self.cd_home['USERINFO'], 5)
-        try:
-            info = self.base_driver.get_text(self.cd_home['USERINFO'])
-        except:
-            info = ''
-        return info
+        swf = self.base_driver.switch_to_frame(self.cd_home['SWFRAME'])
+        self.base_driver.forced_wait(3)
+        return swf

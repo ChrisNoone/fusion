@@ -5,6 +5,5 @@ HomeLoginTest,test_login_check,0,主页登录用例,
 HomeLoginTest,test_free_trial,0,主页免费试玩,
 HomeLoginTest,test_special_agent_login,0,特殊代理登录,
 HomeLoginTest,test_help_center,0,跳转帮助中心,
-HomeLoginTest,test_play_rule,0,"跳转玩法页面
-",
+HomeLoginTest,test_play_rule,0,跳转玩法页面,
 HomeLoginTest,test_information,0,跳转资讯页面,

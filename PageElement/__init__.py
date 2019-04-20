@@ -5,5 +5,6 @@ __all__ = [
     'register_page',
     'rule_page',
     'help_page',
-    'infomation_page'
+    'infomation_page',
+    'user_center_page'
 ]
