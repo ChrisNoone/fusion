@@ -895,7 +895,6 @@ class CsvHelper(object):
             csv_data = csv.reader(csv_file)
             for row in csv_data:
                 data_ret.append(row)
-
         return data_ret
 
     @staticmethod
@@ -910,8 +909,20 @@ class CsvHelper(object):
             csv_dict = csv.DictReader(csv_file)
             for row in csv_dict:
                 data_ret.append(row)
-
         return data_ret
+
+    @staticmethod
+    def write_data(f, data, encoding='utf-8'):
+        """
+        写入csv文件
+        :param f: 文件路径
+        :param data: list类型数据,一行数据一个list
+        :param encoding:
+        """
+        with open(f, encoding=encoding, mode='a', newline='') as fp:
+            csv_write = csv.writer(fp, dialect='excel')
+            csv_write.writerow(data)
+        fp.close()
 
 
 class DbHelper(object):

@@ -1,7 +1,7 @@
 # coding: utf-8
 
 import time
-from common.box import BasePage, YamlHelper
+from common.box import BasePage, YamlHelper, CsvHelper
 
 
 class RegisterPageElement(BasePage):
@@ -71,6 +71,9 @@ class RegisterPageElement(BasePage):
             'qq': str(time.time())[2:10],
             'verifycode': '1234'
         }
+        t = time.strftime('%Y-%m-%d %H:%M:%S')
+        data = [user['username'], user['password'], user['telephone'], user['email'], user['reccode'], user['qq'], t]
+        CsvHelper.write_data('./TestData/csv_case/userinfo.csv', data)
         return user
 
     def check_el_req(self, selector):
