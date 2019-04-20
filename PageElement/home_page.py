@@ -100,6 +100,7 @@ class HomePageElement(BasePage):
         return info
 
     def user_center(self):
+        self.base_driver.explicitly_wait(self.cd_home['PERCENTER'], 5)
         self.base_driver.click(self.cd_home['PERCENTER'])
         time.sleep(2)
 

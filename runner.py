@@ -47,6 +47,8 @@ class Runner(object):
                     suite.add_test(test_register.RegisterTest(test_method))
                 elif test_class == "HomeLoginTest":
                     suite.add_test(test_home_login.HomeLoginTest(test_method))
+                elif test_class == "UserCenterTest":
+                    suite.add_test(test_user_center.UserCenterTest(test_method))
             else:
                 continue
 
