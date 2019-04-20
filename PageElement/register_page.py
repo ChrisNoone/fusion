@@ -79,7 +79,9 @@ class RegisterPageElement(BasePage):
         except:
             el = ''
 
-        if not el:
+        if el:
+            # 若input前有星号，代表是必填，为True
             return True
         else:
+            # 若input前无星号，代表为非必填，为False
             return False
