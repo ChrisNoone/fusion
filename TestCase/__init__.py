@@ -2,6 +2,7 @@
 
 __all__ = [
     'test_register',
-    'test_home_login',
+    'test_login',
+    'test_home',
     'test_user_center'
 ]
