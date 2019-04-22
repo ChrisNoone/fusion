@@ -2,26 +2,24 @@
 
 import csv
 import time
+from configparser import ConfigParser
 from common.box import TestCase, BoxDriver, Browser
 from PageElement import *
 
 
 class RegisterTest(TestCase):
-    """
-    注册用例汇总
-    """
-    url = 'https://fusion.spmobileapi.net/#/home'
-
     def set_up(self):
+        conf = ConfigParser()
+        conf.read('fusion.conf')
+        self.url = conf.get('fusion', 'home_url')
+        self.logger.debug(self.url)
+
         # 启动浏览器
         self.base_driver = BoxDriver(Browser.Chrome)
-
         # 全屏浏览器
         self.base_driver.maximize_window()
-
         # 输入网址
         self.base_driver.navigate(self.url)
-
         # 休眠
         self.base_driver.forced_wait(4)
 

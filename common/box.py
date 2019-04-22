@@ -10,6 +10,7 @@ import pymysql
 import win32gui
 import win32con
 import webbrowser
+from configparser import ConfigParser
 import yaml
 # from ddt import ddt
 from selenium import webdriver
@@ -1069,8 +1070,14 @@ class Browser(Enum):
     Ie = 2
 
 
-class TestLogger:
-    log_path = './TestData/log/fusion_automate_log_%s.log' % time.strftime("%Y%m%d", time.localtime())
+class TestLogger(object):
+    conf = ConfigParser()
+    conf.read('fusion.conf')
+    try:
+        path = conf.get('log', 'path')
+    except:
+        path = './TestData/log/'
+    log_path = path + 'fusion_automate_log_%s.log' % time.strftime("%Y%m%d", time.localtime())
 
     def __init__(self, log_path=log_path):
         # log_path：日志存放路径

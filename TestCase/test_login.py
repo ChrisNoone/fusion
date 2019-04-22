@@ -1,15 +1,19 @@
 # coding: utf-8
 
 import csv
+from configparser import ConfigParser
 from common.box import TestCase, BoxDriver, Browser
 from PageElement import *
 import time
 
 
 class LoginTest(TestCase):
-    url = 'https://fusion.spmobileapi.net/#/home'
-
     def set_up(self):
+        conf = ConfigParser()
+        conf.read('fusion.conf')
+        self.url = conf.get('fusion', 'home_url')
+        self.logger.debug(self.url)
+
         self.base_driver = BoxDriver(Browser.Chrome)
         self.base_driver.maximize_window()
         self.base_driver.navigate(self.url)
