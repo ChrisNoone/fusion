@@ -13,7 +13,6 @@ class RegisterTest(TestCase):
     url = 'https://fusion.spmobileapi.net/#/home'
 
     def set_up(self):
-        self.logger.info('>>> RegisterTest开始执行，初始化浏览器')
         # 启动浏览器
         self.base_driver = BoxDriver(Browser.Chrome)
 
@@ -28,14 +27,13 @@ class RegisterTest(TestCase):
 
     def tear_down(self):
         self.base_driver.quit()
-        self.logger.info('>>> RegisterTest执行结束，清除数据')
 
     def test_register_check(self):
         """
         row[examples]
         :return:
         """
-        self.logger.info('>>>>>> 执行test_register_check')
+        self.logger.info('>>>>>> 执行RegisterTest.test_register_check')
         # 打开csv文件
         csv_file = open('./TestData/csv_case/register_case.csv', 'r', encoding='utf8')
         self.logger.info('打开CSV文件')
@@ -62,7 +60,7 @@ class RegisterTest(TestCase):
         self.logger.info('关闭CSV文件')
 
     def test_register_success(self):
-        self.logger.info('>>>>>> 执行test_register_success')
+        self.logger.info('>>>>>> 执行RegisterTest.test_register_success')
         self.home_page = home_page.HomePageElement(self.base_driver)
         self.home_page.sign()
         self.register_page = register_page.RegisterPageElement(self.base_driver)

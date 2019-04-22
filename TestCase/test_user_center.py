@@ -14,7 +14,6 @@ class UserCenterTest(TestCase):
         self.url = conf.get('fusion', 'home_url')
         self.logger.debug(self.url)
 
-        self.logger.info('>>> UserCenterTest开始执行，初始化浏览器')
         self.base_driver = BoxDriver(Browser.Chrome)
         self.base_driver.maximize_window()
         self.base_driver.navigate(self.url)
@@ -31,7 +30,7 @@ class UserCenterTest(TestCase):
 
     def tear_down(self):
         self.base_driver.quit()
-        self.logger.info('>>> RegisterTest执行结束，清除数据')
 
     def test_check_menu(self):
+        self.logger.info('>>> 执行UserCenterTest.test_check_menu')
         pass

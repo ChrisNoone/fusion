@@ -1,10 +1,11 @@
 class,method,status,example,remarks
 RegisterTest,test_register_check,0,主页注册用例,"status: 0 - 不执行, 1 - 执行"
-RegisterTest,test_register_success,0,主页注册用例,
+RegisterTest,test_register_success,1,主页注册用例,
 LoginTest,test_login_check,0,主页登录用例,
 LoginTest,test_free_trial,0,主页免费试玩,
 LoginTest,test_special_agent_login,0,特殊代理登录,
 HomeTest,test_help_center,0,跳转帮助中心,
 HomeTest,test_play_rule,0,跳转玩法页面,
 HomeTest,test_information,0,跳转资讯页面,
-UserCenterTest,test_check_menu,1,会员中心,
+HomeTest,test_user_center,0,跳转会员中心,
+UserCenterTest,test_check_menu,0,会员中心,
