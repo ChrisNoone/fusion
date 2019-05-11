@@ -6,5 +6,6 @@ __all__ = [
     'rule_page',
     'help_page',
     'infomation_page',
-    'user_center_page'
+    'user_center_page',
+    'sports_page'
 ]

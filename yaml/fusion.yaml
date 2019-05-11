@@ -1,6 +1,7 @@
 FusionHome:
     ## 导航栏
     # 欢迎语
+    CLOSEDIALOG : 'x, //div[@class="dialog"]/i'
     WELCOME     : 'x, //*[@class="activity-gif"]/following-sibling::div[1]'
     # 免费试玩
     FREE_TRIAL  :
@@ -28,6 +29,8 @@ FusionHome:
     USERNAME    : 'x,//*[@id="root"]/div/div[2]/div[2]/div[1]/input'
     # 密码
     PASSWORD    : 'x,//*[@id="root"]/div/div[2]/div[2]/div[2]/input'
+    # 验证码图片
+    RECCODEPIC  : 'x,//*[@id="root"]/div/div[2]/div[2]/div[3]/img'
     # 验证码
     RECCODE     : 'x,//*[@id="root"]/div/div[2]/div[2]/div[3]/input'
     # 登陆按钮
@@ -50,6 +53,8 @@ FusionHome:
     BETRECORD   : 'x,//*[@id="root"]/div/div[2]/div[2]/a[4]'
     # 退出
     DROPOUT     : 'x,//*[@id="root"]/div/div[2]/div[2]/span[3]'
+
+    HOMESPORTS  : 'x, //a[contains(text(), "体育投注")]'
 
 
 FusionReg:

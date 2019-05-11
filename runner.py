@@ -51,6 +51,8 @@ class Runner(object):
                     suite.add_test(test_home.HomeTest(test_method))
                 elif test_class == "UserCenterTest":
                     suite.add_test(test_user_center.UserCenterTest(test_method))
+                elif test_class == "SportsCenterTest":
+                    suite.add_test(test_sports.SportsTest(test_method))
             else:
                 continue
 

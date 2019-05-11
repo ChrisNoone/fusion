@@ -2,6 +2,7 @@
 
 from common.box import YamlHelper, BasePage
 import time
+from common.base import RuoKuai
 
 
 class HomePageElement(BasePage):
@@ -80,6 +81,22 @@ class HomePageElement(BasePage):
             user_info = ''
         return user_info
 
+    def login_with_ruokuai(self, row):
+        """
+        登录流程，使用若快识别验证码
+        :param row: 用例数据字典dict
+        """
+        self.base_driver.clear_cookies()
+        self.base_driver.type(self.cd_home['USERNAME'], row['username'])
+        self.base_driver.type(self.cd_home['PASSWORD'], row['password'])
+        self.base_driver.click(self.cd_home['RECCODEPIC'])
+        time.sleep(3)
+        pic_url = self.base_driver.get_attribute(self.cd_home['RECCODEPIC'], 'src')
+        yzm = RuoKuai().ruokuai(pic_url)
+        self.base_driver.type(self.cd_home['RECCODE'], yzm)
+        self.base_driver.click(self.cd_home['LOGINBUTTON'])
+        self.base_driver.forced_wait(2)
+
     def logout(self):
         """
         退出登录（登录状态下）
@@ -103,6 +120,16 @@ class HomePageElement(BasePage):
         self.base_driver.explicitly_wait(self.cd_home['PERCENTER'], 5)
         self.base_driver.click(self.cd_home['PERCENTER'])
         time.sleep(2)
+
+    def sports_center(self):
+        self.base_driver.click(self.cd_home['HOMESPORTS'])
+
+    def close_dialog(self):
+        try:
+            self.base_driver.click(self.cd_home['CLOSEDIALOG'])
+            self.base_driver.forced_wait(1)
+        except:
+            pass
 
     def get_user_center_text(self):
         """

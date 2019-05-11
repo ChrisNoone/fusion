@@ -4,5 +4,6 @@ __all__ = [
     'test_register',
     'test_login',
     'test_home',
-    'test_user_center'
+    'test_user_center',
+    'test_sports'
 ]

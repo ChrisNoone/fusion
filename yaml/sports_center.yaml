@@ -1,0 +1,3 @@
+SPORTS:
+  # 体育购彩大厅
+  CLOSEDIALOG    : 'x, //div[@class="dialog"]/div/img'
