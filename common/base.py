@@ -5,7 +5,7 @@ import base64
 from common.box import *
 from configparser import ConfigParser
 from PIL import Image
-import tesserocr
+import tesserocr, pytesser3
 import cv2
 
 
@@ -131,6 +131,9 @@ class Captcha(object):
 # 使用OpenCV
 class OpenCVDealImage(object):
     img_dir = './TestData/cache/'
+    '''
+    https://www.cnblogs.com/qqandfqr/p/7866650.html
+    '''
 
     def download_img(self, pic_url):
         """
@@ -162,14 +165,14 @@ class OpenCVDealImage(object):
     # 灰度处理
     def grayscale_deal_img(self, image):
         img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        self.save(img, 'image_grayscale.png')
+        # self.save(img, 'image_grayscale.png')
         return img
 
     # 二值化
     def thresholding_method_img(self, image):
         # 固定阈值二值化
-        ret, img = cv2.threshold(image, 170, 255, cv2.THRESH_BINARY)
-        self.save(img, 'image_threshold.png')
+        ret, img = cv2.threshold(image, 160, 255, cv2.THRESH_BINARY)
+        # self.save(img, 'image_threshold.png')
         return img
 
     # 去边框
@@ -186,7 +189,7 @@ class OpenCVDealImage(object):
                     image[x, y] = 255
                 if x < 2 or x > h - 2:
                     image[x, y] = 255
-        self.save(image, 'image_clearborder.png')
+        # self.save(image, 'image_clearborder.png')
         return image
 
     # 降噪
@@ -212,3 +215,12 @@ class OpenCVDealImage(object):
                     image[x, y] = 255
         self.save(image, 'image_interferenceline.png')
         return image
+
+    # 字符切割
+    def cut_char(self):
+        pass
+
+    # 识别
+    def tesserocr_img(self, image):
+        result = tesserocr.image_to_text(image)
+        return result
