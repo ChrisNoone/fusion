@@ -192,7 +192,7 @@ class OpenCVDealImage(object):
         # self.save(image, 'image_clearborder.png')
         return image
 
-    # 降噪
+    # 线降噪
     def interference_line(self, image):
         """
         干扰线降噪
@@ -215,6 +215,92 @@ class OpenCVDealImage(object):
                     image[x, y] = 255
         self.save(image, 'image_interferenceline.png')
         return image
+
+    # 点降噪
+    def interference_point(self, img):
+        """
+        9邻域框,以当前点为中心的田字框,黑点个数
+        清除孤立的点
+        :param img:
+        :return:
+        """
+        height, width = img.shape[:2]
+
+        for y in range(0, width):
+            for x in range(0, height):
+                if y == 0:  # 第一列
+                    if x == 0:  # 左上顶点,4邻域
+                        # 中心点旁边3个点
+                        sum = int(img[x, y + 1]) \
+                              + int(img[x + 1, y]) \
+                              + int(img[x + 1, y + 1])
+                        if sum >= 2 * 255:
+                            img[x, y] = 255
+                    elif x == height - 1:  # 左下顶点
+                        sum = int(img[x, y + 1]) \
+                              + int(img[x - 1, y]) \
+                              + int(img[x - 1, y + 1])
+                        if sum >= 2 * 255:
+                            img[x, y] = 255
+                    else:  # 最左非顶点,6邻域
+                        sum = int(img[x - 1, y]) \
+                              + int(img[x - 1, y + 1]) \
+                              + int(img[x, y + 1]) \
+                              + int(img[x + 1, y]) \
+                              + int(img[x + 1, y + 1])
+                        if sum >= 4 * 255:
+                            img[x, y] = 255
+                elif y == width - 1:  # 最后一列
+                    if x == 0:  # 右上顶点
+                        sum = int(img[x + 1, y]) \
+                              + int(img[x + 1, y - 1]) \
+                              + int(img[x, y - 1])
+                        if sum >= 2 * 255:
+                            img[x, y] = 255
+                    elif x == height - 1:  # 右下顶点
+                        sum = int(img[x, y - 1]) \
+                              + int(img[x - 1, y]) \
+                              + int(img[x - 1, y - 1])
+                        if sum >= 2 * 255:
+                            img[x, y] = 255
+                    else:  # 最右非顶点,6邻域
+                        sum = int(img[x - 1, y]) \
+                              + int(img[x + 1, y]) \
+                              + int(img[x, y - 1]) \
+                              + int(img[x - 1, y - 1]) \
+                              + int(img[x + 1, y - 1])
+                        if sum >= 4 * 255:
+                            img[x, y] = 255
+                else:  # 不在最左右两列
+                    if x == 0:  # 上非顶点
+                        sum = int(img[x, y - 1]) \
+                              + int(img[x, y + 1]) \
+                              + int(img[x + 1, y - 1]) \
+                              + int(img[x + 1, y]) \
+                              + int(img[x + 1, y + 1])
+                        if sum >= 4 * 255:
+                            img[x, y] = 255
+                    elif x == height - 1:  # 下边非顶点
+                        sum = int(img[x, y - 1]) \
+                              + int(img[x, y + 1]) \
+                              + int(img[x - 1, y - 1]) \
+                              + int(img[x - 1, y]) \
+                              + int(img[x - 1, y + 1])
+                        if sum >= 4 * 255:
+                            img[x, y] = 255
+                    else:  # 具备9领域条件的
+                        sum = int(img[x - 1, y - 1]) \
+                              + int(img[x - 1, y]) \
+                              + int(img[x - 1, y + 1]) \
+                              + int(img[x, y - 1]) \
+                              + int(img[x, y + 1]) \
+                              + int(img[x + 1, y - 1]) \
+                              + int(img[x + 1, y]) \
+                              + int(img[x + 1, y + 1])
+                        if sum >= 7 * 255:
+                            img[x, y] = 255
+        self.save(img, 'image_interferencepoint.png')
+        return img
 
     # 字符切割
     def cut_char(self):
