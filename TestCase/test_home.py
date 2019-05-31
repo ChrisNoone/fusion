@@ -7,6 +7,26 @@ from PageElement import *
 
 
 class HomeTest(TestCase):
+    """
+    @classmethod
+    def setUpClass(self):
+        conf = ConfigParser()
+        conf.read('fusion.conf')
+        self.url = conf.get('fusion', 'home_url')
+        # self.logger.debug(self.url)
+
+        self.base_driver = BoxDriver(Browser.Chrome)
+        self.base_driver.maximize_window()
+        self.base_driver.navigate(self.url)
+        self.base_driver.forced_wait(4)
+
+        self.home_page = home_page.HomePageElement(self.base_driver)
+
+    @classmethod
+    def tearDownClass(self):
+        self.base_driver.quit()
+    """
+
     def set_up(self):
         conf = ConfigParser()
         conf.read('fusion.conf')

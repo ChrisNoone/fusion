@@ -1981,8 +1981,8 @@ class _TestResult(TestResult):
         self.error_count += 1
         TestResult.addError(self, test, err)
         if getattr(test, 'logger', TestLogger):
-            test.logger.error("测试用例执行异常：%s" % str(err))
-
+            # test.error("测试用例执行异常：%s" % str(err))
+            TestLogger().error("测试用例执行异常：%s" % str(err))
         _, _exc_str = self.errors[-1]
         output = self.complete_output()
         self.result.append((2, test, output, _exc_str))
