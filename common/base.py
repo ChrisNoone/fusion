@@ -5,8 +5,9 @@ import base64
 from common.box import *
 from configparser import ConfigParser
 from PIL import Image
-import tesserocr, pytesser3
+import tesserocr
 import cv2
+import queue
 
 
 # 使用“若快”网在线识别，正确率稍高，速度慢
@@ -303,8 +304,130 @@ class OpenCVDealImage(object):
         return img
 
     # 字符切割
-    def cut_char(self):
-        pass
+    def detect4Xy(self, im, x_fd, y_fd):
+        """
+        遍历图片与初始点有连接的所有点，返回最大/最小的，横/总坐标
+        用队列和集合记录遍历过的像素坐标代替单纯递归以解决cfs访问过深问题
+        """
+        xaxis = []
+        yaxis = []
+        visited = set()
+        q = queue.Queue()
+        q.put((x_fd, y_fd))
+        visited.add((x_fd, y_fd))
+        offsets = [(1, 0), (0, 1), (-1, 0), (0, -1)]  # 四邻域
+
+        while not q.empty():
+            x, y = q.get()
+
+            for xoffset, yoffset in offsets:
+                x_neighbor, y_neighbor = x + xoffset, y + yoffset
+
+                if (x_neighbor, y_neighbor) in (visited):
+                    continue  # 已经访问过了
+
+                visited.add((x_neighbor, y_neighbor))
+
+                try:
+                    if im[x_neighbor, y_neighbor] == 0:
+                        xaxis.append(x_neighbor)
+                        yaxis.append(y_neighbor)
+                        q.put((x_neighbor, y_neighbor))
+
+                except IndexError:
+                    pass
+        if (len(xaxis) == 0 | len(yaxis) == 0):
+            xmax = x_fd + 1
+            xmin = x_fd
+            ymax = y_fd + 1
+            ymin = y_fd
+
+        else:
+            xmax = max(xaxis)
+            xmin = min(xaxis)
+            ymax = max(yaxis)
+            ymin = min(yaxis)
+
+        return xmax, xmin, ymax, ymin
+
+    def detectFirstPix(self, im, ymax):
+        """
+        搜索区块起点
+        :param im:
+        :param ymax:
+        :return: 返回起点的纵坐标x, 横坐标y
+        """
+        h, w = im.shape[:2]
+        for y_fd in range(ymax + 1, w):
+            for x_fd in range(h):
+                if im[x_fd, y_fd] == 0:
+                    return x_fd, y_fd
+
+    def buildCoordinate(self, im):
+        """
+        寻找切割字符位置
+        :param im:
+        :return: zoneL - 将要被切割的区块的宽度集合，zoneHB - 将要被切割的区块的纵坐标[起始x, 终点x]集合，zoneWB - 将要被切割的区块的横坐标[起始y, 终点y]集合
+        """
+        zoneL = []  # 各区块长度L列表
+        zoneWB = []  # 各区块的X轴[起始，终点]列表
+        zoneHB = []  # 各区块的Y轴[起始，终点]列表
+
+        ymax = 0  # 上一区块结束黑点横坐标,这里是初始化
+        for i in range(10):
+            try:
+                x_fd, y_fd = self.detectFirstPix(im, ymax)
+                xmax, xmin, ymax, ymin = self.detect4Xy(im, x_fd, y_fd)
+                L = ymax - ymin
+                # H = ymax - ymin
+                zoneL.append(L)
+                zoneHB.append([xmin, xmax])
+                zoneWB.append([ymin, ymax])
+
+            except TypeError:
+                return zoneL, zoneHB, zoneWB
+
+        return zoneL, zoneHB, zoneWB
+
+    def cutting_img(self, image, img_name='cache', xoffset=1, yoffset=1):
+        """
+        切割字符
+        :param image: 待切割图片对象
+        :param img_name: 切割后的文件名
+        :param xoffset: 切割偏移量，纵向
+        :param yoffset: 切割偏移量，横向
+        :return:
+        """
+        # 建立待切割坐标数据集
+        im_position = self.buildCoordinate(image)
+
+        # 处理有连接字符，如果一个字符的长度过长就认为是粘连字符，并从中间进行切割
+        maxL = max(im_position[0])
+        minL = min(im_position[0])
+        if (maxL > minL + minL * 0.7):
+            maxL_index = im_position[0].index(maxL)
+            # minL_index = im_position[0].index(minL)
+            # 设置字符的宽度
+            im_position[0][maxL_index] = maxL // 2
+            im_position[0].insert(maxL_index + 1, maxL // 2)
+            # 设置字符X轴[起始，终点]位置
+            im_position[1][maxL_index][1] = im_position[1][maxL_index][0] + maxL // 2
+            im_position[1].insert(maxL_index + 1,
+                                  [im_position[1][maxL_index][1] + 1, im_position[1][maxL_index][1] + 1 + maxL // 2])
+            # 设置字符的Y轴[起始，终点]位置
+            im_position[2].insert(maxL_index + 1, im_position[2][maxL_index])
+
+        filename = self.img_dir + img_name.split('.')[0]
+        # 识别出的字符个数
+        im_number = len(im_position[1])
+        # 切割字符
+        for i in range(im_number):
+            im_start_X = im_position[1][i][0] - xoffset
+            im_end_X = im_position[1][i][1] + xoffset
+            im_start_Y = im_position[2][i][0] - yoffset
+            im_end_Y = im_position[2][i][1] + yoffset
+            cropped = image[im_start_X:im_end_X, im_start_Y:im_end_Y]
+            cv2.imwrite(filename + str(i) + '.png', cropped)
 
     # 识别
     def tesserocr_img(self, image):
