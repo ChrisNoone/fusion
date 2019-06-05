@@ -13,11 +13,16 @@ class HomeRegistered(BasePage):
         print('进入注册页面')
         #  进入注册页面
         #  用户名   6-16之间，由字母/数字/下划线组成6-16个字
+
+        # self.base_driver.clear(self.config_dict_regiseter['USERNAME'])
+        print('11111111')
         self.base_driver.type(self.config_dict_regiseter['USERNAME'], row['username'])
         print('获取到的用户名是' + row['username'])
+        # self.base_driver.clear(self.config_dict_regiseter['USERNAME'])
         #  密码    长度为6位以上，由数字/字母/下划线组成
         self.base_driver.type(self.config_dict_regiseter['PASSWORD'], row['password'])
         print('获取到的密码是' + row['password'])
+        self.base_driver.forced_wait(1)
         #  邮件
         self.base_driver.type(self.config_dict_regiseter['EMAIL'], row['email'])
         #  推荐ID

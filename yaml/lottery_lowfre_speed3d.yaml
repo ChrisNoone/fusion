@@ -1,0 +1,201 @@
+Speed3D :
+
+  #导行栏
+  MENU : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div'
+  #三码
+  MENU1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[1]'
+  
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #三码直选
+  #三码直选---复式---0
+  SP3ZHIXFX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[1]'
+  SP3ZHIX : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div'
+   
+  #三码百位---十位---个位
+  SP3ZHIXB : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div'
+  SP3ZHIXS : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div'
+  SP3ZHIXG : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div'
+   
+  #三码---全大小单双清
+  SP3ZHIXBWZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div'
+  SP3ZHIXSWZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div'
+  SP3ZHIXGWZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[3]/div'
+  
+  
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #三码直选---单式---1
+  # SP3ZHIX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[1]'
+  SP3ZHIXDSTEXT: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+  
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #三码直选和值---2---0-14
+  # SP3ZHIX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[1]'
+  SP3ZHIXHZ0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div'
+  #三码直选和值---2---15-27
+  SP3ZHIXHZ1: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div'
+  
+  
+  #三码组选
+  #三码组选---组三---
+  SP3ZUX : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div'
+  #三码组选---混合组选---输入框
+  SP3ZUXTEXT : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+  
+  
+  
+  # --------------------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------
+  #导行栏
+  # MENU : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div'
+  # 二码
+  # MENU1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]'
+  # 二码---后二码直选---复式
+  SP3H2ZHIX : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div'
+  # 二码---后二码直选---复式---十位---个位
+  SP3H2ZHIXS : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div'
+  SP3H2ZHIXG : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div'
+  
+  SP3H2ZHIXSWZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div'
+  SP3H2ZHIXGWZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div'
+  
+  
+  # 二码---后二码直选---单式
+  SP3H2ZHIXTEXT : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+  
+   
+  # --------------------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------
+  
+  # 二码---后二码组选---复式
+  SP3H2ZUX : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div'
+  
+  # 二码---后二码组选---单式
+  SP3H2ZUXTEXT : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+  
+  
+  
+  # 二码---前二码直选---复式
+  SP3Q2ZHIX : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[2]/div'
+  # 二码---前二码直选---复式---十位---个位
+  SP3Q2ZHIXS : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div'
+  SP3Q2ZHIXG : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div'
+  
+  SP3Q2ZHIXSWZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div'
+  SP3Q2ZHIXGWZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div'
+  
+  
+  # 二码---后二码直选---单式
+  SP3Q2ZHIXTEXT : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+  
+   
+  # --------------------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------
+  # --------------------------------------------------------------------------------------------------
+  
+  # 二码---后二码组选---复式
+  SP3Q2ZUX : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[4]/div[2]/div'
+  
+  # 二码---后二码组选---单式
+  SP3Q2ZUXTEXT : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ #点击添加注单按钮
+  ADDNOTE: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[3]/button'
+
+
+  #随机1注
+  RANDOM1: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[1]'
+  #随机5注
+  RANDOM5: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[2]'
+
+  #元
+  YUAN: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[1]'
+  #角
+  JIAO: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[2]'
+  #分
+  FEN: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[3]'
+
+  #单注金额
+  XIUGAI: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/input'
+
+
+
+  #全部删除
+  ALLDELETE: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[3]'
+
+  #确认投注
+  SUREBET: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[4]'
+
+
+
+  #请先添加投注内容
+  TIPS: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+  #请先添加投注内容
+  TIPS01: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #下注成功
+  TIPS02: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #您还没有选择号码或所选号码不全
+  TIPS03: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+  #是否删除全部注单？
+  TIPS04: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+  # 确定按钮
+  TIPSBUTTON : 'x,//*[@id="root"]/div/div[1]/div[2]/div[3]/div'

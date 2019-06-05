@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>FUSION系统自动化测试报告</title>
+    <meta name="generator" content="HtmlTestRunner 0.8.4"/>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    
+<style type="text/css" media="screen">
+
+.img{
+    height: 100%;
+    border-collapse: collapse;
+    border: 2px solid #777;
+}
+.screenshots {
+    z-index: 100;
+    position:absolute;
+    height: 80%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+}
+
+.imgyuan{
+    height: 20px;
+    border-radius: 12px;
+    background-color: red;
+    padding-left: 13px;
+    margin: 0 auto;
+    position: relative;
+    top: -40px;
+    background-color: rgba(1, 150, 0, 0.3);
+}
+.imgyuan font{
+    border:1px solid white;
+    width:11px; 
+    height:11px;
+    border-radius:50%;
+    margin-right: 9px;
+    margin-top: 4px;
+    display: block;
+    float: left;
+    background-color: white;
+}
+.close_shots {
+    background-image: url(data:image/png;base64)
+    background-size: 22px 22px;
+    -moz-background-size: 22px 22px;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 22px;
+    z-index: 99;
+    width: 22px;
+}
+
+
+/* -- css div popup ------------------------------------------------------------------------ */
+.popup_window {
+    display: none;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    /*border: solid #627173 1px; */
+    padding: 10px;
+    background-color: #99CCFF;
+    font-family: "Lucida Console", "Courier New", Courier, monospace;
+    text-align: left;
+    font-size: 10pt;
+    width: 500px;
+}
+
+/* -- report ------------------------------------------------------------------------ */
+
+#show_detail_line .label {
+    font-size: 85%;
+    cursor: pointer;
+}
+
+#show_detail_line {
+    margin: 2em auto 1em auto;
+}
+
+#total_row  { font-weight: bold; }
+.hiddenRow  { display: none; }
+.testcase   { margin-left: 2em; }
+
+</style>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<body>
+<script language="javascript" type="text/javascript"><!--
+output_list = Array();
+
+/* level - 0:Summary; 1:Failed; 2:All */
+function showCase(level) {
+    trs = document.getElementsByTagName("tr");
+    for (var i = 0; i < trs.length; i++) {
+        tr = trs[i];
+        id = tr.id;
+        if (id.substr(0,2) == 'ft') {
+            if (level < 1) {
+                tr.className = 'hiddenRow';
+            }
+            else {
+                tr.className = '';
+            }
+        }
+        if (id.substr(0,2) == 'pt') {
+            if (level > 1) {
+                tr.className = '';
+            }
+            else {
+                tr.className = 'hiddenRow';
+            }
+        }
+    }
+}
+
+
+function showClassDetail(cid, count) {
+    var id_list = Array(count);
+    var toHide = 1;
+    for (var i = 0; i < count; i++) {
+        tid0 = 't' + cid.substr(1) + '.' + (i+1);
+        tid = 'f' + tid0;
+        tr = document.getElementById(tid);
+        if (!tr) {
+            tid = 'p' + tid0;
+            tr = document.getElementById(tid);
+        }
+        id_list[i] = tid;
+        if (tr.className) {
+            toHide = 0;
+        }
+    }
+    for (var i = 0; i < count; i++) {
+        tid = id_list[i];
+        if (toHide) {
+            document.getElementById('div_'+tid).style.display = 'none'
+            document.getElementById(tid).className = 'hiddenRow';
+        }
+        else {
+            document.getElementById(tid).className = '';
+        }
+    }
+}
+
+
+
+function showTestDetail(div_id){
+    var details_div = document.getElementById(div_id)
+    var displayState = details_div.style.display
+    // alert(displayState)
+    if (displayState != 'block' ) {
+        displayState = 'block'
+        details_div.style.display = 'block'
+    }
+    else {
+        details_div.style.display = 'none'
+    }
+}
+
+
+function html_escape(s) {
+    s = s.replace(/&/g,'&amp;');
+    s = s.replace(/</g,'&lt;');
+    s = s.replace(/>/g,'&gt;');
+    return s;
+}
+
+function show_img(obj) {
+    var obj1 = obj.nextElementSibling
+    obj1.style.display='block'
+    var index = 0;//每张图片的下标，
+    var len = obj1.getElementsByTagName('img').length;
+    var imgyuan = obj1.getElementsByClassName('imgyuan')[0]
+    //var start=setInterval(autoPlay,500);
+    obj1.onmouseover=function(){//当鼠标光标停在图片上，则停止轮播
+        clearInterval(start);
+    }
+    obj1.onmouseout=function(){//当鼠标光标停在图片上，则开始轮播
+        start=setInterval(autoPlay,1000);
+    }    
+    for (var i = 0; i < len; i++) {
+        var font = document.createElement('font')
+        imgyuan.appendChild(font)
+    }
+    var lis = obj1.getElementsByTagName('font');//得到所有圆圈
+    changeImg(0)
+    var funny = function (i) {
+        lis[i].onmouseover = function () {
+            index=i
+            changeImg(i)
+        }
+    }
+    for (var i = 0; i < lis.length; i++) {
+        funny(i);
+    }
+
+    function autoPlay(){
+        if(index>len-1){
+            index=0;
+            clearInterval(start); //运行一轮后停止
+        }
+        changeImg(index++);
+    }
+    imgyuan.style.width= 25*len +"px";
+    //对应圆圈和图片同步
+    function changeImg(index) {
+        var list = obj1.getElementsByTagName('img');
+        var list1 = obj1.getElementsByTagName('font');
+        for (i = 0; i < list.length; i++) {
+            list[i].style.display = 'none';
+            list1[i].style.backgroundColor = 'white';
+        }
+        list[index].style.display = 'block';
+        list1[index].style.backgroundColor = 'blue';
+    }
+
+}
+function hide_img(obj){
+    obj.parentElement.style.display = "none";
+    obj.parentElement.getElementsByClassName('imgyuan')[0].innerHTML = "";
+}
+
+/* obsoleted by detail in <div>
+function showOutput(id, name) {
+    var w = window.open("", //url
+                    name,
+                    "resizable,scrollbars,status,width=800,height=450");
+    d = w.document;
+    d.write("<pre>");
+    d.write(html_escape(output_list[id]));
+    d.write("\n");
+    d.write("<a href='javascript:window.close()'>close</a>\n");
+    d.write("</pre>\n");
+    d.close();
+}
+*/
+
+--></script>
+
+<div class="container">
+    <div class='heading'>
+<h1>FUSION系统自动化测试报告</h1>
+<p><strong>Start Time 开始时间:</strong> 2019-05-16 19:49:09</p>
+<p><strong>Duration 用时:</strong> 0:01:23.166935</p>
+<p><strong>Status 状态:</strong> <span class="text text-success">Pass <strong>1</strong></span> <span class="text text-warning">Error <strong>1</strong></span></p>
+
+<p class='description'>具体测试报告内容如下: </p>
+</div>
+
+
+    
+<p id='show_detail_line'>
+<span class="label label-primary" onclick="showCase(0)">Summary 摘要</span>
+<span class="label label-danger" onclick="showCase(1)">Failed 失败</span>
+<span class="label label-default" onclick="showCase(2)">All 所有</span>
+</p>
+<table id='result_table' class="table">
+    <thead>
+        <tr id='header_row'>
+            <th>Lottery 数字彩分类/用例</td>
+            <th>Count 个数</td>
+            <th>Pass 通过</td>
+            <th>Fail 不通过</td>
+            <th>Error 测试程序异常</td>
+            <th>PassRate 通过率</td>
+            <th>View 查看</td>
+        </tr>
+    </thead>
+    <tbody>
+        
+<tr class='text text-warning'>
+    <td>marksix.test_pcdd_lucky28.PcddLucky28Test</td>
+    <td>2</td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td><script>
+    document.write(division(1,2));
+    function division(arg1, arg2){
+    var t1 = 0, t2 = 0, r1, r2;
+    try { 
+        t1 = new String(arg1).split(".")[1].length;
+    } catch (e) { }
+    try { 
+        t2 = arg2.toString().split(".")[1].length;
+    } catch (e) { }
+    r1 = Number(new String(arg1).replace(".", ""));
+    r2 = Number(arg2.toString().replace(".", ""));
+    //放大倍数后两个数相除后
+    var money = r1 / r2;
+    //保留2个小数位数
+    return money.toFixed(2);
+}
+</script>%
+</td>
+    
+   
+    <td><a class="btn btn-xs btn-primary"href="javascript:showClassDetail('c1',2)">Detail 详情</a></td>
+</tr>
+
+
+<tr id='ft1.1' class='text text-success'>
+    <td class='text text-warning'><div class='testcase'>test_success_01</div></td>
+    <td colspan='4' align='center'>
+
+        <!--css div popup start-->
+        <a class="popup_link btn btn-xs btn-default" onfocus='this.blur();' 
+        href="javascript:showTestDetail('div_ft1.1')" >
+            error</a>
+
+        <div id='div_ft1.1' class="popup_window">
+            <div style='text-align: right;cursor:pointer'>
+            <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.1').style.display = 'none' " >
+               [x]</a>
+            </div>
+            <pre> 
+            
+ft1.1: 打开网址
+打开csv
+进入数据循环succ01
+特码包三
+选择的号码是：202522
+[2019-05-16 19:49:30,466]-[box.py]-[ERROR]: 测试用例执行异常：(&lt;class 'IndexError'&gt;, IndexError('list index out of range'), &lt;traceback object at 0x000001BDCD8F8688&gt;)
+Traceback (most recent call last):
+  File "D:\fusion\common\box.py", line 1569, in testPartExecutor
+    yield
+  File "D:\fusion\common\box.py", line 1477, in run
+    testMethod()
+  File "D:\fusion\marksix\test_pcdd_lucky28.py", line 70, in test_success_01
+    self.pclucky28.tema_bao3(row)
+  File "D:\fusion\marksix\pcdd_lucky28.py", line 55, in tema_bao3
+    s1 = self.base_driver.clicks(self.config_dict_pclk28['L28TAB30'], a)
+  File "D:\fusion\common\box.py", line 343, in clicks
+    el = els[int(n)]
+IndexError: list index out of range
+
+
+            </pre>
+            <script>        
+            function save_file{  	
+            var fso, tf;
+            fso = new ActiveXObject("Scripting.FileSystemObject");
+            tf = fso.CreateTextFile("/fusion/2.txt", true);
+            tf.WriteLine("Testing 1, 2, 3.") ;
+            tf.WriteBlankLines(3) ;
+            tf.Write ("This is a test.");
+            tf.Close();
+            }
+            </script>
+        </div>
+        <!--css div popup end-->
+
+    </td>
+    <td colspan='1' align='center'>捕捉到图片文件夹路径：/fusion/pictures</td>
+</tr>
+
+<tr id='pt1.2' class='hiddenRow'>
+    <td class='text text-success'><div class='testcase'>test_fail_01</div></td>
+    <td colspan='4' align='center'>
+
+        <!--css div popup start-->
+        <a class="popup_link btn btn-xs btn-default" onfocus='this.blur();' 
+        href="javascript:showTestDetail('div_pt1.2')" >
+            pass</a>
+
+        <div id='div_pt1.2' class="popup_window">
+            <div style='text-align: right;cursor:pointer'>
+            <a onfocus='this.blur();' onclick="document.getElementById('div_pt1.2').style.display = 'none' " >
+               [x]</a>
+            </div>
+            <pre> 
+            
+pt1.2: 打开网址
+打开csv
+进入数据循环succ01
+特码包三
+选择的号码是：202522
+[2019-05-16 19:49:30,466]-[box.py]-[ERROR]: 测试用例执行异常：(&lt;class 'IndexError'&gt;, IndexError('list index out of range'), &lt;traceback object at 0x000001BDCD8F8688&gt;)
+打开网址
+打开csv
+进入数据循环fail
+随机1注
+随机5注
+特码
+特码特码包三
+混合大：5
+混合单：5
+混合大单：5
+混合大双：5
+混合小：59
+混合双：59
+混合小单：59
+混合小双：59
+混合红波：10
+混合绿波：10
+混合蓝波：10
+混合豹子：59
+混合---色波---豹子
+随机1注
+随机5注
+混合---色波---豹子
+test_fail_registered_01 运行完毕
+[2019-05-16 19:50:30,947]-[box.py]-[INFO]: 关闭CSV文件
+[2019-05-16 19:50:33,138]-[box.py]-[INFO]: 测试用例执行成功
+
+
+            </pre>
+            <script>        
+            function save_file{  	
+            var fso, tf;
+            fso = new ActiveXObject("Scripting.FileSystemObject");
+            tf = fso.CreateTextFile("/fusion/2.txt", true);
+            tf.WriteLine("Testing 1, 2, 3.") ;
+            tf.WriteBlankLines(3) ;
+            tf.Write ("This is a test.");
+            tf.Close();
+            }
+            </script>
+        </div>
+        <!--css div popup end-->
+
+    </td>
+    <td colspan='1' align='center'>捕捉到图片文件夹路径：/fusion/pictures</td>
+</tr>
+
+    </tbody>
+    <tfoot>
+        <tr id='total_row'>
+            <td>Total 总共</td>
+            <td>2</td>
+            <td class="text text-success">1</td>
+            <td class="text text-danger">0</td>
+            <td class="text text-warning">1</td>
+            <td>
+            <script>
+            document.write(division(1,2));
+            function division(arg1, arg2){
+            var t1 = 0, t2 = 0, r1, r2;
+            try { 
+                t1 = new String(arg1).split(".")[1].length;
+            } catch (e) { }
+            try { 
+                t2 = arg2.toString().split(".")[1].length;
+            } catch (e) { }
+            r1 = Number(new String(arg1).replace(".", ""));
+            r2 = Number(arg2.toString().replace(".", ""));
+            //放大倍数后两个数相除后
+            var money = r1 / r2;
+            //保留2个小数位数
+            return money.toFixed(2);
+            }
+            </script>%
+            </td>
+</td></td>
+            <td>&nbsp;</td>
+        </tr>    
+    </tfoot>
+    
+</table>
+<tr id='head_row'>
+            <td>报告说明：</td>
+            <p>1、测试用例放在Detail里面的pass</p>
+            <p>2、测试异常截图在/fusion/pictures文件夹下</p>
+        </tr>
+        
+        
+
+
+    <div id='ending'>&nbsp;</div>
+</div>
+
+</body>
+</html>

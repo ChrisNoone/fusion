@@ -68,7 +68,7 @@ class HomeLoginTest(TestCase):
                 self.fusion_login_main.login_before(row)
                 # 断言，断言方法在TestCase类中
                 # 获取在登录失败之后的用户名
-                # self.base_driver.forced_wait(30)
+                #self.base_driver.forced_wait(10)
                 print('22222')
                 get_login_tips03 = self.fusion_login_main.get_login_tips03()
                 print('获取到断线：' + get_login_tips03)

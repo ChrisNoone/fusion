@@ -1,0 +1,214 @@
+LOTTERY_FAST3:
+    # 安徽快三
+    # 今天开奖
+    TODAY: 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span[1]'
+    MENU : 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span'
+  
+
+    # 期数
+    #NUMQISHU  : 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[2]'
+    PERIODS_NUM: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[2]'
+    
+    TTT: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[3]/div[1]'
+  
+    
+    # 时间
+    NUMQISHU: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[1]'
+    TIME_NUM: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[1]'
+    
+    
+    # 总和
+    SUM_SUM: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[4]'
+
+  
+    # 总和--大小
+    #ZONGHEDAN: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[5]'
+    SUM_DX_NUM: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[5]'
+    
+    # 总和--单双
+    #ZONGHEDAN : 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[6]'
+    SUM_DS_NUM: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[6]'
+    
+    
+    # 显示号码骰子
+    # NUM01N: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[3]/div[1]'
+    LOTTERY_NUM01: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[3]/div[1]'
+    LOTTERY_NUM02: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[3]/div[2]'
+    LOTTERY_NUM03: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[3]/div[3]'
+    
+    # 鱼虾蟹
+    LOTTERY_NUMYU : 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[7]'
+    LOTTERY_NUMXIA: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[8]'
+    LOTTERY_NUMXIE: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[9]'
+   
+
+
+
+
+    # ----------------------------------------------------------------------------------------- 
+    # 站长推荐
+    # 安徽快三---稳赢杀号---综合杀号
+    WYKILLNUM: 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span'
+    
+    # 最近10期，最近20期，最近50期，最近100期
+    RECNET_PERIOD_10: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/span[1]'
+    RECNET_PERIOD   : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/span'
+  
+    # 万千百十个杀号
+    NUMKILLNUM: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[2]/div'
+    
+    # 期数
+    WYQISHU: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table/tbody/tr/td[1]'
+   
+    # 开奖号码---等待抽奖
+    KJNUM : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table/tbody/tr[2]/td'
+    
+    # 开奖号码
+    KJNUM00 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[1]'
+    KJNUM01 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[2]'
+    KJNUM02 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[3]'
+    
+    # 王景云
+    WANGJINGYUN : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr[1]/th[3]'
+    NAME00 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr[1]/th'
+
+
+    
+    # 杀N--杀4
+    KILLNUM00 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[3]'
+    KILLNUM01 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[5]'
+    KILLNUM02 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[7]'
+    KILLNUM03 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[9]'
+    KILLNUM04 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[11]'
+    KILLNUM05 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[13]'
+    
+    
+   
+    # 战绩---对错
+    ZHANJINUM00 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[4]'
+    ZHANJINUM01 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[6]'
+    ZHANJINUM02 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[8]'
+    ZHANJINUM03 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[10]'
+    ZHANJINUM04 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[12]'
+    
+    
+    
+    # -----------------------------------------------------------------------------------------------------
+    # 和值杀号
+    # 和值
+    SUM_NUM : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[3]'
+   
+    
+    
+    
+    
+    
+   # ---------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    # 彩票大厅
+    # 走势图
+    TREND: 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span[5]'
+    # MENU : 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span'
+    
+    
+    #基本走势
+    # TREND_BASIC: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/div/div[4]'
+    VIEWTREND : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/div/div'
+ 
+    
+    # 期号
+    TREND_QH : 'x,//*[@id="trend_table2"]/tbody/tr/td[1]'
+ 
+    
+    # 开奖号码
+    LOTTERY_NUM : 'x,//*[@id="trend_table2"]/tbody/tr/td[2]'
+    
+    # 开奖号码分布1~6
+    NUM_FB_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[3]' 
+    NUM_FB_2 : 'x,//*[@id="trend_table2"]/tbody/tr/td[4]'
+    NUM_FB_3 : 'x,//*[@id="trend_table2"]/tbody/tr/td[5]'
+    NUM_FB_4 : 'x,//*[@id="trend_table2"]/tbody/tr/td[6]'
+    NUM_FB_5 : 'x,//*[@id="trend_table2"]/tbody/tr/td[7]'
+    NUM_FB_6 : 'x,//*[@id="trend_table2"]/tbody/tr/td[8]'
+    
+    # 号码形态---豹子、、三不同、对子
+    NUM_FORM_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[9]'
+    NUM_FORM_2 : 'x,//*[@id="trend_table2"]/tbody/tr/td[10]'
+    NUM_FORM_3 : 'x,//*[@id="trend_table2"]/tbody/tr/td[11]'
+    
+    #和值走势
+    TREND_NUM_3 : 'x,//*[@id="trend_table2"]/tbody/tr/td[12]'
+    TREND_NUM_4 : 'x,//*[@id="trend_table2"]/tbody/tr/td[13]'
+    TREND_NUM_5 : 'x,//*[@id="trend_table2"]/tbody/tr/td[14]'
+    TREND_NUM_6 : 'x,//*[@id="trend_table2"]/tbody/tr/td[15]'
+    TREND_NUM_7 : 'x,//*[@id="trend_table2"]/tbody/tr/td[16]'
+    TREND_NUM_8 : 'x,//*[@id="trend_table2"]/tbody/tr/td[17]'
+    TREND_NUM_9 : 'x,//*[@id="trend_table2"]/tbody/tr/td[18]'
+    TREND_NUM_10 : 'x,//*[@id="trend_table2"]/tbody/tr/td[19]'
+    TREND_NUM_11 : 'x,//*[@id="trend_table2"]/tbody/tr/td[20]'
+    TREND_NUM_12 : 'x,//*[@id="trend_table2"]/tbody/tr/td[21]'
+    TREND_NUM_13 : 'x,//*[@id="trend_table2"]/tbody/tr/td[22]'
+    TREND_NUM_14 : 'x,//*[@id="trend_table2"]/tbody/tr/td[23]'
+    TREND_NUM_15 : 'x,//*[@id="trend_table2"]/tbody/tr/td[24]'
+    TREND_NUM_16 : 'x,//*[@id="trend_table2"]/tbody/tr/td[25]'
+    TREND_NUM_17 : 'x,//*[@id="trend_table2"]/tbody/tr/td[26]'
+    TREND_NUM_18 : 'x,//*[@id="trend_table2"]/tbody/tr/td[27]'
+     
+
+    
+    # 数据统计---
+    DATA_BALL_1_0 : 'x,//*[@id="trend_table2"]/tbody/tr[33]/td[2]'
+    DATA_BALL_NUM : 'x,//*[@class="font14"]'
+   
+    
+    
+    
+    # 定位走势（数据统计）
+    DATA_BALL_NUM1 : 'x,//*[@id="trend_table2"]/tbody/tr[33]/td'
+    
+    # 90期
+    DATA_SELECT : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/span'
+  
+    
+    
+    
+    
+    # 012路
+    #LU_0 : 'x,//*[@class="hot zero1"]'
+    LU_0 : 'x,//span[contains(@class,"hot zero1") and contains(@class, "yellowbg")]'
+    LU_1 : 'x,//*[@class="hot zero2"]'
+    LU_2 : 'x,//*[@class="hot zero3"]'
+   
+    
+   
+   
+   
+    # 大小走势
+    TREND_SIZE_1_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[2]'
+    # 第一位、第二位、第三位
+    DX_SIZE_1_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[2]'
+    DX_SIZE_1_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[3]'
+    DX_SIZE_2_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[4]'
+    DX_SIZE_2_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[5]'
+    DX_SIZE_3_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[6]'
+    DX_SIZE_3_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[7]'
+  
+    # 数据统计---第一位~第三位
+    DX_SIZE_SUM : 'x,//*[@class="ng-binding ng-scope"]'
+    
+    
+    DX_SIZE_SUM1 : 'x,//*[@id="trend_table2"]/tbody/tr[22]/td[2]'
+   
+   
+   
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    

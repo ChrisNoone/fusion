@@ -1,0 +1,67 @@
+Lottery:
+
+  #登陆注册模块
+  # 用户名
+  USERNAME : 'x,//*[@id="root"]/div/div[2]/div[2]/div[1]/input'
+  
+  USERNAME1 : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div[2]/div/div[2]/div[2]/div[3]/form/div[1]/div/input'
+  #密码
+  PASSWORD : 'x,//*[@id="root"]/div/div[2]/div[2]/div[2]/input'
+  
+  PASSWORD1 : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div[2]/div/div[2]/div[2]/div[3]/form/div[2]/div/input'
+  
+  
+  #验证码
+  YZM : 'x,//*[@id="root"]/div/div[2]/div[2]/div[3]/input'
+
+  YZM1 : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div[2]/div/div[2]/div[2]/div[3]/form/div[3]/div[1]/input'
+
+
+  #登陆按钮
+  LOGINBUTTON : 'x,//*[@id="root"]/div/div[2]/div[2]/button'
+  
+  
+  LOGINBUTTON1 : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div[2]/div/div[2]/div[2]/div[3]/form/div[4]/button[1]'
+  
+  #点击数字彩
+  LOTTERY : 'x,//*[@id="root"]/div/div[3]/div/div[2]/div[2]/a'
+  
+  
+  
+
+
+   
+  #点击六合彩
+  MARKSIX : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[3]'
+
+  #点击分分六合彩
+  MARKSIX_MIN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[2]/div[3]/a/div'
+  
+  
+     
+  #115
+  LOTTERY11 : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[5]'
+  
+  CH115 : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[5]'
+
+  #115
+  CH115MM : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[3]/div/div[2]/div[3]/a/div'
+
+  
+  
+  
+  
+  #点击时时彩
+  TIME : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[4]'
+
+  #点击分分时时彩
+  TIME_MM : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[1]/div/div[1]/div[3]/a/div'
+  
+  
+    
+  #点击PK10
+  PK10 : 'x,//*[@id="root"]/div/div[2]/div/div[1]/div/div/div[5]'
+
+  #点击分分PK10
+  PK10_MM : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div/div/div/div/div[2]/div/div[1]/div[3]/a/div'
+  

@@ -47,6 +47,10 @@ class HomeRegisterTest(TestCase):
                 self.assertEqual(get_text_hysign, row['tips01'], '注册失败')
                 self.base_driver.refresh()
                 self.base_driver.forced_wait(1)
+                print('-------')
+                print('-------')
+                print('-------')
+                print('-------')
                 # 关闭浏览器
                 # self.base_driver.quit()
         # 使用完csv文件后，关闭

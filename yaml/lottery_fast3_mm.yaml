@@ -1,0 +1,261 @@
+FAST3_MM:
+
+  #导航栏
+  MENU   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div'
+  
+  
+  #二同号
+  NUM_S2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[1]'
+  
+  #二同号单选---标准选号
+  NUM_S2_DS : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[1]'
+  NUM_S2_DSN: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div'
+  #二同号单选---标准选号---二同号
+  NUM_S2_DS_SNN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div'
+  NUM_S2_DS_S11 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[1]'
+  NUM_S2_DS_S22 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[2]'
+  NUM_S2_DS_S33 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[3]'
+  NUM_S2_DS_S44 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[4]'
+  NUM_S2_DS_S55 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[5]'
+  NUM_S2_DS_S66 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[6]'
+  #二同号单选---标准选号---不同号
+  NUM_S2_DS_NN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div'
+  NUM_S2_DS_N1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[1]'
+  NUM_S2_DS_N2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[2]'
+  NUM_S2_DS_N3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[3]'
+  NUM_S2_DS_N4 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[4]'
+  NUM_S2_DS_N5 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[5]'
+  NUM_S2_DS_N6 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[6]'
+  
+  
+  #二同号单选---手动选号
+  NUM_S2_DH : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[2]'
+  
+  #二同号单选---手动选号---输入框
+  NUM_S2_DH_TEXT : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+  
+  #二同号复选---二同号复选
+  NUM_S2_FX : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div'
+  NUM_S2_FXN: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div'
+  #二同号单选---标准选号---二同号
+  NUM_S2_FX_SNNN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div'
+  NUM_S2_FX_S11* : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[1]'
+  NUM_S2_FX_S22* : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[2]'
+  NUM_S2_FX_S33* : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[3]'
+  NUM_S2_FX_S44* : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[4]'
+  NUM_S2_FX_S55* : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[5]'
+  NUM_S2_FX_S66* : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[6]'
+  
+  
+ 
+  
+  
+  #----------------------------------------------------------------------------------------------------------
+  #二不同号
+  NUM_N2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]'
+  
+  #二不同号---标准选号
+  NUM_N2_BZ   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div'
+  
+  NUM_N2_BZ_1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[1]'
+  NUM_N2_BZ_2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[2]'
+  NUM_N2_BZ_3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[3]'
+  NUM_N2_BZ_4 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[4]'
+  NUM_N2_BZ_5 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[5]'
+  NUM_N2_BZ_6 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[6]'
+  #二不同号---手动选号
+  NUM_N2_SD : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[2]' 
+  
+  NUM_N2_SD_TEXT : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea' 
+  
+  #二不同号---胆拖选号
+  NUM_N2_DT : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[3]'  
+  #二不同号---胆拖选号---胆码
+  NUM_N2_DT_DN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div'  
+  NUM_N2_DT_D1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[1]'  
+  NUM_N2_DT_D2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[1]'  
+  NUM_N2_DT_D3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[1]'  
+  NUM_N2_DT_D4 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[1]'  
+  NUM_N2_DT_D5 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[1]'  
+  NUM_N2_DT_D6 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[1]'  
+    
+  #二不同号---胆拖选号---拖码
+  NUM_N2_DT_TN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div'  
+  NUM_N2_DT_T1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[1]'  
+  NUM_N2_DT_T2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[1]'  
+  NUM_N2_DT_T3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[1]'  
+  NUM_N2_DT_T4 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[1]'  
+  NUM_N2_DT_T5 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[1]'  
+  NUM_N2_DT_T6 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[1]'  
+  
+  
+  #----------------------------------------------------------------------------------------------------------
+  #三不同号
+  NUM_N3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[3]'
+  #三不同号---标准选号
+  NUM_N3_BZ  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[1]'
+  NUM_N3_BZN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div'
+  
+  NUM_N3_BZ1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[1]'
+  NUM_N3_BZ2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[2]'
+  NUM_N3_BZ3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[3]'
+  NUM_N3_BZ4 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[4]'
+  NUM_N3_BZ5 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[5]'
+  NUM_N3_BZ6 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[6]'
+  
+  #三不同号---手动选号
+  NUM_N3_SD : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[2]'
+  #三不同号---手动选号---输入框
+  NUM_N3_SD_TEXT : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+  
+  
+  
+  #----------------------------------------------------------------------------------------------------------
+  #三同号
+  NUM_S3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[4]'
+  
+  #三同号--三同号单选
+  NUM_S3_D : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div'
+  
+  NUM_S3_DNNN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div'
+  NUM_S3_D111 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[1]'
+  NUM_S3_D222 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[2]'
+  NUM_S3_D333 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[2]'
+  NUM_S3_D444 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[4]'
+  NUM_S3_D555 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[5]'
+  NUM_S3_D666 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[6]'
+ 
+  
+  #三同号--三同号通选
+  NUM_S3_T : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div'
+  
+  NUM_S3_T111 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[1]'
+  
+ 
+
+ 
+  #----------------------------------------------------------------------------------------------------------
+  #三连号
+  NUM_L3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[5]'
+  #三连号---三连号通选
+  NUM_L3_TX   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div'
+  NUM_L3_TX111: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[1]'
+  
+  
+  
+  
+  #----------------------------------------------------------------------------------------------------------
+  #和值
+  NUM_HH : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[6]'
+  #大小单双
+  NUM_HH_DXDS : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[1]'
+  NUM_HH_DXDSN: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div'
+  
+  #大
+  NUM_HH_DXDSNN: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div'
+  NUM_HH_DXDS1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[1]'
+  #小
+  NUM_HH_DXDS2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[2]'
+  #单
+  NUM_HH_DXDS3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[3]'
+  #双
+  NUM_HH_DXDS4 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[4]'
+  
+  
+  #和值--和值
+  NUM_HH_HH : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[2]'
+  #和值3-18 
+  NUM_HH_NN: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div'
+  NUM_HH_03: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[1]'
+  NUM_HH_04: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[2]'
+  NUM_HH_05: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[3]'
+  NUM_HH_06: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[4]'
+  NUM_HH_07: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[5]'
+  NUM_HH_08: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[6]'
+  NUM_HH_09: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[7]'
+  NUM_HH_10: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[8]'
+  NUM_HH_11: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[9]'
+  NUM_HH_12: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[10]'
+  NUM_HH_13: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[11]'
+  NUM_HH_14: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[12]'
+  NUM_HH_15: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[13]'
+  NUM_HH_16: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[14]'
+  NUM_HH_17: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div[15]'
+  
+  NUM_HH_18: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div'
+  
+
+  
+
+
+  #点击添加注单按钮
+  ADDNOTE  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[3]/button'
+
+
+  #随机1注
+  RANDOM1  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[1]'
+  #随机5注
+  RANDOM5  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[2]'
+
+  #元
+  YUAN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[1]'
+  #角
+  JIAO : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[2]'
+  #分
+  FEN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[3]'
+
+  #单注金额
+  XIUGAI  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/input'
+
+
+
+  #全部删除
+  ALLDELETE: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[3]'
+
+  #确认投注
+  SUREBET  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[4]'
+
+
+
+  #请先添加投注内容
+  TIPS : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  
+  # 确定按钮
+  TIPSBUTTON : 'x,//*[@id="root"]/div/div[1]/div[2]/div[3]/div'
+
+  #请先添加投注内容
+  TIPS01 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #下注成功
+  TIPS02 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #您还没有选择号码或所选号码不全
+  TIPS03 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+  #是否删除全部注单？
+  TIPS04 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 

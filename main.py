@@ -3,6 +3,7 @@ from runner import Runner
 
 class Main(object):
     """
+
     自动化测试方案的唯一执行入口
     """
 

@@ -79,7 +79,6 @@ class RechargeCompanyTest(TestCase):
                     self.base_driver.click('x,//*[@id="main"]/div/section/div[2]/button')
                     self.base_driver.forced_wait(4)
 
-
                 # 关闭浏览器
         self.base_driver.quit()
         # 使用完csv文件后，关闭

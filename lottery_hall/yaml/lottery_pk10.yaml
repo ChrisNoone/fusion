@@ -1,0 +1,330 @@
+PLAN_PK10_LOTTERT:
+
+    # 北京PK10
+    # 今天开奖
+    # TODAY: 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span[1]'
+    MENU : 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span'
+
+    
+    # 双面统计
+    # DOUBLESIZE: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/div/div[1]'
+    IDLENUM01 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/div/div'
+ 
+    
+    # 名次出现次数
+    # CHUXIANCISHU: 'x,//*[@id="shuanmiandata"]/td[1]'
+    NUMS_APPEARA: 'x,//*[@id="shuanmiandata"]/td'
+    
+   
+    
+    # 冠亚龙虎
+    # GUANYALONGHU : 'x,//*[@id="gylhcs"]/td[2]'
+    GYLH_NUM : 'x,//*[@id="gylhcs"]/td'
+
+
+    # 期数
+    # NUMQISHU   : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr[2]/td[2]'
+    PERIODS_NUM: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr[/td[2]'
+   
+  
+    
+    # 时间
+    NUMQISHU: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr[2]/td[1]'
+    TIME_NUM: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[1]'
+    
+    
+    # 开奖号码
+    # NUM01N     : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr[2]/td[3]/span[1]'
+    LOTTERY_NUM00: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[3]/span[1]'
+    LOTTERY_NUM01: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[3]/span[2]'
+    LOTTERY_NUM02: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[3]/span[3]'   
+    LOTTERY_NUM03: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[3]/span[4]'
+    LOTTERY_NUM04: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[3]/span[5]'
+    LOTTERY_NUM05: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[3]/span[6]'
+    LOTTERY_NUM06: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[3]/span[7]'
+    LOTTERY_NUM07: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[3]/span[8]'
+    LOTTERY_NUM08: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[3]/span[9]'
+    LOTTERY_NUM09: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[3]/span[10]'
+   
+  
+    
+    
+    # 冠亚和---单双
+    # GUANYAHEDAN : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr[2]/td[5]'
+    GYH_DS_NUM: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[5]'
+  
+    # 冠亚和---大小
+    # GUANYAHEDAN : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr[2]/td[6]'
+    GYH_DX_NUM: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[6]'
+   
+    
+    # 1-5龙虎
+    #SUM_LH: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr[2]/td[7]'
+    GYH_LH_NUM00: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[7]'
+    GYH_LH_NUM01: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[8]'
+    GYH_LH_NUM02: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[9]'
+    GYH_LH_NUM03: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[10]'
+    GYH_LH_NUM04: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[5]/table/tbody/tr/td[11]'
+ 
+    # 数据统计---历史号码统计
+    # 日期
+    # HISTORY_DATA : 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span[6]'
+    HISTORY_NUM : 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span'
+   
+   
+   
+   
+    # ---------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    # 彩票大厅
+    # 走势图
+    #TREND: 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span[5]'
+    #MENU : 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span'
+    
+    # 冠亚和走势---冠亚和值
+    GYH_SUM_3 : 'x,//*[@id="chart"]/tr/td[2]'
+    GYH_SUM_4 : 'x,//*[@id="chart"]/tr/td[3]'
+    GYH_SUM_5 : 'x,//*[@id="chart"]/tr/td[4]'
+    GYH_SUM_6 : 'x,//*[@id="chart"]/tr/td[5]'
+    GYH_SUM_7 : 'x,//*[@id="chart"]/tr/td[6]'
+    GYH_SUM_8 : 'x,//*[@id="chart"]/tr/td[7]'
+    GYH_SUM_9 : 'x,//*[@id="chart"]/tr/td[8]'
+    GYH_SUM_10 : 'x,//*[@id="chart"]/tr/td[9]'
+    GYH_SUM_11 : 'x,//*[@id="chart"]/tr/td[10]'
+    GYH_SUM_12 : 'x,//*[@id="chart"]/tr/td[11]'
+    GYH_SUM_13 : 'x,//*[@id="chart"]/tr/td[12]'
+    GYH_SUM_14 : 'x,//*[@id="chart"]/tr/td[13]'
+    GYH_SUM_15 : 'x,//*[@id="chart"]/tr/td[14]'
+    GYH_SUM_16 : 'x,//*[@id="chart"]/tr/td[15]'
+    GYH_SUM_17 : 'x,//*[@id="chart"]/tr/td[16]'
+    GYH_SUM_18 : 'x,//*[@id="chart"]/tr/td[17]'
+    GYH_SUM_19 : 'x,//*[@id="chart"]/tr/td[18]'
+    
+    # 冠亚和走势---冠亚和尾
+    GYH_SUM_T_0 : 'x,//*[@id="chart"]/tr/td[19]'
+    GYH_SUM_T_1 : 'x,//*[@id="chart"]/tr/td[20]'
+    GYH_SUM_T_2 : 'x,//*[@id="chart"]/tr/td[21]'
+    GYH_SUM_T_3 : 'x,//*[@id="chart"]/tr/td[22]'
+    GYH_SUM_T_4 : 'x,//*[@id="chart"]/tr/td[23]'
+    GYH_SUM_T_5 : 'x,//*[@id="chart"]/tr/td[24]'
+    GYH_SUM_T_6 : 'x,//*[@id="chart"]/tr/td[25]'
+    GYH_SUM_T_7 : 'x,//*[@id="chart"]/tr/td[26]'
+    GYH_SUM_T_8 : 'x,//*[@id="chart"]/tr/td[27]'
+    GYH_SUM_T_9 : 'x,//*[@id="chart"]/tr/td[28]'
+    
+    
+    
+    
+    # -----------------------------------------------------------------------------------
+    
+    #定位走势
+    # TREND_POSITION: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/div/div/span[2]'
+    VIEWTREND : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/div/div/span'
+   
+    
+    # 标注选择
+    LABEL_SELECTION : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/div[1]'
+    BALL_SELECT : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div[3]/div'
+    
+    
+    # 期号
+    TREND_QH : 'x,//*[@id="trend_table2"]/tbody/tr/td[1]'
+   
+    
+    # 开奖号码--冠军
+    LOTTERY_NUM_0 : 'x,//*[@id="trend_table2"]/tbody/tr[1]/td[2]/span[1]'
+    LOTTERY_NUM : 'x,//*[@id="trend_table2"]/tbody/tr/td[2]/span[1]'
+  
+  
+   
+    
+    # 第一球0-9
+    TREND_BALL_1_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[3]'   
+    TREND_BALL_1_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[4]'
+    TREND_BALL_1_2 : 'x,//*[@id="trend_table2"]/tbody/tr/td[5]'
+    TREND_BALL_1_3 : 'x,//*[@id="trend_table2"]/tbody/tr/td[6]'
+    TREND_BALL_1_4 : 'x,//*[@id="trend_table2"]/tbody/tr/td[7]'
+    TREND_BALL_1_5 : 'x,//*[@id="trend_table2"]/tbody/tr/td[8]'
+    TREND_BALL_1_6 : 'x,//*[@id="trend_table2"]/tbody/tr/td[9]'
+    TREND_BALL_1_7 : 'x,//*[@id="trend_table2"]/tbody/tr/td[10]'
+    TREND_BALL_1_8 : 'x,//*[@id="trend_table2"]/tbody/tr/td[11]'
+    TREND_BALL_1_9 : 'x,//*[@id="trend_table2"]/tbody/tr/td[12]'
+   
+    
+    TREND_BALL_2_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[13]'
+    TREND_BALL_2_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[14]'
+    TREND_BALL_2_2 : 'x,//*[@id="trend_table2"]/tbody/tr/td[15]'
+    TREND_BALL_2_3 : 'x,//*[@id="trend_table2"]/tbody/tr/td[16]'
+    TREND_BALL_2_4 : 'x,//*[@id="trend_table2"]/tbody/tr/td[17]'
+    TREND_BALL_2_5 : 'x,//*[@id="trend_table2"]/tbody/tr/td[18]'
+    TREND_BALL_2_6 : 'x,//*[@id="trend_table2"]/tbody/tr/td[19]'
+    TREND_BALL_2_7 : 'x,//*[@id="trend_table2"]/tbody/tr/td[20]'
+    TREND_BALL_2_8 : 'x,//*[@id="trend_table2"]/tbody/tr/td[21]'
+    TREND_BALL_2_9 : 'x,//*[@id="trend_table2"]/tbody/tr/td[22]'
+    
+    
+    TREND_BALL_3_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[23]'
+    TREND_BALL_3_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[24]'
+    TREND_BALL_3_2 : 'x,//*[@id="trend_table2"]/tbody/tr/td[25]'
+    TREND_BALL_3_3 : 'x,//*[@id="trend_table2"]/tbody/tr/td[26]'
+    TREND_BALL_3_4 : 'x,//*[@id="trend_table2"]/tbody/tr/td[27]'
+    TREND_BALL_3_5 : 'x,//*[@id="trend_table2"]/tbody/tr/td[28]'
+    TREND_BALL_3_6 : 'x,//*[@id="trend_table2"]/tbody/tr/td[29]'
+    TREND_BALL_3_7 : 'x,//*[@id="trend_table2"]/tbody/tr/td[30]'
+    TREND_BALL_3_8 : 'x,//*[@id="trend_table2"]/tbody/tr/td[31]'
+    TREND_BALL_3_9 : 'x,//*[@id="trend_table2"]/tbody/tr/td[32]'
+    
+    
+    TREND_BALL_4_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[33]'
+    TREND_BALL_4_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[34]'
+    TREND_BALL_4_2 : 'x,//*[@id="trend_table2"]/tbody/tr/td[35]'
+    TREND_BALL_4_3 : 'x,//*[@id="trend_table2"]/tbody/tr/td[36]'
+    TREND_BALL_4_4 : 'x,//*[@id="trend_table2"]/tbody/tr/td[37]'
+    TREND_BALL_4_5 : 'x,//*[@id="trend_table2"]/tbody/tr/td[38]'
+    TREND_BALL_4_6 : 'x,//*[@id="trend_table2"]/tbody/tr/td[39]'
+    TREND_BALL_4_7 : 'x,//*[@id="trend_table2"]/tbody/tr/td[40]'
+    TREND_BALL_4_8 : 'x,//*[@id="trend_table2"]/tbody/tr/td[41]'
+    TREND_BALL_4_9 : 'x,//*[@id="trend_table2"]/tbody/tr/td[42]'
+    
+    
+    TREND_BALL_5_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[43]'
+    TREND_BALL_5_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[44]'
+    TREND_BALL_5_2 : 'x,//*[@id="trend_table2"]/tbody/tr/td[45]'
+    TREND_BALL_5_3 : 'x,//*[@id="trend_table2"]/tbody/tr/td[46]'
+    TREND_BALL_5_4 : 'x,//*[@id="trend_table2"]/tbody/tr/td[47]'
+    TREND_BALL_5_5 : 'x,//*[@id="trend_table2"]/tbody/tr/td[48]'
+    TREND_BALL_5_6 : 'x,//*[@id="trend_table2"]/tbody/tr/td[49]'
+    TREND_BALL_5_7 : 'x,//*[@id="trend_table2"]/tbody/tr/td[50]'
+    TREND_BALL_5_8 : 'x,//*[@id="trend_table2"]/tbody/tr/td[51]'
+    TREND_BALL_5_9 : 'x,//*[@id="trend_table2"]/tbody/tr/td[52]'
+    
+    
+  
+    
+    # 数据统计---第一球
+    DATA_BALL_1_0 : 'x,//*[@id="trend_table2"]/tbody/tr[33]/td[2]'
+    DATA_BALL_NUM : 'x,//*[@class="font14"]'
+    # 定位走势（数据统计）
+    DATA_BALL_NUM1 : 'x,//*[@id="trend_table2"]/tbody/tr[33]/td'
+    
+    # 90期
+    DATA_SELECT : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[2]/div/div[1]/div[1]/span'
+  
+    
+    
+    
+    
+    # 012路
+    #LU_0 : 'x,//*[@class="hot zero1"]'
+    LU_0 : 'x,//span[contains(@class,"hot zero1") and contains(@class, "yellowbg")]'
+    LU_1 : 'x,//*[@class="hot zero2"]'
+    LU_2 : 'x,//*[@class="hot zero3"]'
+   
+    
+   
+   
+    # ----------------------------------------------------------------------------------------------
+   
+    # 大小走势~单双走势
+    TREND_SIZE_1_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[2]'
+    
+    TREND_SIZE_DX: 'x,//*[@id="trend_table2"]/tbody/tr/td[1]'
+  
+    
+    # 第一位~第五位
+    DX_SIZE_0_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[2]'
+    DX_SIZE_0_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[3]'
+    DX_SIZE_1_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[4]'
+    DX_SIZE_1_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[5]'
+    DX_SIZE_2_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[6]'
+    DX_SIZE_2_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[7]'
+    DX_SIZE_3_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[8]'
+    DX_SIZE_3_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[9]'
+    DX_SIZE_4_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[10]'
+    DX_SIZE_4_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[11]'
+    DX_SIZE_5_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[12]'
+    DX_SIZE_5_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[13]'
+    DX_SIZE_6_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[14]'
+    DX_SIZE_6_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[15]'
+    DX_SIZE_7_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[16]'
+    DX_SIZE_7_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[17]'
+    DX_SIZE_8_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[18]'
+    DX_SIZE_8_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[19]'
+    DX_SIZE_9_0 : 'x,//*[@id="trend_table2"]/tbody/tr/td[20]'
+    DX_SIZE_9_1 : 'x,//*[@id="trend_table2"]/tbody/tr/td[21]'
+   
+    
+
+    # 数据统计---第一位~第三位
+    DX_SIZE_SUM : 'x,//*[@class="ng-binding ng-scope"]'
+    
+   
+   
+    
+    
+    
+    # ---------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    
+    # 站长推荐
+    # 稳赢杀号
+    WYKILLNUM: 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span'
+    
+    # 最近10期，最近20期，最近50期，最近100期
+    RECNET_PERIOD_10: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/span[1]'
+    RECNET_PERIOD   : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/span'
+  
+    # 冠军--亚军--第三球~第十球
+    NUMKILLNUM: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[2]/div'
+   
+    
+    # 期数
+    WYQISHU: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[1]'
+
+    # 开奖号码---等待抽奖
+    KJNUM : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table/tbody/tr[2]/td'
+    
+    #开奖号码
+    KJNUM00 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[1]'
+    KJNUM01 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[2]'
+    KJNUM02 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[3]'
+    KJNUM03 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[4]'
+    KJNUM04 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[5]'
+    KJNUM05 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[6]'
+    KJNUM06 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[7]'
+    KJNUM07 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[8]'
+    KJNUM08 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[9]'
+    KJNUM09 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[2]/span[10]'
+    
+    # 杀N
+    KILLNUM00 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[3]'   
+    KILLNUM01 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[5]'
+    KILLNUM02 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[7]'
+    KILLNUM03 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[9]'
+    KILLNUM04 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[11]'
+    
+    # 战绩
+    ZHANJINUM00 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[4]'
+    ZHANJINUM01 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[6]'
+    ZHANJINUM02 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[8]'
+    ZHANJINUM03 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[10]'
+    ZHANJINUM04 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table[1]/tbody/tr/td[12]'
+  
+  
+
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

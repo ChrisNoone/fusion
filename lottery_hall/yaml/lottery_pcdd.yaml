@@ -1,0 +1,108 @@
+PCDD_LUCKY:
+
+    # 幸运28
+    # 今天开奖
+    # TODAY: 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span[1]'
+    MENU : 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span'
+
+    # 期数
+    # NUMQISHU   : 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[2]'
+    PERIODS_NUM: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[2]'
+
+
+
+    # 时间
+    NUMQISHU: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[1]'
+    TIME_NUM: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[1]'
+
+
+    # 开奖号码
+    # NUM01N: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[3]/span[1]'
+    LOTTERY_NUM01: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[3]/span[1]'
+    LOTTERY_NUM02: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[3]/span[2]'
+    LOTTERY_NUM03: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[3]/span[3]'
+
+
+    # 总和
+    #SUM_SUM: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[4]'
+    SUM_SUM: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[4]'
+
+    # 总和--大小
+    # ZONGHEDAN : 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[5]'
+    SUM_DX_NUM: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[5]'
+
+    # 总和--单双
+    # ZONGHEDAN : 'x,//*[@id="jrsmhmtjTab"]/tbody/tr[2]/td[6]'
+    SUM_DS_NUM: 'x,//*[@id="jrsmhmtjTab"]/tbody/tr/td[6]'
+
+    
+   
+  
+   
+   
+   
+   
+   
+   
+    
+    
+    
+    # ---------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------
+    
+    # 站长推荐
+    # 稳赢杀号
+    WYKILLNUM: 'x,//*[@id="app"]/div/div[3]/div[2]/div[1]/span'
+    
+    # 最近10期，最近20期，最近50期，最近100期
+    RECNET_PERIOD_10: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/span[1]'
+    RECNET_PERIOD   : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[1]/span'
+  
+    # 万千百十个杀号
+    NUMKILLNUM: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/div'
+   
+    
+    # 期数
+    WYQISHU: 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[1]'
+   
+    # 开奖号码---等待抽奖
+    KJNUM : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[3]/table/tbody/tr[2]/td'
+    
+    #开奖号码
+    KJNUM00 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[2]/span[1]'
+    KJNUM01 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[2]/span[2]'
+    KJNUM02 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[2]/span[3]'
+    KJNUM03 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[2]/span[4]'
+    KJNUM04 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[2]/span[5]'
+    
+    # 杀N
+    KILLNUM00 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[3]'   
+    KILLNUM01 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[5]'
+    KILLNUM02 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[7]'
+    KILLNUM03 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[9]'
+    KILLNUM04 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[11]'
+    
+    # 战绩
+    ZHANJINUM00 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[4]'
+    ZHANJINUM01 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[6]'
+    ZHANJINUM02 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[8]'
+    ZHANJINUM03 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[10]'
+    ZHANJINUM04 : 'x,//*[@id="app"]/div/div[3]/div[2]/div[2]/div/div[4]/table[1]/tbody/tr/td[12]'
+  
+  
+
+    
+    
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

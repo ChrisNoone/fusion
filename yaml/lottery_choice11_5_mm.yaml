@@ -1,0 +1,217 @@
+Choice11_5_Mm :
+
+  #导行栏
+  MENU : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div'
+  #三码
+  MENU1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[1]'
+  
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #三码
+  #三码---前三直选---复式---0
+  CHQ3ZHIXFX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[1]'
+  CHQ3ZHIX  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div'
+   
+  #三码---前三直选---第一位---二位---三位
+  CHQ3ZHIX1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div'
+  CHQ3ZHIX2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div'
+  CHQ3ZHIX3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div'
+   
+  #三码---前三直选---全大小单双清
+  CHQ3ZHIX1WZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div'
+  CHQ3ZHIX2WZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div'
+  CHQ3ZHIX3WZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[3]/div'
+  
+  
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #三码---前三直选---输入框
+  # SP3ZHIX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[1]'
+  CHQ3ZHIXSTEXT: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+    
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #----------------------------------------------------------------------------------------------------- 
+  
+  #三码
+  #三码---前三组选---复式---0
+  CHQ3ZUXFX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div[1]'
+  CHQ3ZUX  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div'
+   
+  #三码---前三组选---第一位---二位---三位
+  CHQ3ZUX1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div'
+ 
+   
+  #三码---前三组选---全大小单双清
+  CHQ3ZUX1WZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[3]/div'
+  
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #三码---前三组选---输入框
+  # SP3ZUX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[1]'
+  CHQ3ZUXSTEXT: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+  
+  
+ 
+  
+  
+  #二码
+  #二码---前二直选---复式---0
+  CHQ2ZHIXFX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[1]'
+  CHQ2ZHIX  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div'
+   
+  #二码---前二直选---第一位---二位
+  CHQ2ZHIX1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div'
+  CHQ2ZHIX2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div'
+  
+  #二码---前二直选---全大小单双清
+  CHQ2ZHIX1WZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div'
+  CHQ2ZHIX2WZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div'
+ 
+  
+  
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #二码---前三直选---输入框
+  # SP3ZHIX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[1]'
+  CHQ2ZHIXSTEXT: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+    
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #----------------------------------------------------------------------------------------------------- 
+  
+  #二码
+  #二码---前二组选---复式---0
+  CHQ2ZUXFX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div[1]'
+  CHQ2ZUX  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div'
+   
+  #二码---前二组选---第一位
+  CHQ2ZUX1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div'
+ 
+   
+  #二码---前二组选---全大小单双清
+  CHQ2ZUX1WZ : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[3]/div'
+  
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #二码--前二组选---输入框
+  # SP3ZUX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div[1]'
+  CHQ2ZUXSTEXT: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  
+
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------------------------------
+  
+  #定位胆---第一位---二位---三位---四位---五为主
+  CHDWD1  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div'
+  CHDWD2  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div'
+  CHDWD3  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div'
+  CHDWD4  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[4]/div/div[2]/div'
+  CHDWD5  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[5]/div/div[2]/div'
+   
+  #三码---前三直选---全大小单双清
+  CHDWD1WZ: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div'
+  CHDWD2WZ: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div'
+  CHDWD3WZ: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[3]/div'
+  CHDWD4WZ: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[4]/div/div[3]/div'
+  CHDWD5WZ: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[5]/div/div[3]/div'
+  
+  
+  #任选复式 
+  CHRXFS: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div'
+  #任选单式
+  CHRXDANS: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div'
+  #任选单式---输入框
+  CHRXDANSTEXT: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea'
+  # 任选复式---清
+  CHRXFXWZ: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[3]/div'
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ #点击添加注单按钮
+  ADDNOTE: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[3]/button'
+
+
+  #随机1注
+  RANDOM1: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[1]'
+  #随机5注
+  RANDOM5: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[2]'
+
+  #元
+  YUAN: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[1]'
+  #角
+  JIAO: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[2]'
+  #分
+  FEN: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[3]'
+
+  #单注金额
+  XIUGAI: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/input'
+
+
+
+  #全部删除
+  ALLDELETE: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[3]'
+
+  #确认投注
+  SUREBET: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[4]'
+
+
+
+  #请先添加投注内容
+  TIPS: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+  #请先添加投注内容
+  TIPS01: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #下注成功
+  TIPS02: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #您还没有选择号码或所选号码不全
+  TIPS03: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+  #是否删除全部注单？
+  TIPS04: 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  
+  # 确定按钮
+  TIPSBUTTON : 'x,//*[@id="root"]/div/div[1]/div[2]/div[3]/div'
+

@@ -1,20 +1,30 @@
 import contextlib
 import csv
+import datetime
+import io
 import logging
+import os
 import smtplib
+import sys
 import time
+import unittest
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from enum import Enum, unique
+from this import i
 from unittest import TestCase as TC, SkipTest
 from unittest.case import _ShouldStop
 from unittest.suite import _DebugResult, _isnotsuite
+from xml.sax import saxutils
 
 import yaml
 from selenium import webdriver
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.remote.command import Command
+from selenium.webdriver.remote.webelement import getAttribute_js
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
@@ -34,20 +44,17 @@ class BoxDriver(object):
     """
     构造方法
     """
-    
-    
 
-    def __init__(self, browser_type=0, download_path="c:\\Users\\tester\\Downloads", by_char=",", profile=None):
+    def __init__(self, browser_type=0, download_path="c:\\Users\\tester\\Downloads", by_char=","):
         """
         构造方法：实例化 BoxDriver 时候使用
         :param browser_type: 浏览器类型
         :param by_char: 分隔符，默认使用","
-        :param profile:
-            可选择的参数，如果不传递，就是None
-            如果传递一个 profile，就会按照预先的设定启动火狐
-            去掉遮挡元素的提示框等
         """
+        self._actions = []
+
         self._by_char = by_char
+
         if browser_type == 0 or browser_type == Browser.Chrome:
 
             profile = webdriver.ChromeOptions()
@@ -62,10 +69,9 @@ class BoxDriver(object):
             driver = webdriver.Chrome(chrome_options=profile)
             # driver = webdriver.Chrome(executable_path='D:\\chromedriver.exe', chrome_options=options)
 
-
         elif browser_type == 1 or browser_type == Browser.Firefox:
             # if profile is not None:
-                # profile = FirefoxProfile(profile)
+            # profile = FirefoxProfile(profile)
 
             profile = webdriver.FirefoxProfile()
             # 指定下载路径
@@ -95,6 +101,7 @@ class BoxDriver(object):
                 'resetKeyboard': True
             }
             driver = webdriver_app.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
+
         else:
             driver = webdriver.PhantomJS()
         try:
@@ -241,6 +248,12 @@ class BoxDriver(object):
         """
         self._base_driver.maximize_window()
 
+    def set_window_size(self, m, n):
+        """
+        最大化当前浏览器的窗口
+        :return:
+        """
+        self._base_driver.set_window_size(m, n)
 
     def navigate(self, url):
         """
@@ -278,8 +291,6 @@ class BoxDriver(object):
         """
         self._base_driver.forward()
 
-
-
     """
     基本元素相关方法
     """
@@ -295,6 +306,30 @@ class BoxDriver(object):
         el.clear()
         el.send_keys(text)
 
+    def types(self, selector, text, n):
+        """
+        Operation input box.
+
+        Usage:
+        driver.type("i,el","selenium")
+        第几个输入
+        """
+        els = self._locate_elements(selector)
+        el = els[int(n)]
+        el.clear()
+        el.send_keys(text)
+
+    def clear(self, selector):
+        """
+        Operation input box.
+
+        Usage:
+        driver.type("i,el","selenium")
+        """
+        el = self._locate_element(selector)
+        el.clear()
+        el.send_keys()
+
     def click(self, selector):
         """
         It can click any text / image can be clicked
@@ -305,6 +340,53 @@ class BoxDriver(object):
         """
         el = self._locate_element(selector)
         el.click()
+
+    def clicks(self, selector, n):
+        """
+        数组里面点击一个
+        n 是第几个
+
+        """
+        els = self._locate_elements(selector)
+        el = els[int(n)]
+        el.click()
+
+    def clicks_by_text(self, selector, text):
+        """
+        捕捉文本点击
+        text 是文本V
+        """
+        # 定义一个元素
+        eles = self._locate_elements(selector)
+        # ele 遍历数组每个元素
+        for ele in eles:
+            if ele.text == text:
+                ele.click()
+
+    def clicks_by_index(self, selector, n):
+        """
+        点击一组元素中第几个
+        text 是文本V
+        """
+        # 定义一个元素
+        eles = self._locate_elements(selector)
+        # 列表中抽到对应的来点击
+        eles[n].click()
+
+    def clicks_mn(self, selector, m, n):
+        """
+        数组矩阵点击某个
+        It can click any text / image can be clicked
+        Connection, check box, radio buttons, and even drop-down box etc..
+
+        Usage:
+        driver.click("i,el")
+        """
+        # els0 = self._locate_elements(selector)
+        # e1 = str(m)
+        # e2 = str(n)
+        # e = els0[str(e1), str(e2)]
+        # e.click()
 
     def click_last_one(self, selector):
         # 点击倒数第一个
@@ -395,6 +477,44 @@ class BoxDriver(object):
             ActionChains(self._base_driver).move_to_element(el_target).perform()
             ActionChains(self._base_driver).release(el_target).perform()
 
+    def click_and_hold(self, on_element=None):
+        """
+        Holds down the left mouse button on an element.
+
+        :Args:
+         - on_element: The element to mouse down.
+           If None, clicks on current mouse position.
+
+        """
+        # 点击鼠标左键，不松开
+
+        if self._base_driver.w3c:
+            ActionBuilder(self._base_driver).pointer_action.click_and_hold(on_element)
+            ActionBuilder(self._base_driver).key_action.pause()
+            if on_element:
+                ActionBuilder(self._base_driver).key_action.pause()
+        else:
+            if on_element:
+                self.move_to_element(on_element)
+            self._actions.append(lambda: self._base_driver.execute(
+                Command.MOUSE_DOWN, {}))
+        return self
+
+    def move_to_element(self, to_element):
+        """
+        Moving the mouse to the middle of an element.
+
+        :Args:
+         - to_element: The WebElement to move to.
+        """
+        if self._base_driver.w3c:
+            ActionBuilder(self._base_driver).pointer_action.move_to(to_element)
+            ActionBuilder(self._base_driver).key_action.pause()
+        else:
+            self._actions.append(lambda: self._base_driver.execute(
+                Command.MOVE_TO, {'element': to_element.id}))
+        return self
+
     def lost_focus(self):
         """
         当前元素丢失焦点
@@ -416,6 +536,20 @@ class BoxDriver(object):
         """
         el = self._locate_element(selector)
         Select(el).select_by_index(index)
+
+    def select_and_click(self, selector, text, n):
+        """
+        It can click any text / image can be clicked
+        Connection, check box, radio buttons, and even drop-down box etc..
+
+        Usage:
+        driver.select_by_index("i,el")
+        """
+        # 选择第二个点击
+        el = self._locate_elements(selector)
+
+        # el = self._locate_element(selector)
+        Select(el[n]).select_by_visible_text(text)
 
     def get_selected_text(self, selector):
         """
@@ -450,12 +584,30 @@ class BoxDriver(object):
         Select(el).select_by_value(value)
 
     """
+    鼠标时间
+    
+    """
+
+    def drag_and_drop_by_offset(self, selector, xoffset, yoffset):
+        pass
+        """
+        按住源元素上的鼠标左键，然后移动到目标偏移量并释放鼠标按钮。
+        source: 按住鼠标的元素位置
+        xoffset: X轴的偏移量
+        yoffset: Y轴的偏移量
+        """
+
+    def perform(self):
+        pass
+
+    """
+    JavaScript 相关
     JavaScript 相关
     """
 
     def execute_js(self, script):
         """
-        Execute JavaScript scripts.
+        执行JS脚本
 
         Usage:
         driver.js("window.scrollTo(200,1000);")
@@ -485,14 +637,51 @@ class BoxDriver(object):
         el = self._locate_element(selector)
         return el.get_attribute(attribute)
 
+    def get_attribute_text(self, selector, attribute, n):
+        """
+        获取数组中对应第N条数据参数的值
+        Gets the value of an element attribute.
+m
+        Usage:
+        driver.get_attribute("i,el","type")
+        """
+        el = self._locate_elements(selector)
+        return el[n].get_attribute(attribute)
+
     def get_text(self, selector):
         """
         Get element text information.
+        获取元素文本信息
 
         Usage:
         driver.get_text("i,el")
         """
         el = self._locate_element(selector)
+        return el.text
+
+    def get_texts(self, selector, n):
+        """
+        Get element text information.
+        获取第n个文本信息
+
+        Usage:
+        driver.get_text("i,el")
+        """
+        el = self._locate_elements(selector)
+        return el[n].text
+
+    def get_text_change(self, selector, text):
+        """
+        获取某一不能清除的文本修改，先退格s
+        Get element text information.
+
+        Usage:
+        driver.get_text("i,el")
+
+        """
+        el = self._locate_element(selector)
+        el.clear()
+        el.send_keys("\b" + str(text))
         return el.text
 
     def get_displayed(self, selector):
@@ -506,12 +695,12 @@ class BoxDriver(object):
         return el.is_displayed()
 
     def get_exist(self, selector):
-        '''
+        """
         该方法用来确认元素是否存在，如果存在返回flag=true，否则返回false
         :param self:
         :param selector: 元素定位，如'id,account'
         :return: 布尔值
-        '''
+        """
         flag = True
         try:
             self._locate_element(selector)
@@ -520,24 +709,24 @@ class BoxDriver(object):
             flag = False
             return flag
 
-    def get_enabled(self,selector):
-        '''
+    def get_enabled(self, selector):
+        """
         判断页面元素是否可点击
         :param selector: 元素定位
         :return: 布尔值
-        '''
+        """
         if self._locate_element(selector).is_enabled():
             return True
         else:
             return False
 
     def get_title(self):
-        '''
+        """
         Get window title.
 
         Usage:
         driver.get_title()
-        '''
+        """
         return self._base_driver.title
 
     def get_url(self):
@@ -578,21 +767,21 @@ class BoxDriver(object):
     """
 
     def accept_alert(self):
-        '''
+        """
             Accept warning box.
 
             Usage:
             driver.accept_alert()
-            '''
+            """
         self._base_driver.switch_to.alert.accept()
 
     def dismiss_alert(self):
-        '''
+        """
         Dismisses the alert available.
 
         Usage:
         driver.dismissAlert()
-        '''
+        """
         self._base_driver.switch_to.alert.dismiss()
 
     def switch_to_parent_frame(self):
@@ -606,16 +795,14 @@ class BoxDriver(object):
         self._base_driver.switch_to.parent_frame()
 
     def switch_to_frame(self, selector):
-            """
+        """
             Switch to the specified frame.
 
             Usage:
             driver.switch_to_frame("i,el")
             """
-            el = self._locate_element(selector)
-            self._base_driver.switch_to.frame(el)
-
-
+        el = self._locate_element(selector)
+        self._base_driver.switch_to.frame(el)
 
     def switch_to_default(self):
         """
@@ -636,12 +823,12 @@ class BoxDriver(object):
             self._base_driver.switch_to.default_content()
 
     def open_new_window(self, selector):
-        '''
+        """
         Open the new window and switch the handle to the newly opened window.
 
         Usage:
         driver.open_new_window()
-        '''
+        """
         original_windows = self._base_driver.current_window_handle
         el = self._locate_element(selector)
         el.click()
@@ -651,11 +838,11 @@ class BoxDriver(object):
                 self._base_driver._switch_to.window(handle)
 
     def switch_to_window_by_index(self, index):
-        '''
+        """
         切换到新窗口
         :param index:需要切换到第几个窗口，从左往右数，数到第几个就是几
         :return:
-        '''
+        """
         all_handles = self._base_driver.window_handles
         num = index - 1
         print('frame')
@@ -671,11 +858,13 @@ class BoxDriver(object):
         driver = self._base_driver
         driver.save_screenshot(file_name)
 
-    def save_window_snapshot_by_io(self):
+    def save_window_snapshot_by_io(self, file_name):
         """
         保存截图为文件流
         :return:
         """
+        driver = self._base_driver
+        driver.save_screenshot(file_name)
         return self._base_driver.get_screenshot_as_base64()
 
     def save_element_snapshot_by_io(self, selector):
@@ -722,17 +911,18 @@ class BoxDriver(object):
         WebDriverWait(self._base_driver, seconds).until(expected_conditions.presence_of_element_located(locator))
 
     """上传"""
-    def upload_input(self,selector,file):
-        '''
+
+    def upload_input(self, selector, file):
+        """
         上传文件 （ 标签为 input 类型，此类型最常见，最简单）
         :param selector: 上传按钮定位
         :param file: 将要上传的文件（绝对路径）
         :return: 无
-        '''
+        """
         self._locate_element(selector).send_keys(file)
 
-    def upload_not_input(self,file,browser_type='Chrome'):
-        '''
+    def upload_not_input(self, file, browser_type='Chrome'):
+        """
         上传文件 （ 标签不是 input 类型，使用 win32gui,得先安装 pywin32 依赖包）
                                                 pip install pywin32
         :param browser_type: 浏览器类型（Chrome浏览器和Firefox浏览器的有区别）
@@ -740,38 +930,39 @@ class BoxDriver(object):
         单个文件：file1 = 'C:\\Users\\list_tuple_dict_test.py'
         同时上传多个文件：file2 = '"C:\\Users\\list_tuple_dict_test.py" "C:\\Users\\class_def.py"'
         :return: 无
-        '''
+        """
         # Chrome 浏览器是'打开'
         # 对话框
         # 下载个 Spy++ 工具，定位“打开”窗口，定位到窗口的类(L):#32770, '打开'为窗口标题
-        dialog = None
-        if browser_type == 'Chrome':
-            dialog = win32gui.FindWindow('#32770', u'打开')
-        elif browser_type == 'Firefox':
-            # Firefox 浏览器是'文件上传'
-            # 对话框
-            dialog = win32gui.FindWindow('#32770', u'文件上传')
-        ComboBoxEx32 = win32gui.FindWindowEx(dialog, 0, 'ComboBoxEx32', None)
-        ComboBox = win32gui.FindWindowEx(ComboBoxEx32, 0, 'ComboBox', None)
-        # 上面三句依次寻找对象，直到找到输入框Edit对象的句柄
-        Edit = win32gui.FindWindowEx(ComboBox, 0, 'Edit', None)
-        # 确定按钮Button
-        button = win32gui.FindWindowEx(dialog, 0, 'Button', None)
-        # 往输入框输入绝对地址
-        win32gui.SendMessage(Edit, win32con.WM_SETTEXT, None, file)
-        # 按button
-        win32gui.SendMessage(dialog, win32con.WM_COMMAND, 1, button)
+        # dialog = None
+        # if browser_type == 'Chrome':
+        #     dialog = win32gui.FindWindow('#32770', u'打开')
+        # elif browser_type == 'Firefox':
+        #     # Firefox 浏览器是'文件上传'
+        #     # 对话框
+        #     dialog = win32gui.FindWindow('#32770', u'文件上传')
+        # ComboBoxEx32 = win32gui.FindWindowEx(dialog, 0, 'ComboBoxEx32', None)
+        # ComboBox = win32gui.FindWindowEx(ComboBoxEx32, 0, 'ComboBox', None)
+        # # 上面三句依次寻找对象，直到找到输入框Edit对象的句柄
+        # Edit = win32gui.FindWindowEx(ComboBox, 0, 'Edit', None)
+        # # 确定按钮Button
+        # button = win32gui.FindWindowEx(dialog, 0, 'Button', None)
+        # # 往输入框输入绝对地址
+        # win32gui.SendMessage(Edit, win32con.WM_SETTEXT, None, file)
+        # # 按button
+        # win32gui.SendMessage(dialog, win32con.WM_COMMAND, 1, button)
         # 获取属性
         # print(upload.get_attribute('value'))
 
+        """
+        表单数据提交:
+            页面校验
+            数据库校验
+            某条记录选择，编辑，删除
+        """
 
-    """
-    表单数据提交:
-        页面校验
-        数据库校验
-        某条记录选择，编辑，删除
-    """
-    def del_edit_choose_the_row(self, selector_of_next_page, selector_of_trs_td, selector_of_del_edit_choose,expected_td_value):
+    def del_edit_choose_the_row(self, selector_of_next_page, selector_of_trs_td, selector_of_del_edit_choose,
+                                expected_td_value):
         """
         页面表单，选中/编辑/删除 指定内容的行（带多页翻页功能）
         :param selector_of_next_page: ‘下一页’定位，如：'l,下页'
@@ -800,17 +991,18 @@ class BoxDriver(object):
                         self.click(selector_of_del_edit_choose % (i + 1))
                 continue
         except Exception as e:
+            print(e)
             print('%s 操作成功！' % expected_td_value)
 
     def assert_new_record_exist_in_table(self, selector_of_next_page, selector_of_trs_td, expected_td_value):
-        '''
+        """
         此方法针对页面列表（带多页翻页功能），都可以判断新增记录是否添加成功！
         若新增成功，则返回 True 布尔值；否则返回 False 布尔值
         :param selector_of_next_page: "下一页"定位，如：
         :param selector_of_trs_td:所有行的某一列的定位，如： 'l,下页''x,/html/body/div/div[2]/div/div[1]/div/table/tbody//tr/td[2]'
         :param expected_td_value:期望的列内容,如：'华仔'
         :return: 布尔值
-        '''
+        """
         # first_count_per_page = self.count_elements(selector_of_real_record)
         # print('当前设置为每页显示 %s 条记录' % first_count_per_page)
         real_records = self.get_text_list(selector_of_trs_td)
@@ -832,6 +1024,7 @@ class BoxDriver(object):
                         return True
                 continue
         except Exception as e:
+            print(e)
             # count_page_real_show = count_per_page_whiles + first_count_per_page
             # print("页面实际显示记录条数：%s" % count_page_real_show)
             # 页面统计总数 VS 页面实际显示记录总数
@@ -842,8 +1035,9 @@ class BoxDriver(object):
             print("页面表单中无此数据，原因：(1)请查询待验证的数据是否输入正确？(2)或者'下页'翻页定位是否正确？")
             return False
 
-    def assert_new_record_exist_mysql(self, db_yaml_path, db_yaml_name,sql_file_path, select_field_num,expected_td_value):
-        '''
+    def assert_new_record_exist_mysql(self, db_yaml_path, db_yaml_name, sql_file_path, select_field_num,
+                                      expected_td_value):
+        """
         数据库校验，True为数据库中存在该数据
         :param db_yaml_path: 数据库的yaml格式的配置文件路径
         :param db_yaml_name: 数据库的yaml格式的配置文件中设置的数据库名（默认是在'DbConfig'下面）
@@ -851,7 +1045,7 @@ class BoxDriver(object):
         :param select_field_num: 查询语句中第几个字段（默认0表示第1个字段）
         :param expected_td_value: 期望要断言的值
         :return: True / False
-        '''
+        """
         ydata = YamlHelper().get_config_dict(db_yaml_path)
         host = ydata['DbConfig'][db_yaml_name]['host']
         port = ydata['DbConfig'][db_yaml_name]['port']
@@ -867,8 +1061,10 @@ class BoxDriver(object):
             for i in result:
                 if i[select_field_num] == expected_td_value:
                     return True
-        except Exception:
+        except Exception as e:
+            print(e)
             return False
+
 
 class BasePage(object):
     """
@@ -883,9 +1079,61 @@ class BasePage(object):
         构造方法
         :param driver: 指定了参数类型，BoxDriver
         """
-        self.base_driver = driver
+        # cur_path = os.path.dirname(os.path.realpath(__file__))
+        # self.file_name = os.path.join(os.path.dirname(cur_path),'logs')
+        # self.logger = logging.getLogger()
+        # self.logger.setLevel(logging.DEBUG)
+        # # 日志输出格式
+        # self.formatter = logging.Formatter('[%(asctime)s]-[%(filename)s]-[%(levelname)s]: %(message)s')
 
+        if logger is not None:
+            self.logger = TestLogger(logger)
+        else:
+            test_time = time.strftime("%Y%m%d_%H%M%S", time.localtime())
+            self.logger = TestLogger("test_log_%s.log" % test_time)
+
+        self.base_driver = driver
         self.logger = logger
+
+        self._actions = []
+        if self.base_driver:
+            self.w3c_actions = ActionBuilder(driver)
+
+    # def infos(self, message):
+    #     """
+    #     添加信息日志
+    #     :param message:
+    #     :return:
+    #     """
+    #     self.logger("info", message)
+    #
+    # def logger(self, level, message):
+    #     # 创建一个FileHandler，用于写到本地
+    #     fh = logging.FileHandler(self.file_name, 'a', encoding='utf8')
+    #     fh.setLevel(logging.DEBUG)
+    #     fh.setFormatter(self.formatter)
+    #     self.logger.addHandler(fh)
+    #
+    #     # 创建一个SteamHandler,用于输出到控制台
+    #     ch = logging.StreamHandler(sys.stdout)
+    #     ch.setLevel(logging.DEBUG)
+    #     ch.setFormatter(self.formatter)
+    #
+    #     self.logger.addHandler(ch)
+    #     if level == 'info':
+    #         self.logger.info(message)
+    #     elif level == 'debug':
+    #         self.logger.debug(message)
+    #     elif level == 'warning':
+    #         self.logger.warning(message)
+    #     elif level == 'error':
+    #         self.logger.error(message)
+    #     elif level == 'example':
+    #         self.logger.error(message)
+    #     # 这两行代码为了避免日志输出重复
+    #     self.logger.removeHandler(ch)
+    #     self.logger.removeHandler(fh)
+    #     fh.close()
 
     def open(self, url):
         """
@@ -906,9 +1154,37 @@ class BasePage(object):
         if self.logger is not None:
             self.logger.info(msg)
 
+    def logs(self, msg):
+        """
+        记录日志
+        :param msg:
+        :return:
+        """
+        if self.logger is not None:
+            self.logger.info(msg)
+
+    def example(self, msg):
+        """
+        记录日志
+        :param msg:
+        :return:
+        """
+        if self.logger is None:
+            self.logger.info(msg)
+        return
+
+    def info(self, message):
+        """
+        添加信息日志
+        :param message:
+        :return:
+        """
+        self.logger("info", message)
+
+
 class CsvHelper(object):
 
-    def read_data(self, f,encoding="utf-8-sig"):
+    def read_data(self, f, encoding="utf-8-sig"):
         """
         读csv文件作为普通list
         :param f:
@@ -935,6 +1211,7 @@ class CsvHelper(object):
                 data_ret.append(row)
 
         return data_ret
+
 
 class DbHelper(object):
     """
@@ -967,9 +1244,9 @@ class DbHelper(object):
         :param database: 选择的数据库
         :param charset: 字符集
         """
-        self.connect = pymysql.connect(host=host, port=port,
-                                       user=user, password=password,
-                                       db=database, charset=charset)
+        # self.connect = pymysql.connect(host=host, port=port,
+        #                                user=user, password=password,
+        #                                db=database, charset=charset)
 
     def read_sql(self, file, encoding="utf8"):
         """
@@ -1009,6 +1286,7 @@ class DbHelper(object):
         """
         self.connect.close()
 
+
 class YamlHelper(object):
 
     def get_config_dict(self, f):
@@ -1021,11 +1299,12 @@ class YamlHelper(object):
             config_dict = yaml.load(file_config.read())
             return config_dict
 
+
 class Email(object):
 
-    def email_attachment(self,report_file):
-        '''配置发送附件测试报告到邮箱'''
-        '''发件相关参数'''
+    def email_attachment(self, report_file):
+        ''' 配置发送附件测试报告到邮箱 '''
+        ''' 发件相关参数 '''
         try:
             # 发件服务器
             smtpserver = 'smtp.163.com'
@@ -1069,6 +1348,7 @@ class Email(object):
             print(e)
             print("邮件发送失败!")
 
+
 @unique
 class Browser(Enum):
     """
@@ -1078,7 +1358,9 @@ class Browser(Enum):
     Firefox = 1
     Ie = 2
 
+
 class TestLogger:
+
     def __init__(self, log_path):
         # log_path：日志存放路径
         # 文件命名
@@ -1113,6 +1395,14 @@ class TestLogger:
         """
         self._console("error", message)
 
+    def example(self, message):
+        """
+        运行用例日志信息
+        :param message:
+        :return:
+        """
+        self._console("example", message)
+
     def _console(self, level, message):
         # 创建一个FileHandler，用于写到本地
         fh = logging.FileHandler(self.file_name, 'a', encoding='utf8')
@@ -1134,13 +1424,16 @@ class TestLogger:
             self.logger.warning(message)
         elif level == 'error':
             self.logger.error(message)
-
+        elif level == 'example':
+            self.logger.error(message)
         # 这两行代码为了避免日志输出重复
         self.logger.removeHandler(ch)
         self.logger.removeHandler(fh)
         fh.close()
 
+
 # TODO：参数化
+
 '''
 参数化 :
     paramunittest
@@ -1275,6 +1568,7 @@ class TestCase(TC):
             self.logger.info(msg)
 
     def read_csv_as_dict(self, file_name):
+
         """
         读 CSV 作为 DICT 类型
         :type file_name: csv 文件路径 和名字
@@ -1294,6 +1588,7 @@ class TestCase(TC):
         # 用[1]报错，数组超出界限，报告是空的，改为[0]就可以了
         # return doc and doc.split("\n")[0].strip() or None
 
+
 class _Outcome(object):
     def __init__(self, result=None):
         self.expecting_failure = False
@@ -1306,6 +1601,7 @@ class _Outcome(object):
 
     @contextlib.contextmanager
     def testPartExecutor(self, test_case, isTest=False):
+
         old_success = self.success
         self.success = True
         try:
@@ -1334,6 +1630,7 @@ class _Outcome(object):
                 self.errors.append((test_case, None))
         finally:
             self.success = self.success and old_success
+
 
 """
 A TestRunner for use with the Python unit testing framework. It generates a HTML report to show the result at a glance.
@@ -1402,11 +1699,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 __author__ = "Wai Yip Tung && Eason Han"
 __version__ = "0.8.4"
 
-import datetime
-import io
-import sys
-import unittest
-from xml.sax import saxutils
+
+# import datetime
+# import io
+# import sys
+# import unittest
+# from xml.sax import saxutils
 
 
 def to_unicode(s):
@@ -1415,6 +1713,7 @@ def to_unicode(s):
     except UnicodeDecodeError:
         # s is non ascii byte string
         return s.decode('unicode_escape')
+
 
 class OutputRedirect(object):
     """ Wrapper to redirect stdout or stderr """
@@ -1432,11 +1731,14 @@ class OutputRedirect(object):
     def flush(self):
         self.fp.flush()
 
+
 stdout_redirect = OutputRedirect(sys.stdout)
 stderr_redirect = OutputRedirect(sys.stderr)
 
+
 # ----------------------------------------------------------------------
 # Template
+
 
 class _TemplateReport(object):
     """
@@ -1482,6 +1784,7 @@ class _TemplateReport(object):
         0: 'pass',
         1: 'fail',
         2: 'error',
+        # 3: 'passrate',
     }
 
     DEFAULT_TITLE = 'Unit Test Report'
@@ -1566,6 +1869,7 @@ function showClassDetail(cid, count) {
         }
     }
 }
+
 
 
 function showTestDetail(div_id){
@@ -1658,6 +1962,7 @@ function showOutput(id, name) {
     d.close();
 }
 */
+
 --></script>
 
 <div class="container">
@@ -1681,19 +1986,18 @@ function showOutput(id, name) {
 <style type="text/css" media="screen">
 
 .img{
-	height: 100%;
-	border-collapse: collapse;
+    height: 100%;
+    border-collapse: collapse;
     border: 2px solid #777;
 }
-
 .screenshots {
     z-index: 100;
-	position:absolute;
-	height: 80%;
+    position:absolute;
+    height: 80%;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-	display: none;
+    display: none;
 }
 
 .imgyuan{
@@ -1718,7 +2022,7 @@ function showOutput(id, name) {
     background-color: white;
 }
 .close_shots {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAYAAAA8AXHiAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXXPues852zzwfACAyWSDNRNYAMqUIeEeCDx8TG4eQuQIEKJHAAEAizZCFz/SMBAPh+PDwrIsAHvgABeNMLCADATZvAMByH/w/qQplcAYCEAcB0kThLCIAUAEB6jkKmAEBGAYCdmCZTAKAEAGDLY2LjAFAtAGAnf+bTAICd+Jl7AQBblCEVAaCRACATZYhEAGg7AKzPVopFAFgwABRmS8Q5ANgtADBJV2ZIALC3AMDOEAuyAAgMADBRiIUpAAR7AGDIIyN4AISZABRG8lc88SuuEOcqAAB4mbI8uSQ5RYFbCC1xB1dXLh4ozkkXKxQ2YQJhmkAuwnmZGTKBNA/g88wAAKCRFRHgg/P9eM4Ors7ONo62Dl8t6r8G/yJiYuP+5c+rcEAAAOF0ftH+LC+zGoA7BoBt/qIl7gRoXgugdfeLZrIPQLUAoOnaV/Nw+H48PEWhkLnZ2eXk5NhKxEJbYcpXff5nwl/AV/1s+X48/Pf14L7iJIEyXYFHBPjgwsz0TKUcz5IJhGLc5o9H/LcL//wd0yLESWK5WCoU41EScY5EmozzMqUiiUKSKcUl0v9k4t8s+wM+3zUAsGo+AXuRLahdYwP2SycQWHTA4vcAAPK7b8HUKAgDgGiD4c93/+8//UegJQCAZkmScQAAXkQkLlTKsz/HCAAARKCBKrBBG/TBGCzABhzBBdzBC/xgNoRCJMTCQhBCCmSAHHJgKayCQiiGzbAdKmAv1EAdNMBRaIaTcA4uwlW4Dj1wD/phCJ7BKLyBCQRByAgTYSHaiAFiilgjjggXmYX4IcFIBBKLJCDJiBRRIkuRNUgxUopUIFVIHfI9cgI5h1xGupE7yAAygvyGvEcxlIGyUT3UDLVDuag3GoRGogvQZHQxmo8WoJvQcrQaPYw2oefQq2gP2o8+Q8cwwOgYBzPEbDAuxsNCsTgsCZNjy7EirAyrxhqwVqwDu4n1Y8+xdwQSgUXACTYEd0IgYR5BSFhMWE7YSKggHCQ0EdoJNwkDhFHCJyKTqEu0JroR+cQYYjIxh1hILCPWEo8TLxB7iEPENyQSiUMyJ7mQAkmxpFTSEtJG0m5SI+ksqZs0SBojk8naZGuyBzmULCAryIXkneTD5DPkG+Qh8lsKnWJAcaT4U+IoUspqShnlEOU05QZlmDJBVaOaUt2ooVQRNY9aQq2htlKvUYeoEzR1mjnNgxZJS6WtopXTGmgXaPdpr+h0uhHdlR5Ol9BX0svpR+iX6AP0dwwNhhWDx4hnKBmbGAcYZxl3GK+YTKYZ04sZx1QwNzHrmOeZD5lvVVgqtip8FZHKCpVKlSaVGyovVKmqpqreqgtV81XLVI+pXlN9rkZVM1PjqQnUlqtVqp1Q61MbU2epO6iHqmeob1Q/pH5Z/YkGWcNMw09DpFGgsV/jvMYgC2MZs3gsIWsNq4Z1gTXEJrHN2Xx2KruY/R27iz2qqaE5QzNKM1ezUvOUZj8H45hx+Jx0TgnnKKeX836K3hTvKeIpG6Y0TLkxZVxrqpaXllirSKtRq0frvTau7aedpr1Fu1n7gQ5Bx0onXCdHZ4/OBZ3nU9lT3acKpxZNPTr1ri6qa6UbobtEd79up+6Ynr5egJ5Mb6feeb3n+hx9L/1U/W36p/VHDFgGswwkBtsMzhg8xTVxbzwdL8fb8VFDXcNAQ6VhlWGX4YSRudE8o9VGjUYPjGnGXOMk423GbcajJgYmISZLTepN7ppSTbmmKaY7TDtMx83MzaLN1pk1mz0x1zLnm+eb15vft2BaeFostqi2uGVJsuRaplnutrxuhVo5WaVYVVpds0atna0l1rutu6cRp7lOk06rntZnw7Dxtsm2qbcZsOXYBtuutm22fWFnYhdnt8Wuw+6TvZN9un2N/T0HDYfZDqsdWh1+c7RyFDpWOt6azpzuP33F9JbpL2dYzxDP2DPjthPLKcRpnVOb00dnF2e5c4PziIuJS4LLLpc+Lpsbxt3IveRKdPVxXeF60vWdm7Obwu2o26/uNu5p7ofcn8w0nymeWTNz0MPIQ+BR5dE/C5+VMGvfrH5PQ0+BZ7XnIy9jL5FXrdewt6V3qvdh7xc+9j5yn+M+4zw33jLeWV/MN8C3yLfLT8Nvnl+F30N/I/9k/3r/0QCngCUBZwOJgUGBWwL7+Hp8Ib+OPzrbZfay2e1BjKC5QRVBj4KtguXBrSFoyOyQrSH355jOkc5pDoVQfujW0Adh5mGLw34MJ4WHhVeGP45wiFga0TGXNXfR3ENz30T6RJZE3ptnMU85ry1KNSo+qi5qPNo3ujS6P8YuZlnM1VidWElsSxw5LiquNm5svt/87fOH4p3iC+N7F5gvyF1weaHOwvSFpxapLhIsOpZATIhOOJTwQRAqqBaMJfITdyWOCnnCHcJnIi/RNtGI2ENcKh5O8kgqTXqS7JG8NXkkxTOlLOW5hCepkLxMDUzdmzqeFpp2IG0yPTq9MYOSkZBxQqohTZO2Z+pn5mZ2y6xlhbL+xW6Lty8elQfJa7OQrAVZLQq2QqboVFoo1yoHsmdlV2a/zYnKOZarnivN7cyzytuQN5zvn//tEsIS4ZK2pYZLVy0dWOa9rGo5sjxxedsK4xUFK4ZWBqw8uIq2Km3VT6vtV5eufr0mek1rgV7ByoLBtQFr6wtVCuWFfevc1+1dT1gvWd+1YfqGnRs+FYmKrhTbF5cVf9go3HjlG4dvyr+Z3JS0qavEuWTPZtJm6ebeLZ5bDpaql+aXDm4N2dq0Dd9WtO319kXbL5fNKNu7g7ZDuaO/PLi8ZafJzs07P1SkVPRU+lQ27tLdtWHX+G7R7ht7vPY07NXbW7z3/T7JvttVAVVN1WbVZftJ+7P3P66Jqun4lvttXa1ObXHtxwPSA/0HIw6217nU1R3SPVRSj9Yr60cOxx++/p3vdy0NNg1VjZzG4iNwRHnk6fcJ3/ceDTradox7rOEH0x92HWcdL2pCmvKaRptTmvtbYlu6T8w+0dbq3nr8R9sfD5w0PFl5SvNUyWna6YLTk2fyz4ydlZ19fi753GDborZ752PO32oPb++6EHTh0kX/i+c7vDvOXPK4dPKy2+UTV7hXmq86X23qdOo8/pPTT8e7nLuarrlca7nuer21e2b36RueN87d9L158Rb/1tWeOT3dvfN6b/fF9/XfFt1+cif9zsu72Xcn7q28T7xf9EDtQdlD3YfVP1v+3Njv3H9qwHeg89HcR/cGhYPP/pH1jw9DBY+Zj8uGDYbrnjg+OTniP3L96fynQ89kzyaeF/6i/suuFxYvfvjV69fO0ZjRoZfyl5O/bXyl/erA6xmv28bCxh6+yXgzMV70VvvtwXfcdx3vo98PT+R8IH8o/2j5sfVT0Kf7kxmTk/8EA5jz/GMzLdsAAD+3aVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/Pgo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjYtYzA2NyA3OS4xNTc3NDcsIDIwMTUvMDMvMzAtMjM6NDA6NDIgICAgICAgICI+CiAgIDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+CiAgICAgIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICAgICAgICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgICAgICAgICB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIgogICAgICAgICAgICB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIKICAgICAgICAgICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICAgICAgICAgICB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPHhtcE1NOkRvY3VtZW50SUQ+YWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjk4NDVkYzlhLTM2NTEtMTFlOC1hMDRjLWMzZmRjNzFmNjFkZDwveG1wTU06RG9jdW1lbnRJRD4KICAgICAgICAgPHhtcE1NOkluc3RhbmNlSUQ+eG1wLmlpZDo3YzQ4OTMyZS0wM2FjLTIxNDctYTJiZi1iNmViOWU4ZDY2Y2Q8L3htcE1NOkluc3RhbmNlSUQ+CiAgICAgICAgIDx4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ+MEIzOTNDRjk1RDQ0RDlGMDNFQjEzQkZEQ0UxRDA5MjM8L3htcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD4KICAgICAgICAgPHhtcE1NOkhpc3Rvcnk+CiAgICAgICAgICAgIDxyZGY6U2VxPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmFjdGlvbj5zYXZlZDwvc3RFdnQ6YWN0aW9uPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6aW5zdGFuY2VJRD54bXAuaWlkOmQ0ZjMzNDFjLTRkYjctZjc0YS1iZTAxLWYxMGEwMzNhNjg4ZDwvc3RFdnQ6aW5zdGFuY2VJRD4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OndoZW4+MjAxOC0wNC0wMlQxNjo0MToxMCswODowMDwvc3RFdnQ6d2hlbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OnNvZnR3YXJlQWdlbnQ+QWRvYmUgUGhvdG9zaG9wIEVsZW1lbnRzIDE0LjAgKFdpbmRvd3MpPC9zdEV2dDpzb2Z0d2FyZUFnZW50PgogICAgICAgICAgICAgICAgICA8c3RFdnQ6Y2hhbmdlZD4vPC9zdEV2dDpjaGFuZ2VkPgogICAgICAgICAgICAgICA8L3JkZjpsaT4KICAgICAgICAgICAgICAgPHJkZjpsaSByZGY6cGFyc2VUeXBlPSJSZXNvdXJjZSI+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDphY3Rpb24+Y29udmVydGVkPC9zdEV2dDphY3Rpb24+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpwYXJhbWV0ZXJzPmZyb20gaW1hZ2UvanBlZyB0byBpbWFnZS9wbmc8L3N0RXZ0OnBhcmFtZXRlcnM+CiAgICAgICAgICAgICAgIDwvcmRmOmxpPgogICAgICAgICAgICAgICA8cmRmOmxpIHJkZjpwYXJzZVR5cGU9IlJlc291cmNlIj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmFjdGlvbj5kZXJpdmVkPC9zdEV2dDphY3Rpb24+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpwYXJhbWV0ZXJzPmNvbnZlcnRlZCBmcm9tIGltYWdlL2pwZWcgdG8gaW1hZ2UvcG5nPC9zdEV2dDpwYXJhbWV0ZXJzPgogICAgICAgICAgICAgICA8L3JkZjpsaT4KICAgICAgICAgICAgICAgPHJkZjpsaSByZGY6cGFyc2VUeXBlPSJSZXNvdXJjZSI+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDphY3Rpb24+c2F2ZWQ8L3N0RXZ0OmFjdGlvbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0Omluc3RhbmNlSUQ+eG1wLmlpZDo3YzQ4OTMyZS0wM2FjLTIxNDctYTJiZi1iNmViOWU4ZDY2Y2Q8L3N0RXZ0Omluc3RhbmNlSUQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDp3aGVuPjIwMTgtMDQtMDJUMTY6NDE6MTArMDg6MDA8L3N0RXZ0OndoZW4+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpzb2Z0d2FyZUFnZW50PkFkb2JlIFBob3Rvc2hvcCBFbGVtZW50cyAxNC4wIChXaW5kb3dzKTwvc3RFdnQ6c29mdHdhcmVBZ2VudD4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmNoYW5nZWQ+Lzwvc3RFdnQ6Y2hhbmdlZD4KICAgICAgICAgICAgICAgPC9yZGY6bGk+CiAgICAgICAgICAgIDwvcmRmOlNlcT4KICAgICAgICAgPC94bXBNTTpIaXN0b3J5PgogICAgICAgICA8eG1wTU06RGVyaXZlZEZyb20gcmRmOnBhcnNlVHlwZT0iUmVzb3VyY2UiPgogICAgICAgICAgICA8c3RSZWY6aW5zdGFuY2VJRD54bXAuaWlkOmQ0ZjMzNDFjLTRkYjctZjc0YS1iZTAxLWYxMGEwMzNhNjg4ZDwvc3RSZWY6aW5zdGFuY2VJRD4KICAgICAgICAgICAgPHN0UmVmOmRvY3VtZW50SUQ+MEIzOTNDRjk1RDQ0RDlGMDNFQjEzQkZEQ0UxRDA5MjM8L3N0UmVmOmRvY3VtZW50SUQ+CiAgICAgICAgICAgIDxzdFJlZjpvcmlnaW5hbERvY3VtZW50SUQ+MEIzOTNDRjk1RDQ0RDlGMDNFQjEzQkZEQ0UxRDA5MjM8L3N0UmVmOm9yaWdpbmFsRG9jdW1lbnRJRD4KICAgICAgICAgPC94bXBNTTpEZXJpdmVkRnJvbT4KICAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9wbmc8L2RjOmZvcm1hdD4KICAgICAgICAgPHBob3Rvc2hvcDpDb2xvck1vZGU+MzwvcGhvdG9zaG9wOkNvbG9yTW9kZT4KICAgICAgICAgPHBob3Rvc2hvcDpJQ0NQcm9maWxlPnNSR0IgSUVDNjE5NjYtMi4xPC9waG90b3Nob3A6SUNDUHJvZmlsZT4KICAgICAgICAgPHhtcDpDcmVhdGVEYXRlPjIwMTgtMDQtMDJUMTY6MjM6NTUrMDg6MDA8L3htcDpDcmVhdGVEYXRlPgogICAgICAgICA8eG1wOk1vZGlmeURhdGU+MjAxOC0wNC0wMlQxNjo0MToxMCswODowMDwveG1wOk1vZGlmeURhdGU+CiAgICAgICAgIDx4bXA6TWV0YWRhdGFEYXRlPjIwMTgtMDQtMDJUMTY6NDE6MTArMDg6MDA8L3htcDpNZXRhZGF0YURhdGU+CiAgICAgICAgIDx4bXA6Q3JlYXRvclRvb2w+QWRvYmUgUGhvdG9zaG9wIEVsZW1lbnRzIDE0LjAgKFdpbmRvd3MpPC94bXA6Q3JlYXRvclRvb2w+CiAgICAgICAgIDx0aWZmOkltYWdlV2lkdGg+MjU0PC90aWZmOkltYWdlV2lkdGg+CiAgICAgICAgIDx0aWZmOkltYWdlTGVuZ3RoPjI1NDwvdGlmZjpJbWFnZUxlbmd0aD4KICAgICAgICAgPHRpZmY6Qml0c1BlclNhbXBsZT4KICAgICAgICAgICAgPHJkZjpTZXE+CiAgICAgICAgICAgICAgIDxyZGY6bGk+ODwvcmRmOmxpPgogICAgICAgICAgICAgICA8cmRmOmxpPjg8L3JkZjpsaT4KICAgICAgICAgICAgICAgPHJkZjpsaT44PC9yZGY6bGk+CiAgICAgICAgICAgIDwvcmRmOlNlcT4KICAgICAgICAgPC90aWZmOkJpdHNQZXJTYW1wbGU+CiAgICAgICAgIDx0aWZmOlBob3RvbWV0cmljSW50ZXJwcmV0YXRpb24+MjwvdGlmZjpQaG90b21ldHJpY0ludGVycHJldGF0aW9uPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICAgICA8dGlmZjpTYW1wbGVzUGVyUGl4ZWw+MzwvdGlmZjpTYW1wbGVzUGVyUGl4ZWw+CiAgICAgICAgIDx0aWZmOlhSZXNvbHV0aW9uPjcyMDAwMC8xMDAwMDwvdGlmZjpYUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6WVJlc29sdXRpb24+NzIwMDAwLzEwMDAwPC90aWZmOllSZXNvbHV0aW9uPgogICAgICAgICA8dGlmZjpSZXNvbHV0aW9uVW5pdD4yPC90aWZmOlJlc29sdXRpb25Vbml0PgogICAgICAgICA8ZXhpZjpFeGlmVmVyc2lvbj4wMjIxPC9leGlmOkV4aWZWZXJzaW9uPgogICAgICAgICA8ZXhpZjpDb2xvclNwYWNlPjE8L2V4aWY6Q29sb3JTcGFjZT4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjE1MDwvZXhpZjpQaXhlbFhEaW1lbnNpb24+CiAgICAgICAgIDxleGlmOlBpeGVsWURpbWVuc2lvbj4xNTA8L2V4aWY6UGl4ZWxZRGltZW5zaW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/Pu2egpoAAAAgY0hSTQAAeiUAAICDAAD5/wAAgOkAAHUwAADqYAAAOpgAABdvkl/FRgAATH9JREFUeNrsvXecHNd1Jvqde2+lDtMTMYNBBgEQgQBIkARJgDkomrJkW1a2ZdkKKwet465lv5Vl++3bfSu9nzd4HVfRFJUlizYVKAYxZ4JEznmQJvd0qKob3h+3qrtnpgeBwCDQKP7qR0zq7rr33BO+c8536E9/93mc64to4nc4IjkAZYrwnBZwngEZH+XqETiOA8HaoDWBsQiAg0gOwhGtKFePIOPPQKlyBBm/F1INwxHtkHoEgloBqsDoDBjXiOQQHNYBYgpRPATBukDMQJsiimPH0Jq7EqCYNIUUhoOI4pi3BAtbtYm7ifQMUNwjVaW3Go30Vioj7WFYCkqV4Xy1UsrEsuooHXMlJQNAXLjSdfzY9zLVIMiXspn2kUym7YTrBCOCZQ8TOYMw/Jg2dIhI9MfyeOS6GTDyjdHcGEMAK4HBh9YcYXwYgd8FrR3E6jg8pwNaMYBVAOMjVoMQrBVj5f1obVkEJTUYVzDKgaEqYlWEKzpgdAVEORCLUY1OQEmDXHYOtB5DNRoEmQCe2wlDCgwm2Swg/acxdM5kQOCNfREABoBprVoM4lWa4qXamNnVcKh3646/W/3qlh9eAyPguh5c14UQApw7kFLCGAPOOTjnICJorUHJqTHGQCkFrTW01gAAxghhRUIrA8flCAKOVct//uGZ3cs3CO7uMBQfNEbvIHKOElAFoOvb+sa6xBtPkIgAMGN0Tsl4qSF5XRiN3vDMtr9ZtXXno6tcNwNDAIEhk8mgd+aCREg0YACtNZRSYMQBAhgxGA0oraCUgjEGRATGGDgXcASrCZvWGr4jEmGzQvfKxh/c9eKG796llIQxGr7vYv3aj3yns+PKpzmxVwnuRgBDAKlE0C4L1kUkTwwgboyaK+PqlXFcun33oWeuffSp/3On72WQy7WAMYaWfAeEcME4QxzHMBoYK5asIDEHQvBEaKxwWIEziXln4JzV3lFrjThWANQ4LeY6DICBMQaMEzj3AHjJa0kAhCee/fIvjo0Vf9GYGOtu+MBjc2Ze9aoQlWcIwdMAHX0jCNmlLFhEREIb3RLF5RsiOXbznr5nr3/08X+8O5crwPM89HTPTTYZiakykDIGFCXmi4GIw3EEHMeBUgpxLEEEENE4gTHGTHxzEFHt++nXcRwjfUNjCEpFtZ8zxqAV4PsBfD+AMQbbdz10+4sbvnW7lOGn1qz6xWcWL1z3OMF/hlPwJCMaNYbkpWguxaUpT+RoLefGcektAyMbb/7xI//9PcYAhUIr2tq74bq+1RBaQ2szYfN5Ys74uFeN49iGGVwAhgGUuj8mCUZ04uimDq6ZEKgkX/PUE6bExeNA4iorxWCgEEYagK4JYzbbDhCw+8CTN7229Uc3SSlx+7qPPDir5+ofccZ+TET7AYouJQETl5ZAMU/K6tJIVe7dve/he5589mu3dHZ2oLu7F6VSCUoaOI5b84UatUtt+82p9sYkQtUsDjAAmQbhmuolpvg5aRAmfpZE8MnUzHB7exueeem+t42M/PXbbljzC88vXXL7j10efJuI7SKi6qVgJsUlIE6MiPlSVldEqvyO1zZ/997N23+62vcDzJw5G2EYov/EQBLRuahUqrUobiqhInqdYfXphONnGLKnESXIfrZsJgclFYIgh7a2Duze/8TaF17+3tprVv3cO5ZccdOzlcrINxyRfZ6IVQ2gLgvW6wjwGOPZOK5eE8vqezZs+trtm7Y+clVXZye6Z8xCHMeIIwnOHORyPqSUUErD8wJIGdWit9d/mXNoeXSCemCcsmnUnib5dqUSgnMOrTUqpQqCIEBPzyzsO/j06u27H1ntcP/jb7rj33+hJTf3+65oeRREpYvRRF6UgsUYD7SO58dR9dde2/Xju7ft/Nk1mYyHrq4eVCoh4uIIMpkAAEMYRiAicO6AMVa7m2mp0xO0ZgLV6FdRw9cn+3tqIlyTtHEtsEg/G+cMUsoET/NQrYTwPA++1wLH8cEYwz//6C8+0tk+60O3r//tv8oG3fczxrcBVLmY9pDfetNHzwPyzqB0BQYRBPfAmAOCQCzHwDkHowDGEDiDMEBXuTrwif2Hn/3tR578u/ePlA725rI5SGlDfs/z4LoOtFa1DfA8D1orRFEIpeQ4UzhxI88Oaz2VUJ3J79XXKhX6VNCICK7rAgCUVMnzAGElAhFDEGQxVhrlm7Y+st512cp8rrvbdbJ9jDAGOIpIQ6oyjAZctwBjIkhVAcGB4Bnrz008M5O/uPQ1FhEDZ5SphINvHR7d985HnvqH95QrQ05HezeMBkZHixDCheM4GBsbgePYRRfCfnwpJYgInueBqBbtX6SXnnToGk2i57kIwxDlchmccwhhMTUpJRhnCdpPaGvrgDEKL2z41rpN235y3S03fviajtYl/5wJMt8GsbF/8xrLEa6AEfNK1SMf/emT/+3/e+nV718XBFmeyRQQRzGUVvD9AEQGcRzB973ayUpPeQpmAhbxJmKTfJiz01bn8jITzDSN+6xKKTiOUzPnjnDs88HAddwadlatVhFFIbLZFhAD37j5p0uPnth0z6yZiz3HyR81CEe00upCaawLKljahDkiunXPoWc++5PH/scnpAzdXK4TWqfRkjUpWtsNIGLQumnkmNysJlTjv08Xkcaqm0r7eWnS3egXamsbQYxBG1P3AIlABEitQQCyuRZUoqK7Y8+z63w/e2U+21lkzDnkiHz0b8YUEjFGhK5KdeRj23c//s59B59dnc350IohimxUdPk69eE1hkBJoKCVgcM9gGm2YfN37zp8ZOvsq696+5rAn/H3jPED5ztyPO8ay3UyAkZcPTC841M/fuzzv7Xv0IvzWgudLA4VqtUqgiBzmkDmv2WhogmRrl0rrTS00nA9l46f2NF54NArNxQKXZ25oLPPID4Bw9Ub0hQypn1A3LX34HN/+NTz//jeWJX9jraZCKMIcazgeV6tXOXiMl8Xp3DVBYtS3A+cWwgml20FWMR37Hr2akZsRVfn/H5G3n7GfPmGEiwildEmfNfm7Y/+8cuvfe82JgwPvDyKY2OQsYbreA1+0mWhel3xpjbg3AHAMDY2Bt/LwEBhcPjQjCisriwUenTgtW8BTEyNhX6XpmAROBfZ4ljfb2zc+uPf3r3vmZVckDCKI6xG8D0fQggopVJwFG/Q2rfphJRrGssYwBgN1/VgDBLg2Ihd+17oHhrad3N394JyJujaApiqzX1egoJFxMA4bxkt7v53jz7z15/Zvf/ZeRm/hXPmQGkNxjgY54jjGEQMrhsgDKsgumwKTxu8qOUmra9ljMX3jAGkVLXfyWVbMTR8yBsY3HVje9ssJ5Pp2kZgxfGH+BIQLCIOImo/Prjpd5984R/+ZHD4YK6Q7wFMCh+k6lsnQCdDHIfwfX+cQ3r5aiZMk4WBiACTwC3GwMCAcwatjbUIWiOXa8Hw8GHv0JFNN7QWur1CftZmIhqtv95FLlg2X8c7jxx/6T8+/eL/+YOR0WNe4HdAKzUlxkRk/84YdVlyzsBxp7QYO6kbownZJLumBjApwJxFqTLCjw3sXNOS78wV8r2bATbcPL95EQkWEYPgvLPv+Mt/8NwrX/mdsdKA57o5sOSJpVTjksTNAcTL1+tc/UnrN96lMCAy8P0syuVhfrx/+6pcriPbWpi9CcDIuUR4zrFgMQghWo4Pbvq9p1/4wqdGRvoy+VwnolhCKg3BHXCeVnBeFoNpig0TN0LXBMn6XiopgrS51Uwmj9FiP+8f2HNVW6GHt7bM2mQMiufKBTlHgmW7rDgXmaHR7R9/6vl//MORkUP5lpYulCsRMpkcCAQp4yTlclmwpsn7avBNzaQIXSlZixyjKEI+V8BYaUAMDO9b2VboEflsz6sEVjLnwCyenWARQKRhIME5c0bH9n30yRf+4TNHju1obS3MhIwkiPi4tikrVJel6nz6Y6mg2ZY1B0QMcWyB6Ewmj+GRPndg5OCqttaZ0vOyzxrEkohs89PrFazb1n205vS9rpvFIBY5sRx528sb//nPdu19pretpRdaaTAuAAK0SdUyA2O4rK3Om5/ViMyjFo3bchwrYJVKFfl8KwaGDrhShkvb2zr6OKdtnHNFJGD069ssdraPwZjgSus7d+557g8P9W3uKeR7wLgAI9v5EscSjuPAcVwYI6G1bdy8fE2nUDW7rW+rtd0DItvJbStWY+SCVoyMHPH2H9ryB1qbexkTZ1WgcFaCxYiTAVbvPfDCp17b8i/XK1POEHEorSCVBhccjusklZ1xreHzcn75wvhfnueBMQ4pbfUtY6j1U4I4qvFI28YtP1m2d/8rnzLG3ETE2XkXLAIDEbqPHHvtYxu3PnCb0mXXET4YM1BSgjiHSaIRK1AmKbvll32s84h1NX6tlK1xS0u3bXe2DahsJ5oDYtrZsvOhNYeOvPZJwMyn1+lnsdcr/VwYMTC08wPPvPTV95XKJzJBUIBO+A9sM+hltXTpmM8EqNAxXCdAGI9kn3v5a/cODu/6AOc8eD0RIktA2TO6OWciksN3bd/zyG8cH9jdEmTaEUUxOBdQ+jKUcMkiYNqi84GXx3CxL/vChq99Yqx8+N2CczHtGsuWB5t5h/o2ffJA34Z5He2zIOO4xtRSj0QuX5falbbOhWGIrvbZ2Hfw5d4dex/599qEy06eLTkHgsUZc4eL+9/76tYf3KFMJSiPVcGIQQgHcWwBOPshLpvCS0+wCK7rQEqF0WIZHe1zsG3Xk8uOD2z/NYBazsQksjN7Y0GlyrE3P7fhK785MHQoz+HDEQ5c14dSGq9DY16+Lqa40ega2ZxtO2OIoqL/3Ctf+5VSpe+dXDBuS5pOjW+y0wdDCUR69omBTR/Zs/fpmdmgHXEs4fk+qtUIaaGZZXcZ7xRevho37+KOJOM4hhAOOBOQsUQu24G+41s6Dh558deNia9gjCX1cie/T1tjcQ5nuLj/l1/d+qObO9rnwRgNIVzEsWzIAWoYY3v7pmdTzKRwenJjwekt4Ov52Zls0FSX4/DaGtlOGz3u86d0lKlP09gSpvV0A8usJvhS2Q5sKSUK+RnYvO3hawaH93wIpNw0I3my+7SiQoDIQC473r/l5w8e2dLJmGdbjwg11ZnWUTF2Lsk0mgtXvUF1/PebEaRdiFN/sp9JGcMYW3xnT3/9syulxnV3NwoSEdV+dq6xrsZDyZgtDmQcMDDQWsFowshYX/7wkZd/TutoNYGTMYST3aehsQhELBgp9v3Sa1seWjGjczaiKKxt5mQgjk3rpqULnLadN3YQ16tRT1/zncnPTtfUnew14tiWrxAxRFEMY+okJinLTCO/VypcFuBU034o0kIBrXRNezqOQCHfhc3bf7ZgcOTAhwxM2yl1HzGNk92MEwuj4bXPbfjqh4dGDrW7CeNJShjWbBEvBNwwXsCnV2ueAg2a8r2NMXBdSxFgqwvqCXmrhZHwoVryk1TQajSTenqfqb6fqYNuaviW1kAYjRSeffEr7wmjoTuIGD+ZLWQnd8IAxpQ7Utz/y9t3PD2ns6MHlUrlFJs6/ZeUMRxHwPPc2pO4riWnDcPqhKccr30nBhVnbj7Nad560nunZiKK4hpzTvoZOLdOcfpMWiswZt2NOI4gZQwh2PQeiQZq8TRgSxmloyhCa8sMHDj02ozhkd2/BKOzJ3stcbLojYixWEbLDh/dfGMu0w6lTCK9zaGFs2bMO83Lcx1UqmOJSTYNAYaA52YbyRgbGPbqQmXobE++OUNNkL53XdiJbOGdlLFlI3Q4isUhhFHCSJh8Zke4cBwfICR+7PmgH2g8bJSUOxHiWKGzfQ6ee/lb97z5jitu8Zz2HxnTPFITU08jIBDgjJX63r1j95NL8oU2hNUInuchiqqJataTiCzOlUqeWjgJxbF+9HQtO1po6R3LZFrGCKSrYTkzPNrXcqhvQ6/v5cC520RbTe1PnbPu6yk5SuuVnUJYOiJK/i1lhLHyKGb1rD6cy3SW8/n2IRjDx8rDraVKf3D4yGu9jDlwHB80jdYw9fWM0Q0HgJLcL4NUGrlsDnv2b+woVY68y3PaHrbU4aaJxppCsAgMUVydvWP3428Po9Es8daEcVhP6aBPZ2u8sQ4hKtUi5s1ec3j1il/8okH4UDbTWiJiulodC4i8ddsLvR/pH9jfOjiyb6bg3qSjcl48rybClTI1GyPhug7i2AZAvudgeGQIy6+8c8eKxW/9qlSlx1pyM4pKK1Yc629xndzN27KdHz5weEsrsUpnHE1foWR976jWtGPPnvX/tNaIwhjdXXPw1PNffvubb/uTr3he7kljJuMg/LYpSpMZI1GuHv3VJ5774nt9P8stvEBJmUVKw3OuWfPqJ8diY7xWI+9wjrGx41i08Ia916764B+2t8391vDowS2MsSNay6NhWD7Y2b5kSzabe64l37N4YPBQWxyPZbhwoY0GYwyxjCAcUQNwx7dQ0Smfwf6uaXoM0zuFaKz5sGXZlqHPgYwjS0ekFXw/A6VDCN4ytHzJbXtXL/ul38vnZjwwPHJwG+fuMSmjo9VwbH93x7Ktrstedt3MtQcOvdTrubmao88YT0pe7LwB20V+tsc39b7rGiu1agQCF/Y9jvXvzF25aF0xE7T/FICehLxPibeouPdo/6Z7DUI3FapG0zdd4GKqii3GYyMhYgxSVtE786r916z4hS/ngpnfUSo+NsmpV9FwHFef7Gif/Z9XL3/bS57bNiRVCDAOYgRiQCRDpC3pjSW8pwM5WEd/okCNfy3GHDAS0JpqgUEcR1AqBuMAZzyprI3QWpjbt3zJ3ZsWzrvhow5v+aFS8YmJ76m07M9l5j60cO4tX+rtXnUglpaNOxWuRhyMztpONk5sqj9TevhAhFhJgICWfCf2HXpxnZRqIYETDEPjzZrFMwDxMBq864lnv3ZdobWr5kMZo+pvMq3RiWW1S5FpIoZyuYSFc6/fmc/OvM8YKAY+ZYmzNurJnp5Ff37Nync8xXluRCsbKTLG7YycCS1S5w6aSP1OeyiU0nAcB57nQSkNRhzEDVzPwUjxKBbOuW5v94x5fxrFY09rI5uuA2MCgdeDbKbnO4sW3LgtCquwxXpUm9dTO+zn5DGoiRZLIkVWh0McN8Arm364IowH7rX6jdB4s2YvrI1qGy0dvKcaDefsa6bYRqrqp1ey0lSCTWxzaCWhtUIu1zFUDvsPVaIjKIXH4Xm5k6Dz6unZs5b/+ZqV9z4neG5Eqios6w2dRJhOl5SWmmi8Ovug0VSjDbAMMDy1AlAqRDUcxDUr37pz3uwbPxu4Mx/PB/PHDRZIr0LLDMRyFLEehDZjo/l89wFtFITgSVRuageGak0r50KwqKmJZIwgBEO5XAFnAq5DweEjG96slJo30fObBJAyZlgcj61+5oX73jyrZwFKpVKCcOsp2YinIzqxSLpJWsTt9wQPKrEsObEcRhgNQwinVv6stWwmXC/M6V3+Z2tWvfM5z2kbNojgCNEQ9ZhTntjJONfUQgWYpGlEJ4fCouUpLJLJZjAyegRLF9+2Z9XSd3/cczoe8pw2eG577fWUjhO2mACBl4c2VRhTAUxEDs8O2gkWNvyfCGEYmGkQqrqJ1Folg6YAowmtrV14/uXv3ih16fqJ6cEmUaFhsRy69cix3e3dM+Ym6G/d7zgfWFWaMzOGEszMgrxSloPAmxuNf3j70K7TMUlOLGeBfmZ277LPcC7+5JWN37+5Eg60cuZOiNzGC8fZbYSGNhocSOr9Ca7roVQexsDAcaxZ+fNbVl75i7/j8NZHm5ny9sISOMIDZ/bQcKq/Uyz72izhh4JWjeS4ds4P4WzN4VTPb98nrY/3fS+ZPaRRqQznquHx9Q5r+S4aJmWwiU6X0mb20Oiha/K5NlSrVbiumyDAVENlpzvLboxpcN51jZBtrDTY5vDcla7TylxRgL1b4DoFBH5HDQ6ZrHH0s7N7l/3l6qt+7gXfbR+MVcUu4imc3Yk41+n4WLGMwRggBNkJGdCQuoq2wrzD16x855aVS9/9O57T+XBz/5CQ8TohWA6AB4IPgg+GADAiOzp2bC4lkabNG6rEAJ2rQ25OYgrrhYC2CVlDa6CtrQuPP/2P75EqXEBkAyRigCCmGnEeFoWl5Y8//U+3BkEeRIQoCpFGhekGT7ePJYRAFMU2wkqiKN8PsHHrg9fP6Lziw75X+L1axGJ1BDhzoLVs6nclwvVcb8+Vn2Wgz27a/tOrRor7u4UITvPEnoa2MkmEaAjENKTUMAAcR6B/YB9W3fT2w11dC/9QsOzjuimjDsGYEBpxQ1CRNJrCoBoOfeSVjT+40fezkzrKDcw5xhCTZyM9btpZ6vtKCXieX9OYR47umAGqrDPk74KxXjmbUO7ApCleO1o8WiBKi/YInIvE15GJep/uqBBIC8rsqTTgTKBcHizsO/DqWm3CTyhdgdQVKF2FVGVoE0LpCjhzksivqVl8qqd78Z+tWvbWDdmgZ0CpqCGDABgT1TAhO/ZtfO409WfSnFpKE27LYADGFYLAjv2VSiKbzeBE/x6sWfmOrfNn3/InOX/+482Fl2BQSt47hmm8SYEx/d6de5/9ueGRYwWRdJfbxHTipuhEsM/6wDdiAxNfz9QgDs9za4M9iTH4mSyq4cB1xmg3/XN+200fawD39IwTA5s/duT4lqWc+/YPk8x6CjckOcTpB69rp89uOgHg3MVo8UiHNqxrRsd8YYx5mWr4kZhQNMfAmEhWPa0OUAD0gXyuc1/Gb13eP3iwXaqyrxUl9VF14ozm5sXUAwnh1goabdivauG/MQZBEGB45BBWL3/b9quXv/c3Paf9Ycbc5tqBKgDsTKDxwRUDY/wXNmx88Lf3HXp2jbDRisWvQA0gb1KJcE7NYjPXoI4IpK4B5zZkGBjauWD+7Fu+xpkYIaJ6VMiYIakqi3/21JfuzGXz4wjQ0lKK9HSe32K68Y56GI9ld+z+2bU79zz/ASHcX59aMAFj4inMonlyVu/S/7Rm5TuedXh+RKlKUtHJwbnTUFrNEkxqfAWAMayW7uBcwHXdROMDjHNwAfQPHMCKJW/effWK933SFW2PaKOa4G7MChXJKWAX552vbnrwN7ftfviGSnk0Q2Tr0I1mMCZ1SRjqwwimOVrntpAzjsOaxoxjBd/NYMfujV0EuZJYTMQiMKMJRhO0JmYQrhwePZKfOAGiWbXm+RWsBkQXLjhDsG3nw2s3bX7sw5yLXz+Z862NnrTgCdzw5KyZy//ymqvufTGX6RxRqgpjTEIMV9dY49B2shgbYwQlNezamaTUWIJzAa0r8JzCwI1r3v/K6uW//EmHW6Fq5ugbKp1MqH7htS0//M29h59c7wWui8RhJvDkTtak7mVhuvsMTOLXWRzNQh5KAb7vw+E+Qjm41mjGjObgt974scTGG7dc7fvQvoPPX8+YAzPJFzATMt7nt5iv8d2qkQQx44yWjnQLFuQ62md7IHrFatnJAzDrI3sVUtYbwICROJTPdezN5boWjYwczVfCoazvZRJ4BZOen5E1uQCBkc2bydjiTlwwCG7gOYX+pYvv2DN31lV/7LtdP22eNWMwNAZA1j9n6nwTQQjnHRu3PvTxrbt+epsxyotDCSGcBNcT9VCL0s1uxOSmb190Ml6FcwGlbKGCSmrjHcHR0dY7mM/O+xeARfzWdR8FiKB11PX4s3/1t0rGAYigzUTBakzWXgjBqufkhOMgjmN4viuOHtvVS8wtdM9YqJSKNjYTrIkCkpoNAjOAOZjLdRwMvMLywaFDhTAeDer+2sTn5zWcDUkhpNYKQeAB0OgfOICVy9+0Z86sq/5Aq+gxRxQ0I2eyUGGspqkmCpZwvLdt2Pjg7+w59MRtMMovjpaRyWRt7blBrU6+NkY48UNrhx7T6P8SwWiASCCOVM0vjaIK/MDH4b5Ns5cuetP3OOPHGSOAEQjQ8/uO7m7DKZLMF6bLmU0AUGM4joPSWBnaxMHu/Y+v37Xn+fcL4X3kZKdN6agZsq4N9OM93Vf855VL37w543UMxvFYQ8sbS6osBIwRNvHPbOODjCM7lUxGGCkexeoVb9175YK3fDrnL3gsGyxUjHkThJNBowggbvoZHcd7+6atD/27zTt+clulUvKF8JDN5m0innjStBIlvmNj5MrOy94w4jZI0vXGDmsObY3+0PCJPEguAZMQBhUrihStMJrBcVzEcQRA1HGSCT7VhW2ht7CH3QgnSd1EwSubHrjDGM0Wzr/WSBl9sZktNUpDk6rRKTUIlzJGP9rTs5iIiT/euPUnVxVLfZ2um7W4naaEQoCgEwiEMdvUCSIMjxzC8ivv3Hftivf/rud2/tBorYk5TYRqLBEqaoLdeT//2uYHP75t76N3ZrKuW63EKJUqENy1vhVLIz/r09lolzW0v7FJuvncZ0QMiNmoRQgHYViFcAiOKyzvmeLQJp4NHRO/9cZPAIbxSnj0fTv2PrXO9wPEcrzDO3Fmy/lvRk3UPtWnvddTTNZEKC2d4dHDvQ7LZjvbZ7vaqA2NEaKNaFXiPFEN2TcJJ7qxVDn78/muPs/LLS+XB3NhNBaEoYTwPYRxCKVtZMeEdeAF5xguHsXyRXfsufaqD/6h53Y+oLWWk7eXwaAEIEqNag1WICK4jv/mbTt/9huvbP7ne4yGbwyrfW5CI46W/nUzDTUd+zJxz1mtysEYBQMFIg3GrXl2XR+dnfMG8pm53xXJhE9WqY52pcnfi3tI0uQ0izEGnHGEUSm7eeePb1cmpiVX3CjjuPpPU0WLVr50gmvrREC1BPDwnFnL5Gjx6F/3bfp+e2tLL5SU8HwPxAxMUvNPMBgcOoorF918cM3K9ydCpZoIFYfGKGgK8+e6mbtffvUHv71j76N3BBnXj8LxLV+nSpKf76vRitlEuKmB2kQMY2ND7aZdtPLb1n0UWssZjz33V//bGO0abc4LAHouT1VtxAoIUoXO0PDBWWSclu6uBUwp+do4jZUsDmceHNEFRhkIloMQLXBEKwRv0S4rHOjsWLC7Jdcxe3jkaKEajQaxVJBKwSgFZjQq4TCWLbntwLUrP/Ap3+36F61V3FSo9BA0RWANTRCpxnKd4G0bXvvX39q666G7paraoOEiZtGsr2O9ISRNL1lB4zh2Yues5Yvf9E1GZAikZx8/fjCXNoJeejRErHYTBIyJM9t3P3rrjj3P/7Lj+B+YUiDhgMjejNzaDQjFufuThfOv+4uZMxb1K11E4HEIBmQyHsZKxzF/znUH16x83++cVKjMMDSqTWutXCd4y7adT314255H7hIO+dlMHqWx0sV9hCmppGhYd+uDotbdPVoczIDUPAFSAKm5aVtX2up9pnxI59UYTjDVEzkdwjCG7/Ps1h2P3MFJqIUL1iCKw/umzo1N/K4Cgyc56/7ZquXv+g+thd5/v3n7wyuj+Hgbo8LodavfvfPKhXd93hMd/9rM/BEEYnUChqKm4b/nBG/bsPFHn9jb99RdjFNQHK0gn+dwhHeJHGRd87dq7oiu5y+NCXuFNiEZE8/wfT8JHxmUuhS5rVhtW13XRxzH4FxmN23/0d3aaLZo4Q2yosJvnCHiLxlzHpjduzwSjve7O/Y8N2/WjCuH585e8efE3B8Zg6aOusIwtKmASDTxqYK3b935+K/t2vfYXbGOMmEYI5vNo1yuIAgyUCq+iA+0Ggf91FN9qJVVeZ6LSI31CKWqUCqekc5h5oxPG1vM+cK54rgK1/URhhE8L85u2fnQnXFU9ZYsudGPwvKXz2wxtdRG/aSna5Eo5Hs+AZgvGyN/ZIyOm34OqgImaupke272rS+99sAn9+5//PZYVjNKcwR+zqaKmHuJUGzqGhluvR2fgTHrZzmOg3JlsFeE8RgpFbdZXiQfjC5xqkfDIIRAtVqB5wWQUsJ1w+yOPY+tZ0KoK+avgZTxGQqXiYmxB13Xf0zKqGyMbCJUHNqMgEg1FSrXzbx507affuzA4SfuqFSLgetkwbhAtRpCCAdCCIRViYuZu+5kaEGqsbTRGBrqmymKxRPQWs5kTIAzDqWSojE4STjeaFcvEv3E2ISHbTRHMnEknVrFQhwDxoTZXXueuNl1stHc2cu00fjqGb5tbIwZmUpjajMKjQo4vGaO+r2btj/6ke17HrkniuNAOAGU0TAmSspOQlspIQiqwbQyMyHnac5BydVZrbsYRxxi4QaW+OUmKVvOYnjkeIeoVEehtcqmzY414I30RX1yThdvqX/NUAlH8pu2/uvdleqwv3LZmyJo+sbZ40IM2hRhUGka/TlO8As79zz3/h17Hr67XB7JcuY0gKMYV39ljLmoiRBPxS6UAtfV6pgrisUBMka3ppQ5zcuOL/4RJeMjw8bIpR7BEHFIXc5u3/vQ3X1Htyx7y52fCktj/d830OBMIJZhsjgKrtOOwJt1CveeQZlhJGmxSRGm5wX3vrrxoY8eOvb8rdXqaMYWB5pawnmqyHaqw3ExH+j0eaSUKJVHAj5r5jIWRuVPVsKBmVo10mkbXFieqdf/sPX9oElovdaA1pJpE/uVSnXmzO6FkZTRJmJUa20CCFKVARhw5kLqMTAmkgoDi9Y7ogBiOknVNJbo2OEJnIt379nz0q/u2PfY7WFYzBI5kxj6mm2OadyoZpj7BZS1yVZg/MGwUIMGwR8S1eoYAOMzxhDr8aXIl/6lJ0SNLMk3ChCkd3zgtev37W8J585Z4WitvjrRdIbxABDbBUs31GiNwC9AOBrajDXdaUd4b9+5+5n3bdn9k7ukKufiWEPrEExwCMYntdJNNCcXO0g6VeFno3MvpJJISxFTp8z+X580pL+40OBT+V2pObQNAlLFiOIYleh4HuaJ9cSYnjdnZTmOw+9MBlAb6uCNgetm4TjZKdv7XSe4dcv2Rz+y88Cjb4qisWwcayhNKLQWMDpWrC3+pXhwT/a56zXwHCACu/uW34dSkqWDEmsnZlLPnb7oH/rkNUlJ14kBOHeQz+VhtMHw6LGWbbsfuvnAwU2/7jje+87mM7hO5q1bdz76+xu3/cubBweOZpUEpNTw/QAjo6NwRForb07zM186QVMjOS4ACCImUibitDSmNrP5Qse3p2HrT3ryqZE5JRGuxH2slEOAGBxPwHVdVg3HfKViR6qoGUhqSc8YRxSXAKim76t0tVVJ6WcyeUMMkLGB52cQSwmlYttHoAkEmmT6LgUNNtVnnEiJrmTMmdZKEhg4E0mHq0HaeDleqC6kKdQT7okPyibdxhAYeWDkIY4t1uV6BlKWIFUE4RgYFcJ3suXermtfmD9v1RdjGX6lmVAFfhuCoM2av5Nolyiu3r9o4fV/t3Th3Q8L7o0KxyCslsCgwMEgyAGjiUWGqt7LSAosoaZiTfbwQp/xifTdjRToaXtgHIdwXS/mRlcYF+LjlXCoC0lxvC071c1ikgt1ViZhUpOJOsYLg6W1tlqYc1YbIGXrqrglyBVc57Pd/WtWvuO/RFHpPlvxUP8PMPDcHDJ+q+W5khVoo8CZM+WaELC1UOh2BMsU+gcPzmRcuUK4CReFPbTjZbPeS0AXpIjyHB5/rSEEB5E/KDw/B2N0qEdVEi7W6YouVYCUMQHXtW36Whm4niVCi6IIFBsIhyMXFErLFt3z6Pw5133H4TPud8XMpn6ZNiVoUx6XUNZGIXBmQpkQUTwwqX4tjsOvLpi3JhJuprpp27/eVS4Pt6QkabZplY3zW415Y4yH0doS5ikZc+F7GRijwxT/uVQjlnG+TjJMgEEg1jYCZLVadauNA78wPH/O6q/FMrzf4c2puw1KMBgDQTQxzhK+0w0YjUgOT3LApQy/MW/2ChZWi/7OfY/dWiqNZG1KpFEDX/yg6Jlc6Vg6xlwlgiAPbVQlddovdQwr/exRFCEIOFwuEuBTQzgCXBCy/oxD99z6+38EnbtfMFVrzmj0JzXGoM0Y6CT01wYKntsDkEEUj0yyYlFUuf/KRTcapQ32HPzZbVpFmTjW46iu30iX7SIyCIJsKFoL3UYrNTiZmvrSFCgAEMLyNjAGhGEIx+FgnKFUHkNP4Yq+u2/5/T+Gzt1vjGxu/jAGZYoWRTenet8YnjMzcd6Hmzj0la+vXHZbJFXMd+x57BYYGYw3neyMzPzFDvkopdDWOnNY5HMzoJQ8GsdRUsMUn/NhQOf7kjJKJpNFCMMKGPcglcTcWUv7brvhU38E03Jfc6ECjClDm9Fac2rDsgkiygKwDB5NhMt2/FQnvWYYlb+7evmdnis8uXPfY7dF8Wi2RsQyqfaNXeKCJdHePrOfeW7OeG520NJGs4u8Q6fZyaYmLIMErSWIgFwuC98L4pbczCPrrv/EZ8gU7ptKUxnESe8fmxiFcqXju8Kocp8x5peIJrU3w5gYvjMTjmhpCiZHceX+JVes/eayRfc84ohMSWtb3qOha+H69I+NOz8RfDbTNiI8twVSxfssqVYMz3MS+qJmWFJjeD+dwqdP6SRGUQQiAddxEccxiBm4roswLENKiUwmgFQxQKK0YPYtT61a8eYvkW67X5tTlf6Or1IgYpwxduOOPS/87r4DL1+5eOENH+/pXjhCxH6CCS3NBhKCdUKyCMZUm+FcX75iwbVSG4mtO396F5HMlMMYnHMoFYMLDqOaU3Ger3Eyk9ciTZIygFTCYk01vgitNUDGcpJpAxggn+06LJJysnIYhhBJMX+9uuHijfo8z85MVDoGYwQDk0x7sGPQoihEa1tXed7M9Y8tvuLab1aqxfsDt3CGqp1xRuzmXXuf+/SWHT+6RepisHXnaFs1vOHTi+bf7pKgHxgzfuSHMTF8txexPAGpi5MOYBRV7lu2+JaqjCOxbfcjt/kOz8SNlNqEk6LbF87OTT3VDIZqqaowrELwoF/AOCCj9wiH1bz6dMLCmWiR84uXKEiJGtWS6zpQKnHUXQbPc6EUL8/suOapRQuu/U4UVb5C5J6pv8A54+v27n3pj7bvfuhmqcpBpQwIGis8//J964ZHDn/uxmt+tcp57ifGGDW+ySCGIzphpIbSpSaaq/ydlSvuYoxxtW33w3dpXQmEcGA7plVTJ/7CCNbJotd0oHy9XZALgipLcJbdxqx5ZwcLha6yVnGNI6r5C503ROSkt+OIhKeJgXM7HsWab9vbRsSrSxbc9vhVy27/pyiufPHMnVDGAbp5/8HX/uO2PT+9aWjkaCYKDTKZDBh30do6C9t2P7bw1W3f+6tqfPhWbUJhYYnG0ScSHu8G58256KOo8q2rlt35xYVz1z8euNmKIEIYhrUUz+R0yYWaHptWuuimyiUFjuspHg1j+H5+640fBcBUS651+d4DL67wvCBhN2kc5WEm+B8XJvVQnzqqoJROmPQsF6jrChA38L18padz1fPXrHjTF8O4/E8pdELE4fCWk5h4AqAAijkRrT9w6LU/eWHDt26thsMtrpsDkmkT1TCEVhKeF6BULhJnzqrWwpw+xpw9SkfGMlJbs6ERgVMWGmFNWNLeOxtgqK2zZy0va83ajg/sme05zLFrn5LXsgmMN+wCuyiNQHKdnM4+E8EYjba27tEr5t35fwuQBhGi1sLMvZEMkeMF28qj0VD3zi64KZxcXGYpqeNYwnU5iBmQdEoLZq17+srFN349jCtfO7lzPrm6lBHnYOLGvQde/ePXtv7oBsdFRsscytUKgmwGUko4ngBpglYSUhbbn3rxS+vCaOxzS664pRrJys8AoxzugTEOqSI7QcKgaY9horm+u2zJLY5SMdu686e3A8av41xUW/96FcSFEiQk1S6JPNTYBOu0BVEU4abrPnw/Iz4qiIUAmPG81m1RGELKZD5L+scXrKmiriknCpXrujUGX2vjBbTildUr3v74/NmrvhdFlS9MnldYQ7kaxMnURs0x4iR15db9+5//vS07H72hWDxeACwduB9kkhEsEkYBnAkorcDhoNAyA3v2v9KTzXb/eU/XFZ81pB4h4soywlhaR5CB0hGIeFNG5ziufuOqpXeSMZrt2vfErVFU9ifmH9Mk+vlztZoIVdNfYyBmD2oYVpDxWw+CjBEE3/6V1rsZs0RarDEJnYSZ5xdoswOO0sJDa7eBtOurWq1CCJ6YFAPGvOri+bc+Pbt3+QOxDP9hqtc0JoLGSDKYQAJGg9mZhgyEa7fufOgvHnvqb9d3z7gShUInyuVKbQxcOiGDE4OMZY2byxiOyAy3bdv5yJVE7LM9MxaAiB5Bw5SGGk6mFUzNxZggXLL69ZXL7iSHB3Lzzh/eGUUVn3O3llu0dOIE4hfijDeMmGvIc6b8/0iYZ7RR4Dy7k1hcI7fVMGxfb8+CYRVXYUycFPppWFPJUOc3x7T7V0QWOmjkk9faEqZxnoS2yUBsx8mU58+64bkli264X6nob5rmsJgH1wkS3s90YxMSEeJExNfuPbDhL3bte2pld/dCAAyVStkKslGA1uAgy6evTZKZqPNFMXIwWuzr3Lb90SuOH9/7nwDcSlNQ9qREuM2uWEb3L128/ivLFt39hO/lylpb7lFjbDkK4/okjjSd4wCrEcOytXn16SQGhnRSesSgVARGGr5bKBrjvQrj6cR5B4hxPaNz7uxNWx++NpfLI5aNuMX4ov/pDn2tEPFaOxHnTm34udaWSBbQ4Myvrlz21icWX3HDN5WK/rFx+qvVZhqMBHyvBdqo2gFJI5jEMb5+/6FXP71hyw9uC+PhPMHF5JqpU4f9nLuoRIPZ/oGDLdlM55UtLV17jTEHJlaIMsYRRZUkl8knra8xevOMrgXadXLZvqM75jCmHTsoQDfJ4TYjXps+J0xpBV7rP7XMyUbboRJSxrjlpl99sCU37xsAKrUp9oyoEgSdG8fGRpo4tudXsOxGCcSxhNawD2AMoiiElBEYI3DhVxbOXf/83Fkrvydl+PdNQQuyw8ebNT4QERGxtYf6Nn/6pde+86ZYjuW09JISmZOX4DYP/Q0E8xGq4dZXNz+4uu/Ijs8QsVuoyWIR2cGeU2kuKaP7Fsxd882rr3r7z7TWVS4MtJa40ARAaQdX+rx2KIPlawjDCjra521hzAwRaTBiBsmtGYJXWlu7x7SWYDxtXW829Oh8hCb2g7uuSOrFrVkIMgHGxoaweN4tLyxfsv6ftI7/NnU0TcNgSyIGxh3oKRpBidjaw0e2fmbjth/eEutqoKUDz8skNOTNI9Fmh6sRY1JawXNyiOLhtlc3P7iq7+j2/0xEt0zVQxjHlSmFS2n51SsXrfvK0kV3P1epVEPHZRe8yiYF0FMQPWWPtpmOMlynbQORApEEv+WGj9Vm6RBYOZ/Prd1/8JUrHOHZLWqSlJ5ejZU2jlJiDpFQEjEIh0HKEIHfPrDu2g/+LwP+d0QCjASIOSAIcJYQqDGq4VdErEZ+n2Au1x4+suXTr2x6YP1wsa+D4FmqQyagoUHQTf3Ieqqrcd4hw8RBmEK4COPRTH//gZZCvmdRLtu+x0AfhDENs3ssPhXLsMaHioaS6MRObOrqnGdkrGcPDPe1C0GOnd9zYUwhMYKSEgCDEA6kjGELYQzy+c6hxfPf9JeMvEEYAX7bul+vDyJipITDVmzY9MD6IGhJeTmbCtN0C1f6+ikJnO+7GBkdhO+1Dv/cPX/8F54z838KnoPg+drtiAIcXrBdy6Y8Dlg0iQZkxK452LfpT55/5Rt3Rmq4zeFZRLFEJp+35jaswOF8ypTKxFb+8S1clqZaSgnBHShT9YeHj+V8r7Ayl23bA+DA+FF5VhDiuALXKQBQ4wQr4ZF/tbtzPofh3YePbpxbr7c//4JlkgAuHXJuO8UJ5fII7rrlt74e+D33p3jOuAmrjBvlO51PZrPtZZClpKmTa+nz1geXOu4pViUEQyQjZDOtI3ff+ttf8sXM/1FPfajaxAmDGJEcQqSOT9I4iUa4ev/BVz7z4qvfvLtc7S9wcqGUQiYIoKREFIfwPK+p+az7bTSBRXq88EVRFUJYuMR1shgt9XW/vPEH1xzv3/sXBHZrc7PIwKnNdhWxAERe7WbkgZj391fMX/tI4LWPXUjkPRUqxuwsRhulM5TKo2jJzX6SMYpqU+yNdpDeWjmKseDlq1f8/AtxHKbzpRKHjTC+/3D6UXbGWOK4AyMjQ1i94u0vtrUs/IINgBnS2w6gLILIoFw9OKmcODE71xw8vPFPn9/wzXvCeKSlJd8JKe3zhHEIKUMQLJ96OpmmBhFSA5NFEy1V97U0HMetzbIOwyo496FMsXXztoeWnhg88BlGfF3z9dNwWCuUBBzRAUe0Q1ArHNEJz5mBTDDrS8uvvOelKKo0rFPj8+EcaSszQQOO/6zC4bWeAp50O/XMWNRvjP8CGehaMJhwkCa3hHD48Vm9K58bHe6H57pJDTzVnLXz4binYGR98azDmM91DsayuCNWRSP1GKQeQ6yK0KaEcvWQXYYJqRPrU4mVBw+/9qfPv/yNNxmEGUZZVKvSTmN3OAQjcAJE4kMYolpbpb0bvh4/33GSQ68UAIha/4CVRoHh0b7uTdseXt53dNefgeiWZj6cgcZIcReUGoPWFShTgdJlSFUCUXy0q2POnjCqTkj6mob6KHUOhKphXmGtRzOhPOesNj7PTloFBocGcfv6T35TcH+nTocsaAJLQdDaDaNcXngin+8uOkIkw7KjmgbxfT+ZBzz9wtVYFxYEPjwnU6mEJ9xKdBiV8DCq8VHE6gQidaJpLi7RDNfs2f/in27Y9P27KuFQ3rIi1/Gg9JzUKzjP/uDYTR7v/ziOj5HRAz2vbv6Xa/sHDnyWMb6+aYDAHETxAKQeAVC23FumCGPKcJ38sTQb0ejzpUM5p+vM1+f9EMJqhCAIQGRHzygdwvc6n2CMxpVrjzOFRjvQmivHyT+7fu37f9Y/cARaaziOY9MZnMMWBE5vTXydq6sOZsaxRBiXM47IS9cpwHVbEwwl07STxg5jFGuOHNv+6ede/qd3hNFQIZdpbUieTg2fjJvFQHRG8zgaJ7FOfEUhfFSjwfbN2x5afuLEvs8wJm6iptGnnW4bRSEEy4FTDkQBoqhUaNRU05ejpQnPUB/Z7DguoiiCUgrV6hiuWrr+ACPvJWOgU/+KyKapMfHmnA91dix9UIhcKZv1YWBPRGoK+TTP7k27PdL3srlDhWJpoC3wOmdm/V7K+jPtMO/m4CeIsbXH+nd9euP2f73NIPajiECMIVZqaoFKupFrbe6gxkkroLMi3EvhCAel6onuV7f88Oq+ozv+jHOxbiqzNDJ2GIwyIMrBGLdlcOTAirSpuF4ONH7S6jlL40ziR0unn1lQ1A9cALxyw5pf+9+OCPam0z7SmzVKWcPkWOU6bQ9dfdVbN5YrowlFt4RSCo7jJBPUpzv6YDUBIwIymSz2H3rpirHS0Q+WKseM0vHU6RUmru8fOPAHL7zy7VtGx/q6QK4dlJ203J+saYEmLMTZOcBNokrGwZmPajzQtWHTD647fGTHZx3h31CfQ9j4uwKAQhgPoFI9/q7DR7fMcRyvyXOfKw1GJ30OYyxO53kewrCMxVes3yV4/odNEpeYMlHqcOfA7N41P9HKqfierYV3XbcWEUx3VGgrQa1gKanhexnsO/Di/L0Hn31TsXzobs6cQpN8XeAI/4bj/fv+42tbHlw3PHp4hpYOOBNwPdt0YSPcKbTVOYl2TQOIOnnTiBiq1SqM5pB6tH3Ljoeu2b7nib8Lo8G7OHdyE/+GMZEN4+N37D307If3Hnx+gdsgWJPR/3OpsfSE52CWrsC1Puqx44ewcO7aJ4UQWwGlJw5m57ev+41JM55sdEXa4ZkThsKb+45tmSm4XwMsp9sUpoFC+l4mwdAYMURyzC2Xi2/JBO3McYXKBIUWzkQPAfNK5ZGf23PwqT/buvPxZYPDB2ZmM60Jg46EUjaqUSoG52IS9c70+Sv1M5xuvOMIVKtlOK4HUDWzZ9+LPQbVdfnczIhzsIzfWhDC7YrjytJqtfT2HXse+09Hj++YGUWVHBeNTbSNkMfZd/GkETiNq8GrR4jGYi1QKkJH++yBq5a880859/dbUtXxAiSmKuAy0EY4zs5ZM1c98fizX14zZ9bSpA5KnJeRKKlWTBOdWht4bgbFsWM9hw5vw8jIsd/r6lz4K76XGzBGCynDoH/owIy+Y6/OhPHgudkaRbTWBMaQzGxWp8we0ElO/unxd1BTK2APZgyAIZMJEMUxjCbkMh3YtvPxRZVy6Y9yuY6i62QHichUo9Hu0eLR/L4DL/Xk823J57dVnCnrYt23OnvU3fq0KbSUuiPJVFmtEyCXMDh6HHeu/8SDrsi+rCVZ8G/CJU7GdKLBolzQ+91F89a8t1gZ6HZdL+nnm+56LGoQKl1DKLVhgAnQ3pZB/+C+riPHd3QBGgSCNtomqYNWGMVr6QdAJ4MvbWRpYYmTb8DZkb807wdML8exmkspDZYMOAIIrpPHgcMbZisdQWmbKxVcwPV8FAozEMeRbcKF2+C0o0n0eTZWgmpUS5bD3Q6/tGg7wIwBEGNGx4KBlvz8bxPjVTOFW1SbYt/s1tKYwG99Ze01731waLivNqa1MTI5v50j6RxkBtfNIBMUkMu2I5ttQy7bBt/L2c82LklcTxo3q9Y439dUy2WLFgO0tHShtaUbLblOZIJWCB7U5jBbZ940pNnOLbM158w2/xJqkJLW0g5igIHnuTh+4hDWXvueR1y38JQ2WjX3o05VckgGMKycz8395qIFNxwaHjkO33chZYSJAykbJxZMdz5LKUuqZgxqwGBqLrW6tEk1ZKyglElowwGd/JsRB2cC9fay5hmAs7lsUWWKV0YgYnBdD4CluqxGJcydvbK/rbDw2wxs6KTa75S+jlHK89oev371B74UeG1jjBNYLS+lm5xIOi9EYmkFZgpL2Iw7b358cCHHDk8VedGEFrsU50rXr055qTUavtf8mey6n/2nsz60hpSWS8zCPYQg42N4pA/Xrn7nQ77X+bA2J4cG2Gnq73I+1/vt5Utu23Fi4BAcz0W9Y6QxacnOy+aljmvaU2hvlbSESUwMfSfeF4tgpcLVeNvDwpPINW0YYYlWPrm2O1vf1yb8rVC5rlvrTPI8H8PDx7Bw/vWH2lsXf4lOoa1gMxbmlBthjIZg7vZ5c9Z+Z2bX0mNhmDQaoJHs9HyajEYMUyfREepMzzjVffFexqikIVfWyoEYS1F203QNztXap9yttqqEI44j+J4HjRie21a8btUHv+i77T/TWulTLXFT5H3ybWCMqbYXFnx91Yq3vjg0fAzE6qWyxjQKGTsP5qaxBDkp02BUuy/lq24FTMMzUm0fUs02mXrg7C1FY6SZ5oiJMRw+tAtXX/WWl9oKc7+ujY5Oy1WZ6AROdWttYDTtm9G29MuLFlx/bKzUb0+Q0XAda4vTU8Y5JTmjyaH36UWRJz8O4/kMWHInAm7YReVjTaSwPp3fn1jBUF+7M3zvCXlOTKBCMpO+RkMvp22SKJWHMHvWysE5M6//KpGzzRhjTkcZscbE4clvglRKZzMzH7h+9fu+0JLvGVMqgjIaSisIwSEES7SbQmP/3pnb/pML1ni/JN0AdlLn9uJx3k/tP041q+Z01ubsQOk68G0picpw3ZbyzTf86jdzmd4HlNT6dFfvjOFzo3W1s23xl5dececLA4N9CDIZSBmjWq3C8wII4SKKZK2ZYXrycZev09orGn+jSd9CY2pLa8s0ZAwQBAFGiseweP6NO2e0X/kFIvSfieCesWBpo0Fwdi6Yve5/Ll64vq842g/X9UDEUCqVE5IOr8FU6Vpt1RtjothF7qOdxhJPJDJObwvZWIUwMnocC+evOb5k4R1/Q+S9orU2pxMWNfYunfEVx1Lnsr0P3rTmV/66tWX2SKU6htbWtqSSUaORF7RZWuPydWE016m8AM45XNdDGBYR+O3l6656zxdacnO+rpSRZ7qD7PUeC6Vk2Nqy8CtXr3jXdxg5uhoWEQSBBfkSUK3Zffk6f1rLANA0njqtnsCe7NNprVCpFOG5LeW1V7/7Xzvbl3xRaz3yeny3112iYIyGgTk0p/fqv7lmxTt/qmIWxnEFQkzu2D3taV2Xr3Ovrc7ApTfGYGjkCK5YuHbPgrnX/i/GaOdUcxmnTbBSCRfcfXnxFTf9ryWLbtsJ45ZqbHYate6OFCK47GtdTHjZ+MNu2QpHsGjhdcUrF975OULmaSm1OSPHqhEgPWuoUseaSD90xYI1/8+smVcOjhZPJInqCqSMklJmm9vj3EFjl/NJHvuShQsu9KVhamU/BDSMqSMYpcCYDQ5t+ZOttQoCD2Pl4+hon1teu/pD/1dLZu7XpdTybHK+/NabPnqWupbBaC59t21bPt9lBof23jI0fMjJZvPjhKRarSYj3sQ4Op7m/OWXBetsNFHzG+DckqMppeH72STHKlGNRtBW6K2uXf3Bz3d3XPXftdbVs8XEzl6wQCASIBI6G3Ruam/tZcOjB9eMFE+4rhPUKhFTBjybaJ1c7XjZsT8P/lZSYOg4rgW8ZYxYlpDLdoZrr/7A/5ndc93nldZD5hzUrJ0DwWp0ExG15Hs25XIdwbH+XdeNlQZ4Nsgn6R47G9l20sqGasXLwnXuBWhy1GeHVNpiwShKhi6YEL6bU9eu+uX75s+58b8ajYPanJtCyHMoWDXhKudzPZtb811e/+Duq0uVQeE6QcIfb/sAp2rGuCxY584pn4iqpwUCQgiACGFYRD7fUb121bu/Pn/Ojf8vge04l91X51iwrHARUbGQ793U0tLlHTq65epSpV9kMznb2St4rUHisnBNf7SXfo8xS8oLGMh4LNFU7/7Wwnnr/ysRban1FlysgkWEpOacRltys17taOtl/UN7rikWjzvZTB5KS1vDPUVAelmwzo0ZnAzpEIQgVCtDKLT0lG689kNfmTvr+s8B2Gw7l+jiFyzUaoporCU36+XOttl0vH/X9SPFPpEJMjaSNI0YCl0WrHN0pdUJjWbQFu4JVMNhtLZ0V9eu+ZUvze699nOA2V5vh7tEBCup8IExqGQzM16e2b24BGI9A/2HW43R3BjLfieEqAGndrSdHFe6kc4ZTmuEzgc/14U1Zaah2K8+maJx41NH3PKYxskMIZ6sTzqHx/YBCGHnUI+VhtDeOqu6/vpf/3xP58rPG2MO2PImXIqCldaW8aoj2IbO9lmDUmHR8MjhGVpHZMPflBmZJ2S27rihkBOR+ino099IxqwmTM1oKYWwh6+xoyZl4wFSagJWY96L4xCjxaPo7Vk6cttNn/wPbS2L/hZAv5nEpXWJCVaKtMdxMQKinbN6VuzzvZauE4O75hOTjAvHUlJqDSl1rcy53oGTtnfJCcx1J7svdY3WfKyfMbphViNqPZ5EDJw7cBwHURTXhmxVqkUEfr56zcp3vHD18nf+t3x27pe0UqV6Sen0CdZ5Hf6stKx4XPxo6aI7jwVBbuCp57/w3igaodbWLowVK/A9F7FUCSmIZYyzaQUFY+rTMRh7I2utxqECuiZUqfa3fZQmwaHqo5bjWCKODVzXAWccI8V+eG4+XHfdBx/o7lr899DiSa1U1YwjHJ/Gpzg/GotBqTK0CcG5pwX3j+Qzs59bOO/6o4eObryhr2+nl8m2JOReupa8TjtW0rFlqWt1ah/rUtZojUwyphHCqTnhUWQnyXJuGZrTik/H4VAqQrE0gEJ+5ujb7vqDz3e1LfkfykSvaKUizgLU2AynWWOdd8ESIrApIIhRz23bsGDu9VsyQUv7wNDehcqEEMIBo/pwppQ2KVX5xuAcEYxdzD5WvTunvoZ1jZbygabTzxzHciuUK6MwGuaaFfc+deOaD/yXXGbOP4D0EaUrGobwhhcsxuy8Gq0Ru66zs6tj8Svz56wa27X3hTWVcMDxXB+cERivd/qkwyOtYJ0qSW0uYcHSaTTdxO+yLDC2W1mCc4ZcLgdtIhw/cRAtue7KW+74vb+Z03vN5xzhPWSMU7G06iH+TQmWMQSDWHMujnui49kF86/f09U+x9l36LVF5eoIuY5XiwQ550klBZL5eCcDVy9dwaoX1jUKV70jKU3oKyXhOByl8jCqlVjdtu4jP75+9fs+l8vM+Vtieq/SsWTkgy6QYImLZDGN0aaY8Vvun9t786Ndb17yoV37nn7ry6/+YH1LoQVaWRYUz81C6wgw3DZteLw2YEBriUqlDN/3a5yl2tTbmbQyNb6H+oYZjB9ElTaH8nGQh30NNgnRTjuT698bX685ka4bqBPX1amaLC6V0m8SS37XWPPHmC0zUso63ZxszsLzGOJI6mWL7nlx4dy1TxZa5n2ByOw0GtHFMBj+gmsskEoWksMgUkTeCGP6xe6Opa9dsWBNcd/BF9cWiwMsk8nbKelagyUcA47jgsigWCyCiNDS0gqlFCoVm5N0EkyHEmJWxgSMZqiXhUwWrObFrc0bPCdzYaFhhnMdAW8kK+Gc1Xi/4jiu+Yycc3ieWyttSRPHlpyDWV51RshmfRw7dhCMeeruW3/rq/NmX/85YuY+z2nt0zpUBBegGMZo/JvXWBOdV61VxXWC51uyize+7c7PPjNWPvyWnz7x1x853n8IM7p6wRkl7WYj8DwfuVwOSimEYYxSqYp8Pp/Miw4bwFcOJQFtJDg/BfFaQ74tRfzr32dJy4upjay1mkmPw6DqJm18f2UcpxqLQ4g6uVwUxZDSclB4XoBKpQytFQotBWhjUCoVoRGhPMZw71v+w9faWhb+wHUKP9YoF7VW6mLjpLgIBau2udoYlHwv9z2HL33wnW/6L18vR8fe8fKrD9yze99zV3Z2dqBQyCMMo3ETM7LZLKqVyLaIuw4cx6aMZGzxL1e4MIhO2q5uTKN2qp/m8YldakAuDOo0RPUhBBN5LAgcnKM20DP9mTW1wvJSRTEojsEYRy6fA0jhxLGjWLRw/dZli29+uTW/8DuuyD3CBUpaMWmMvij376IVrAb/SwJCBn7Lw9KMPHnL2o+tvv7qd71rx+6f3fnSaw9c19rahiCTQxzJZPycgOMm+UdNUEnVqhDJjBwjgSQfN0lQwMbhRs0dfWMrM5iZ4D/Z5ty6IDYGESkAZztM0re1M7hZLVeqtURLNgttJKKoihPHjmDRFTdtvvUdv/Vwxu35ymh537ZMUKjK2Chj5EW9bxe9YI3XYLriiOB5A/+V1Svee99VS996z6EjG+567KkvvNX3AgjHheAC2tjhjHGsEEVh4qPYgUJRHCcpEXPSQZcTHfVxvhXpps66FaC6xjKmLnDpzx0hAGOglAY0YEjCaA3BGTzPw+DQccRRjNvW/+pDc3rXPMR5/iexOrFdCD80RptLpcPpkhGsBhHTxpiQc3ej4NmtC+fc9f25777x2krUf9Puvc/e+OxL374xlyvA9zJwXR+OwxDHEaSMwTjgC9eaodSEGWoI8+uVFI1J8MYSFJsZ0FNEhQ1OsaEJJG8s8bEs87Tn27mDUkaoVq0/JWWAd73tT/9n4HW/wHn2OaLKXsCTkTTmYuf1egMIVoMOMyYm4ntcN7tPmcr3Vy/75QUrl9579Wj50F0HDm9c/szz31yfCXLI5bOJo62TagBqgmlNHRXVhSvVQCoRsvHCZIypZQ1qwlhj7Uumu5KLOI4wNDQAKSNcvfLtLy6Ye91rhZbZT0J7z3Pu7mVchUZzrY0xF56B8N+cYDXmQIwCjGJM7GDM3+k6me+tWvpLPSuX3LtS6eLqI8c3rX38mb//+TBUcB0fXiYAq7Wi2RdxuAuQHWBpqytMDV+yGknVcnWALV2x7Wx8XO7ScThkHCfjhy0uJWWIsdKY5ZpnHDdd/8Efz+pd9bwrWl9m8DcVy/sPCBEoaFfVO0Qv7euNIFgThcwAiBjxAyScQ6SDH83pucN/3ztvmcFIL1Zm7KpydWBR37Ety1545Ru3V6uWuS4IcrbhI7Z1TmkRoue543AnQCfFh6IGRShl66MMgNJYCCktKs64wcrlb3t6zsxVm3LZrp2c5bcYzXcTiROahkcFdzQM1839tcuCdTFfOgn7S5w5exnpfUbznzoix5Yu+IXMlfPv7SHSPSDVo3W1uxIXe6uV4a4wHMuOlYcLI6MnCqXSSCaOQ6EhGYmYu64be64fAyDXzUSZTGul0NIxVMh3H/e8/LDn5A9z5g3COIeNYQeIxPFyeLDCmNCcO8YQN+eDVfpCX///AJZI8x1p7Qe4AAAAAElFTkSuQmCC);
+    background-image: url(data:image/png;base64)
     background-size: 22px 22px;
     -moz-background-size: 22px 22px;
     background-repeat: no-repeat;
@@ -1785,18 +2089,19 @@ function showOutput(id, name) {
 
     REPORT_TMPL = """
 <p id='show_detail_line'>
-<span class="label label-primary" onclick="showCase(0)">Summary</span>
-<span class="label label-danger" onclick="showCase(1)">Failed</span>
-<span class="label label-default" onclick="showCase(2)">All</span>
+<span class="label label-primary" onclick="showCase(0)">Summary 摘要</span>
+<span class="label label-danger" onclick="showCase(1)">Failed 失败</span>
+<span class="label label-default" onclick="showCase(2)">All 所有</span>
 </p>
 <table id='result_table' class="table">
     <thead>
         <tr id='header_row'>
-            <th>Test Suite/Test Case 测试套件/用例</td>
+            <th>Lottery 数字彩分类/用例</td>
             <th>Count 个数</td>
             <th>Pass 通过</td>
             <th>Fail 不通过</td>
             <th>Error 测试程序异常</td>
+            <th>PassRate 通过率</td>
             <th>View 查看</td>
         </tr>
     </thead>
@@ -1810,11 +2115,41 @@ function showOutput(id, name) {
             <td class="text text-success">%(Pass)s</td>
             <td class="text text-danger">%(fail)s</td>
             <td class="text text-warning">%(error)s</td>
+            <td>
+            <script>
+            document.write(division(%(Pass)s,%(count)s));
+            function division(arg1, arg2){
+            var t1 = 0, t2 = 0, r1, r2;
+            try { 
+                t1 = new String(arg1).split(".")[1].length;
+            } catch (e) { }
+            try { 
+                t2 = arg2.toString().split(".")[1].length;
+            } catch (e) { }
+            r1 = Number(new String(arg1).replace(".", ""));
+            r2 = Number(arg2.toString().replace(".", ""));
+            //放大倍数后两个数相除后
+            var money = r1 / r2;
+            //保留2个小数位数
+            return money.toFixed(2);
+            }
+            </script>%%
+            </td>
+</td></td>
             <td>&nbsp;</td>
-        </tr>
+        </tr>    
     </tfoot>
+    
 </table>
-"""  # variables: (test_list, count, Pass, fail, error)
+<tr id='head_row'>
+            <td>报告说明：</td>
+            <p>1、测试用例放在Detail里面的pass</p>
+            <p>2、测试异常截图在/fusion/pictures文件夹下</p>
+        </tr>
+        
+        
+
+"""  # variables: (test_list, count, Pass, fail, error, passrate)
 
     REPORT_CLASS_TMPL = r"""
 <tr class='%(style)s'>
@@ -1823,9 +2158,31 @@ function showOutput(id, name) {
     <td>%(Pass)s</td>
     <td>%(fail)s</td>
     <td>%(error)s</td>
+    <td><script>
+    document.write(division(%(Pass)s,%(count)s));
+    function division(arg1, arg2){
+    var t1 = 0, t2 = 0, r1, r2;
+    try { 
+        t1 = new String(arg1).split(".")[1].length;
+    } catch (e) { }
+    try { 
+        t2 = arg2.toString().split(".")[1].length;
+    } catch (e) { }
+    r1 = Number(new String(arg1).replace(".", ""));
+    r2 = Number(arg2.toString().replace(".", ""));
+    //放大倍数后两个数相除后
+    var money = r1 / r2;
+    //保留2个小数位数
+    return money.toFixed(2);
+}
+</script>%%
+</td>
+    
+   
     <td><a class="btn btn-xs btn-primary"href="javascript:showClassDetail('%(cid)s',%(count)s)">Detail 详情</a></td>
 </tr>
-"""  # variables: (style, desc, count, Pass, fail, error, cid)
+
+"""  # variables: (style, desc, count, Pass, fail, error, passrate cid)
 
     REPORT_TEST_WITH_OUTPUT_TMPL = r"""
 <tr id='%(tid)s' class='%(Class)s'>
@@ -1833,7 +2190,8 @@ function showOutput(id, name) {
     <td colspan='4' align='center'>
 
         <!--css div popup start-->
-        <a class="popup_link btn btn-xs btn-default" onfocus='this.blur();' href="javascript:showTestDetail('div_%(tid)s')" >
+        <a class="popup_link btn btn-xs btn-default" onfocus='this.blur();' 
+        href="javascript:showTestDetail('div_%(tid)s')" >
             %(status)s</a>
 
         <div id='div_%(tid)s' class="popup_window">
@@ -1841,9 +2199,20 @@ function showOutput(id, name) {
             <a onfocus='this.blur();' onclick="document.getElementById('div_%(tid)s').style.display = 'none' " >
                [x]</a>
             </div>
-            <pre>
+            <pre> 
             %(script)s
             </pre>
+            <script>        
+            function save_file{  	
+            var fso, tf;
+            fso = new ActiveXObject("Scripting.FileSystemObject");
+            tf = fso.CreateTextFile("/fusion/2.txt", true);
+            tf.WriteLine("Testing 1, 2, 3.") ;
+            tf.WriteBlankLines(3) ;
+            tf.Write ("This is a test.");
+            tf.Close();
+            }
+            </script>
         </div>
         <!--css div popup end-->
 
@@ -1883,6 +2252,7 @@ function showOutput(id, name) {
 
 TestResult = unittest.TestResult
 
+
 class _TestResult(TestResult):
     # note: _TestResult is a pure representation of results.
     # It lacks the output and reporting ability compares to unittest._TextTestResult.
@@ -1895,6 +2265,7 @@ class _TestResult(TestResult):
         self.success_count = 0
         self.failure_count = 0
         self.error_count = 0
+        self.passrate_count = 0
         self.verbosity = verbosity
 
         # result is a list of result in 4 tuple
@@ -1999,6 +2370,7 @@ class _TestResult(TestResult):
         else:
             sys.stderr.write('F')
 
+
 class TestRunner(_TemplateReport):
     """
     HtmlTestRunner
@@ -2071,6 +2443,8 @@ class TestRunner(_TemplateReport):
             '<span class="text text-danger">Failure <strong>%s</strong></span>' % result.failure_count)
         if result.error_count:   status.append(
             '<span class="text text-warning">Error <strong>%s</strong></span>' % result.error_count)
+        # if result.passrate_count:   status.append(
+        #     '<span class="text text-passrate">PassRate <strong>%s</strong></span>' % result.passrate_count)
         if status:
             status = ' '.join(status)
         else:
@@ -2123,14 +2497,16 @@ class TestRunner(_TemplateReport):
         sortedResult = self.sort_result(result.result)
         for cid, (cls, cls_results) in enumerate(sortedResult):
             # subtotal for a class
-            np = nf = ne = 0
+            np = nf = ne = npra = 0
             for n, t, o, e in cls_results:
                 if n == 0:
                     np += 1
-                elif n == 1:
+                if n == 1:
                     nf += 1
-                else:
+                if n == 2:
                     ne += 1
+                # else:
+                #     npra += 1
 
             # format class description
             if cls.__module__ == "__main__":
@@ -2140,7 +2516,6 @@ class TestRunner(_TemplateReport):
             doc = cls.__doc__ and cls.__doc__.split("\n")[0] or ""
             desc = doc and '%s: %s' % (name, doc) or name
 
-
             row = self.REPORT_CLASS_TMPL % dict(
                 style=ne > 0 and 'text text-warning' or nf > 0 and 'text text-danger' or 'text text-success',
                 desc=desc,
@@ -2148,6 +2523,7 @@ class TestRunner(_TemplateReport):
                 Pass=np,
                 fail=nf,
                 error=ne,
+                # passrate=npra,
                 cid='c%s' % (cid + 1),
             )
             rows.append(row)
@@ -2157,10 +2533,12 @@ class TestRunner(_TemplateReport):
 
         report = self.REPORT_TMPL % dict(
             test_list=''.join(rows),
+            # count=str(result.success_count + result.failure_count + result.error_count + result.passrate_count),
             count=str(result.success_count + result.failure_count + result.error_count),
             Pass=str(result.success_count),
             fail=str(result.failure_count),
             error=str(result.error_count),
+            passrate=str(result.passrate_count),
         )
         return report
 
@@ -2203,7 +2581,8 @@ class TestRunner(_TemplateReport):
                     tmp += """ <img src="data:image/jpg;base64,%s" style="display: none;" class="img"/>\n""" % img
             images = self.IMG_TMPL % dict(images=tmp)
         else:
-            images = u"""无截图"""
+            # images = u"""无截图"""
+            images = u"""捕捉到图片文件夹路径：/fusion/pictures"""
 
         row = tmpl % dict(
             tid=tid,
@@ -2223,6 +2602,7 @@ class TestRunner(_TemplateReport):
     def _generate_ending(self):
         return self.ENDING_TMPL
 
+
 class TestProgram(unittest.TestProgram):
     """
     A variation of the unittest.TestProgram. Please refer to the base
@@ -2236,6 +2616,7 @@ class TestProgram(unittest.TestProgram):
         if self.testRunner is None:
             self.testRunner = TestRunner(verbosity=self.verbosity)
         unittest.TestProgram.runTests(self)
+
 
 class TestSuite(unittest.TestSuite):
     """A test suite is a composite test consisting of a number of TestCases.
@@ -2301,11 +2682,160 @@ class TestSuite(unittest.TestSuite):
         """
         self.addTests(tests)
 
+
 main = TestProgram
+
 
 ##############################################################################
 # Executing this module from the command line
 ##############################################################################
+
+
+def context_click(on_element=None):
+    pass
+    """
+    鼠标右键点击
+    如果参数不写，那么点的是当前鼠标位置
+    如果参数写定位到的元素对象element，那就是点这个元素
+    """
+
+
+def click(on_element=None):
+    pass
+    """
+    点击:
+    如果参数不写，那么点击的是当前鼠标位置
+    如果参数写定位到的元素对象element，那就是点这个元素
+    """
+
+
+def click_and_hold(on_element=None):
+    pass
+    """
+    鼠标左键按住某个元素
+    如果参数不写，那么点的是当前鼠标位置
+    如果参数写定位到的元素对象element，那就是点这个元素
+    """
+
+
+def double_click(on_element=None):
+    pass
+    """
+    双击鼠标
+    如果参数不写，那么点的是当前鼠标位置
+    如果参数写定位到的元素对象element，那就是点这个元素
+    """
+
+
+def drag_and_drop(source, target):
+    pass
+    """
+    按住源元素上的鼠标左键，然后移动到目标元素并释放鼠标按钮
+    source: 按住鼠标的元素位置
+    target: 松开鼠标的元素位置
+    """
+
+
+def drag_and_drop_by_offset(source, xoffset, yoffset):
+    pass
+    """
+    按住源元素上的鼠标左键，然后移动到目标偏移量并释放鼠标按钮。
+    source: 按住鼠标的元素位置
+    xoffset: X轴的偏移量
+    yoffset: Y轴的偏移量
+    """
+
+
+def key_down(value, element=None):
+    pass
+    """
+    只发送一个按键，而不释放它。只应用于修饰键（控制、alt和shift）。
+
+    value: 要发送的修饰符键。值在“Keys”类中定义。
+    element: 定位的元素
+    如果element参数不写就是当前鼠标的位置
+
+     举个例子，按住
+    ctrl + c::
+
+    ActionChains(driver).key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform()
+    """
+
+
+def move_by_offset(xoffset, yoffset):
+    """
+    将鼠标移动到当前鼠标位置的偏移量
+
+    xoffset: X轴
+    作为一个正整数或负整数移动到x偏移量
+     yoffset: Y轴
+    偏移，作为正整数或负整数。
+    """
+
+    def move_to_element(self, to_element):
+        pass
+        """
+        鼠标悬停
+        - to_element: 定位需要悬停的元素
+        """
+
+
+def move_to_element_with_offset(to_element, xoffset, yoffset):
+    pass
+    """
+    通过指定元素的偏移量移动鼠标。偏移量与元素的左上角相对
+    - to_element: 定位需要悬停的元素
+    - xoffset: X
+    轴偏移量
+    - yoffset: Y
+    轴偏移量
+    """
+
+
+def release(on_element=None):
+    pass
+    """
+    释放一个元素上的鼠标按钮。
+
+    - 如果参数不写，那么是当前鼠标位置
+    - 如果参数写定位到的元素对象element，那就是这个元素.
+    """
+
+
+
+
+
+class ActionChainss(object):
+    def __init__(self, driver):
+        self._base_driver = driver
+        self._actions = []
+        if self._base_driver:
+            self._actions = ActionBuilder(self._base_driver)
+
+    def perform(self):
+        # 执行行为事件
+        if self._base_driver:
+            self._actions.perform()
+        else:
+            for action in self._actions:
+                action()
+
+    def key_up(self, value, element=None):
+        pass
+
+        # 释放按键，配合上面的一起使用
+
+    def send_keys(self, *keys_to_send):
+        """"
+        发送到当前焦点元素
+        要发送的按键。修饰符键常数可以在“Keys”类。
+
+        def send_keys_to_element(self, element, *keys_to_send):
+            发送到定位到的元素上
+            - element: 定位的元素
+            - keys_to_send: 要发送的按键。修饰符键常数可以在“Keys”类。
+        """
+
 
 if __name__ == "__main__":
     main(module=None)

@@ -1,0 +1,490 @@
+Pk10_Mm:
+
+  #导航栏---前一
+  MENU : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div'  
+  MENU1: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]' 
+  
+  #层级标题1----前一
+  IDELE1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div' 
+  
+  #前一---冠军
+  #0-9
+  QIAN1GJUN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div' 
+  
+ 
+  #QIAN1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[10]'
+  
+  
+  #全---大---小---单---双
+  QIANWENZI : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[3]/div' 
+  
+  QIAN12 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[3]/div[1]' 
+  QIAN13 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[3]/div[2]' 
+  
+  #-------------------------------------------------------------------------------------------------------
+  #前二---前二复式---前二单式
+  QIAN2DFN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div' 
+  #前二---冠军
+  
+  QIAN2GJUN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div' 
+  #全---大---小---单---双
+  QIAN2GWENZI: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div' 
+  
+  #前二---亚军
+  QIAN2YJUN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div' 
+  #全---大---小---单---双
+  QIAN2YWENZI : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div' 
+  #前二---复式---输入框
+  QIAN2DFNTEXT : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea' 
+  
+  
+  
+  
+  
+  
+  
+  #-------------------------------------------------------------------------------------------------------------
+ 
+  #前三---前三复式
+  QIAN3Q3N  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div' 
+  #前三---冠军
+  QIAN3GJUN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div' 
+  #全---大---小---单---双
+  QIAN3GWENZI: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div' 
+  
+  #前三---亚军
+  QIAN3YJUN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div' 
+  #全---大---小---单---双
+  QIAN3YWENZI: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div' 
+  
+  #前三---亚军
+  QIAN3JJUN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div' 
+  #全---大---小---单---双
+  QIAN3JWENZI: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[3]/div' 
+  
+  #前三---复式---输入框
+  QIAN3DFNTEXT : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/textarea' 
+  
+  
+  
+  
+  
+ 
+  #------------------------------------------------------------------------------------------------------------- 
+  #定位胆DWW1_5
+  DWD: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[1]' 
+  
+  #定位胆第1~5名---第6~10名---定位胆
+  DWD1_5: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div'
+ 
+  DWD1_5_1_05: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[1]'
+  DWD1_5_6_10: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[2]'
+  DWD1_5_1-10: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[3]'
+  
+  
+  #五行---冠军---亚军---季军
+  WXGYJ3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div' 
+  #五行---冠军---亚军---季军---金木水火土
+  WXGYJ35: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div' 
+  
+  
+  #------------------------------------------------------------------------------------------------------------- 
+  #大小单双
+  DXDS: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[1]' 
+  
+  #大小单双---大小---冠军---亚军---季军
+  DXDS_DX_GYJ: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[2]/div'
+  
+  #大小单双---大小
+  DXDS_DX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div'
+   
+  #大小单双---单双---冠军---亚军---季军
+  DXDS_DS_GYJ: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div'
+  
+  #大小单双---单双
+  DXDS_DS: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div'
+  
+  
+  #大小单双---冠军和
+  DXDS_GYJH: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[3]/div[2]/div'
+  
+  #大小单双---冠军和---大小单双
+  DXDS_GYJH_DS: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div'
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  #冠军DWW1_5(0-9)
+  DWD1_50111: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div'
+  #亚军
+  DWD1_51111: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div'
+  #季军
+  DWD1_52111: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div'
+  #第四名
+  DWD1_53111: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[4]/div/div[2]/div'
+  #第五名
+  DWD1_54111: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[5]/div/div[2]/div'
+  #第六名
+  DWD1_55111: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[6]/div/div[2]/div'
+  #第七名
+  DWD1_56111: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[7]/div/div[2]/div'
+  #第八名
+  DWD1_57111: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[8]/div/div[2]/div'
+  #第九名
+  DWD1_58111: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[9]/div/div[2]/div'
+  #第十名
+  DWD1_59111: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[10]/div/div[2]/div'
+ 
+ 
+ 
+ #冠军文字---全---大---小---单---双
+  DWD1_50WZ0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div'
+  DWD1_51WZ0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div'
+  DWD1_52WZ0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[3]/div'
+  DWD1_53WZ0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[4]/div/div[3]/div'
+  DWD1_54WZ0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[5]/div/div[3]/div'
+  DWD1_55WZ0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[6]/div/div[3]/div'
+  DWD1_56WZ0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[7]/div/div[3]/div'
+  DWD1_57WZ0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[8]/div/div[3]/div'
+  DWD1_58WZ0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[9]/div/div[3]/div'
+  DWD1_59WZ0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[10]/div/div[3]/div'
+  
+  
+  
+  DWD1_50WZ00: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div[1]'
+  DWD1_50WZ01: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[2]'
+  DWD1_50WZ02: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div[3]'
+  DWD1_50WZ03: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div[4]'
+  DWD1_50WZ04: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div[5]'
+  DWD1_50WZ05: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div[6]'
+ 
+ 
+ 
+  
+  
+  #亚军10个号码DWW1_50(1-9)----01
+  DWD1_50101: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[1]'
+  DWD1_50102: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[2]'
+  DWD1_50103: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[3]'
+  DWD1_50104: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[4]'
+  DWD1_50105: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[5]'
+  DWD1_50106: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[6]'
+  DWD1_50107: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[7]'
+  DWD1_50108: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[8]'
+  DWD1_50109: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[9]'
+  DWD1_50110: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div[10]'
+  #百位---全
+  BQUAN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div[1]'
+  #百位---大
+  BDA    : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div[2]'
+  #百位---小
+  BXIAO  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div[3]'
+  #百位---单
+  BDAN   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div[4]'
+  #百位---双
+  BSHUANG: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div[5]'
+  #百位---清
+  BQING  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[3]/div[6]'
+ 
+ 
+ 
+ #十位
+  S0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[1]'
+  S1: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[2]'
+  S2: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[3]'
+  S3: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[4]'
+  S4: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[5]'
+  S5: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[6]'
+  S6: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[7]'
+  S7: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[8]'
+  S8: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[9]'
+  S9: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[2]/div[10]'
+   
+  
+  #十位---全
+  SQUAN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div[1]'
+  #十位---大
+  SDA    : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div[2]'
+  #十位---小
+  SXIAO  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div[3]'
+  #十位---单
+  SDAN   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div[4]'
+  #十位---
+  SSHUANG: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div[5]'
+  #十位---清
+  SQING  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div/div[3]/div[6]'
+  
+  
+  
+  
+ #个位
+  G0: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div[1]'
+  G1: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div[2]'
+  G2: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div[3]'
+  G3: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div[4]'
+  G4: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div[5]'
+  G5: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div[6]'
+  G6: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div[7]'
+  G7: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div[8]'
+  G8: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div[9]'
+  G9: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[2]/div[10]'
+  
+  
+  
+  #十位---全
+  GQUAN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[3]/div[1]'
+  #十位---大
+  GDA    : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[3]/div[2]'
+  #十位---小
+  GXIAO  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[3]/div[3]'
+  #十位---单
+  GDAN   : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[3]/div[4]'
+  #十位---双
+  GSHUANG: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[3]/div[5]'
+  #十位---清
+  GQING  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[3]/div/div[3]/div[6]'
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  #-------------------------------------------------------------------------------------------------------------
+ 
+  #冠亚和
+  QIANGYH  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div' 
+  #3---17
+  
+  QIANGYH1: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div[1]/div[2]/div' 
+  #18---19
+  QIANGYH2: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[2]/div[1]/div[2]/div' 
+  
+  
+ 
+  #-------------------------------------------------------------------------------------------------------------
+ 
+  #龙虎
+  LONGHU  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div[1]/div/div[2]/div' 
+  #龙虎---冠军亚军季军
+  LONGHUNUM: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div' 
+  #龙虎---冠军
+  LONGHUNUM1: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[2]' 
+  
+  #龙虎--龙虎
+  LONGLH  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div' 
+  #龙虎--龙
+  LONGLONG: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[4]/div/div/div[2]/div[1]' 
+ 
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  IDELE11 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[2]' 
+  IDELE21 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/div[2]/div[1]' 
+  
+  
+  QIAN11: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div'  
+  QIAN1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[1]'  
+  QIAN2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]'  
+  QIAN3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[3]'  
+  QIAN4 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[4]'  
+ 
+  
+  
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  #点击添加注单按钮
+  ADDNOTE  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[3]/button'
+
+
+  #随机1注
+  RANDOM1  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[1]'
+  #随机5注
+  RANDOM5  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[2]'
+
+  #元
+  YUAN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[1]'
+  #角
+  JIAO : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[2]'
+  #分
+  FEN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[3]'
+
+  #单注金额
+  XIUGAI  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/input'
+
+
+
+  #全部删除
+  ALLDELETE: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[3]'
+
+  #确认投注
+  SUREBET  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[4]'
+
+
+
+  #请先添加投注内容
+  TIPS : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+  #请先添加投注内容
+  TIPS01 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #下注成功
+  TIPS02 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #您还没有选择号码或所选号码不全
+  TIPS03 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+  #是否删除全部注单？
+  TIPS04 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  
+  # 确定按钮
+  TIPSBUTTON : 'x,//*[@id="root"]/div/div[1]/div[2]/div[3]/div'

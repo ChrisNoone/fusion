@@ -1,0 +1,7 @@
+设计稿地址：
+https://lanhuapp.com/web/#/item/project/board/detail?pid=f85d705e-a89a-4ff2-9d91-e9c65b6b4211&project_id=f85d705e-a89a-4ff2-9d91-e9c65b6b4211&image_id=cd08c8ef-c2ef-4da5-b5cb-0726904018f0
+账户：LCjyxm@gmail.com
+密码：lee123456
+前台测试地址：https://tipster-frontend.spmobileapi.net/
+后台测试地址：https://tipster-backend.spmobileapi.net/admin/user/login.html
+https://lanhuapp.com/web/#/item/project/door?pid=08d5a00e-e1dd-4aa1-9533-b378f007d001&type=share_board&toName=board

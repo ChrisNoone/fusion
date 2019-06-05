@@ -813,7 +813,7 @@ CompanyDeposit:
 
 HomeRegistered:
     #注册
-    #用户名          
+    #用户名            
     USERNAME: 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[1]/div[1]/div[2]/input'
     PASSWORD: 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[2]/div[1]/div[2]/input'
     EMAIL   : 'xpath,//*[@id="root"]/div/div[4]/div/div/div/div[3]/div[1]/div[2]/input'

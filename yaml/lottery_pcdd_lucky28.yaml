@@ -1,0 +1,177 @@
+LUCKY28:
+
+  #特码
+  L28TAN0 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[1]/div/div[3]/input'
+  L28TAN1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[2]/div/div[3]/input'
+  L28TAN2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[3]/div/div[3]/input'
+  L28TAN3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[4]/div/div[3]/input'
+  
+  L28TA00 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[1]/div[2]/div[3]/input'
+  L28TA01 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[1]/div[3]/div[3]/input'
+  L28TA02 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[1]/div[4]/div[3]/input'
+  L28TA03 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[1]/div[5]/div[3]/input'
+  L28TA04 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[1]/div[6]/div[3]/input'
+  L28TA05 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[1]/div[7]/div[3]/input'
+  L28TA06 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[1]/div[8]/div[3]/input'
+ 
+  L28TA07 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[2]/div[2]/div[3]/input'
+  L28TA08 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[2]/div[3]/div[3]/input'
+  L28TA09 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[2]/div[4]/div[3]/input'
+  L28TA10 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[2]/div[5]/div[3]/input'
+  L28TA11 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[2]/div[6]/div[3]/input'
+  L28TA12 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[2]/div[7]/div[3]/input'
+  L28TA13 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[2]/div[8]/div[3]/input'
+
+  L28TA14 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[3]/div[2]/div[3]/input'
+  L28TA15 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[3]/div[3]/div[3]/input'
+  L28TA16 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[3]/div[4]/div[3]/input'
+  L28TA17 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[3]/div[5]/div[3]/input'
+  L28TA18 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[3]/div[6]/div[3]/input'
+  L28TA19 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[3]/div[7]/div[3]/input'
+  L28TA20 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[3]/div[8]/div[3]/input'
+ 
+
+  L28TA21 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[4]/div[2]/div[3]/input'
+  L28TA22 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[4]/div[3]/div[3]/input'
+  L28TA23 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[4]/div[4]/div[3]/input'
+  L28TA24 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[4]/div[5]/div[3]/input'
+  L28TA25 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[4]/div[6]/div[3]/input'
+  L28TA26 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[4]/div[7]/div[3]/input'
+  L28TA27 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[1]/div[2]/div[4]/div[8]/div[3]/input'
+  
+    
+  #特码包三
+  #下注金额
+  L28TAB3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[2]/input'
+  
+  #三个号码
+  
+  #L28TAB30 : 'x,/html/body/div/select'
+  #L28TAB30 : 'x,.//option[contains(selectNum)]'
+  L28TAB30 : 's,#root > div > div:nth-child(2) > div > div:nth-child(2) > div.left > div > div.pcdd > div.temabaosan > div.bet > div:nth-child(3) > div > div.value > div'
+
+  #L28TAB30 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[3]/div'
+  
+  
+  L28TAB31 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[4]/div/div/div'
+  L28TAB32 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[5]/div/div/div'
+  
+  #L28TAB32 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[2]/div[1]/div[5]/div/div[1]/div'
+ 
+  #混合
+  #大
+  L28HHDA  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[1]/div[1]/div[3]/input'
+  #单
+  L28HHDAN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[1]/div[2]/div[3]/input'
+  #大单
+  L28HHDDD : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[1]/div[3]/div[3]/input'
+  #大双
+  L28HHDSS : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[1]/div[4]/div[3]/input'
+  #极大
+  L28HHJID : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[1]/div[5]/div[3]/input'
+ 
+ 
+  #小
+  L28HHX  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[2]/div[1]/div[3]/input'
+  #双
+  L28HHSS : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[2]/div[2]/div[3]/input'
+  #小单
+  L28HHXD : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[2]/div[3]/div[3]/input'
+  #小双
+  L28HHXS : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[2]/div[4]/div[3]/input'
+  #极小
+  L28HHJIX: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[2]/div[5]/div[3]/input'
+ 
+ 
+ 
+  #色波
+  #红
+  L28SBR : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[3]/div[1]/div[3]/input'
+  #绿
+  L28SBG : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[3]/div[2]/div[3]/input'
+  #蓝
+  L28SEB : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[3]/div[3]/div[3]/input'
+ 
+ 
+  #豹子
+  L28BZ  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[2]/div[3]/div[2]/div[2]/div[4]/div/div[3]/input'
+ 
+    
+
+  
+ 
+
+  #点击添加注单按钮
+  ADDNOTE  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[3]/button'
+
+
+  #随机1注
+  RANDOM1  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[1]'
+  #随机5注
+  RANDOM5  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[2]'
+
+  #元
+  YUAN : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[1]'
+  #角
+  JIAO : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[2]'
+  #分
+  FEN  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/div[3]'
+
+  #单注金额
+  XIUGAI  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[1]/div/input'
+
+
+
+  #全部删除
+  ALLDELETE: 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[3]'
+
+  #确认投注
+  SUREBET  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[4]/div[2]/button[4]'
+
+
+
+  #请先添加投注内容
+  TIPS : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+  #请先添加投注内容
+  TIPS01 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #下注成功
+  TIPS02 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  #您还没有选择号码或所选号码不全
+  TIPS03 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+
+  #是否删除全部注单？
+  TIPS04 : 'x,//*[@id="root"]/div/div[1]/div[2]/div[2]/div'
+  
+  
+  
+  SLIDER  : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[2]/div[2]/div/div[4]'
+  
+  TTT1 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[2]/div[2]/div/div[4]'
+  TTT2 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[2]/div[2]/div/div[4]'
+  TTT3 : 'x,//*[@id="root"]/div/div[2]/div/div[2]/div[1]/div/div[3]/div[2]/div[2]/div/div[2]'
+  
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 

@@ -1,0 +1,3 @@
+[2019-05-16 19:49:30,466]-[box.py]-[ERROR]: 测试用例执行异常：(<class 'IndexError'>, IndexError('list index out of range'), <traceback object at 0x000001BDCD8F8688>)
+[2019-05-16 19:50:30,947]-[box.py]-[INFO]: 关闭CSV文件
+[2019-05-16 19:50:33,138]-[box.py]-[INFO]: 测试用例执行成功
