@@ -9,22 +9,23 @@ from unittest.suite import _DebugResult, _isnotsuite
 import pymysql
 import win32gui
 import win32con
-import webbrowser
-from configparser import ConfigParser
 import yaml
-# from ddt import ddt
+import smtplib
+from configparser import ConfigParser
 from selenium import webdriver
-
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
-
-import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import datetime
+import io
+import sys
+import unittest
+from xml.sax import saxutils
 
 
 class BoxDriver(object):
@@ -883,6 +884,142 @@ class BasePage(object):
         self.base_driver.forced_wait(2)
 
 
+class TestCase(TC):
+    """
+    TestCase类
+    """
+    images = None
+    base_driver = None
+    logger = None
+
+    def __init__(self, methodName='runTest', logger_file=None):
+        """
+        重写构造方法
+        """
+        super().__init__(methodName)
+        if self.images is None:
+            self.images = []
+        if logger_file is not None:
+            self.logger = TestLogger(logger_file)
+        else:
+            self.logger = TestLogger()
+
+    def set_up(self):
+        """
+        ddd
+        :return:
+        """
+        pass
+
+    def tear_down(self):
+        """
+        dddd
+        :return:
+        """
+        pass
+
+    def run(self, result=None):
+        orig_result = result
+        if result is None:  #如果没有传入result对象自己实例化一个TestResult对象
+            result = self.defaultTestResult()
+            startTestRun = getattr(result, 'startTestRun', None)
+            if startTestRun is not None:
+                startTestRun()
+
+        result.startTest(self)
+
+        testMethod = getattr(self, self._testMethodName)
+        if (getattr(self.__class__, "__unittest_skip__", False) or
+                getattr(testMethod, "__unittest_skip__", False)):
+            # If the class or method was skipped.
+            try:
+                skip_why = (getattr(self.__class__, '__unittest_skip_why__', '')
+                            or getattr(testMethod, '__unittest_skip_why__', ''))
+                self._addSkip(result, self, skip_why)   #调用addSkip
+            finally:
+                result.stopTest(self)
+            return
+        expecting_failure_method = getattr(testMethod,
+                                           "__unittest_expecting_failure__", False)
+        expecting_failure_class = getattr(self,
+                                          "__unittest_expecting_failure__", False)
+        expecting_failure = expecting_failure_class or expecting_failure_method
+        outcome = _Outcome(result)
+        try:
+
+            self._outcome = outcome
+
+            with outcome.testPartExecutor(self):
+                self.set_up()
+            if outcome.success:
+                outcome.expecting_failure = expecting_failure
+                with outcome.testPartExecutor(self, isTest=True):
+                    testMethod()
+                outcome.expecting_failure = False
+
+                # 尝试异常继续运行
+                with outcome.testPartExecutor(self):
+                    self.tear_down()
+
+            for test, reason in outcome.skipped:
+                self._addSkip(result, test, reason)
+            self._feedErrorsToResult(result, outcome.errors)
+            if outcome.success:
+                if expecting_failure:
+                    if outcome.expectedFailure:
+                        self.snapshot()
+                        self._addExpectedFailure(result, outcome.expectedFailure)
+                    else:
+                        self._addUnexpectedSuccess(result)
+                else:
+                    result.addSuccess(self)
+
+            self.doCleanups()
+            return result
+        finally:
+            result.stopTest(self)
+            if orig_result is None:
+                stopTestRun = getattr(result, 'stopTestRun', None)
+                if stopTestRun is not None:
+                    stopTestRun()
+
+            # explicitly break reference cycles:
+            # outcome.errors -> frame -> outcome -> outcome.errors
+            # outcome.expectedFailure -> frame -> outcome -> outcome.expectedFailure
+            outcome.errors.clear()
+            outcome.expectedFailure = None
+
+            # clear the outcome, no more needed
+            self._outcome = None
+
+    def snapshot(self):
+        """
+        截图
+        :return:
+        """
+        self.images.append(self.base_driver.save_window_snapshot_by_io())
+
+    def read_csv_as_dict(self, file_name):
+        """
+        读 CSV 作为 DICT 类型
+        :type file_name: csv_case 文件路径 和名字
+        :return:
+        """
+        return CsvHelper().read_data_as_dict(file_name)
+
+    def shortDescription(self):
+        """Returns a one-line description of the test, or None if no
+        description has been provided.
+
+        The default implementation of this method returns the first line of
+        the specified test method's docstring.
+        """
+        doc = self._testMethodDoc
+        return doc and doc.split("\n")[0].strip() or None
+        # 用[1]报错，数组超出界限，报告是空的，改为[0]就可以了
+        # return doc and doc.split("\n")[0].strip() or None
+
+
 class CsvHelper(object):
     @staticmethod
     def read_data(f, encoding="utf-8-sig"):
@@ -1060,6 +1197,7 @@ class Email(object):
             print(e)
             print("邮件发送失败!")
 
+
 @unique
 class Browser(Enum):
     """
@@ -1147,149 +1285,6 @@ class TestLogger(object):
         self.logger.removeHandler(ch)
         self.logger.removeHandler(fh)
         fh.close()
-
-# TODO：参数化
-'''
-参数化 :
-    paramunittest
-    ddt
-'''
-
-
-class TestCase(TC):
-    """
-    TestCase类
-    """
-    images = None
-    base_driver = None
-    logger = None
-
-    def __init__(self, methodName='runTest', logger_file=None):
-        """
-        重写构造方法
-        """
-        super().__init__(methodName)
-        if self.images is None:
-            self.images = []
-        if logger_file is not None:
-            self.logger = TestLogger(logger_file)
-        else:
-            self.logger = TestLogger()
-
-    def set_up(self):
-        """
-        ddd
-        :return:
-        """
-        pass
-
-    def tear_down(self):
-        """
-        dddd
-        :return:
-        """
-        pass
-
-    def run(self, result=None):
-        orig_result = result
-        if result is None:  #如果没有传入result对象自己实例化一个TestResult对象
-            result = self.defaultTestResult()
-            startTestRun = getattr(result, 'startTestRun', None)
-            if startTestRun is not None:
-                startTestRun()
-
-        result.startTest(self)
-
-        testMethod = getattr(self, self._testMethodName)
-        if (getattr(self.__class__, "__unittest_skip__", False) or
-                getattr(testMethod, "__unittest_skip__", False)):
-            # If the class or method was skipped.
-            try:
-                skip_why = (getattr(self.__class__, '__unittest_skip_why__', '')
-                            or getattr(testMethod, '__unittest_skip_why__', ''))
-                self._addSkip(result, self, skip_why)   #调用addSkip
-            finally:
-                result.stopTest(self)
-            return
-        expecting_failure_method = getattr(testMethod,
-                                           "__unittest_expecting_failure__", False)
-        expecting_failure_class = getattr(self,
-                                          "__unittest_expecting_failure__", False)
-        expecting_failure = expecting_failure_class or expecting_failure_method
-        outcome = _Outcome(result)
-        try:
-
-            self._outcome = outcome
-
-            with outcome.testPartExecutor(self):
-                self.set_up()
-            if outcome.success:
-                outcome.expecting_failure = expecting_failure
-                with outcome.testPartExecutor(self, isTest=True):
-                    testMethod()
-                outcome.expecting_failure = False
-
-                # 尝试异常继续运行
-                with outcome.testPartExecutor(self):
-                    self.tear_down()
-
-            for test, reason in outcome.skipped:
-                self._addSkip(result, test, reason)
-            self._feedErrorsToResult(result, outcome.errors)
-            if outcome.success:
-                if expecting_failure:
-                    if outcome.expectedFailure:
-                        self.snapshot()
-                        self._addExpectedFailure(result, outcome.expectedFailure)
-                    else:
-                        self._addUnexpectedSuccess(result)
-                else:
-                    result.addSuccess(self)
-
-            self.doCleanups()
-            return result
-        finally:
-            result.stopTest(self)
-            if orig_result is None:
-                stopTestRun = getattr(result, 'stopTestRun', None)
-                if stopTestRun is not None:
-                    stopTestRun()
-
-            # explicitly break reference cycles:
-            # outcome.errors -> frame -> outcome -> outcome.errors
-            # outcome.expectedFailure -> frame -> outcome -> outcome.expectedFailure
-            outcome.errors.clear()
-            outcome.expectedFailure = None
-
-            # clear the outcome, no more needed
-            self._outcome = None
-
-    def snapshot(self):
-        """
-        截图
-        :return:
-        """
-        self.images.append(self.base_driver.save_window_snapshot_by_io())
-
-    def read_csv_as_dict(self, file_name):
-        """
-        读 CSV 作为 DICT 类型
-        :type file_name: csv_case 文件路径 和名字
-        :return:
-        """
-        return CsvHelper().read_data_as_dict(file_name)
-
-    def shortDescription(self):
-        """Returns a one-line description of the test, or None if no
-        description has been provided.
-
-        The default implementation of this method returns the first line of
-        the specified test method's docstring.
-        """
-        doc = self._testMethodDoc
-        return doc and doc.split("\n")[0].strip() or None
-        # 用[1]报错，数组超出界限，报告是空的，改为[0]就可以了
-        # return doc and doc.split("\n")[0].strip() or None
 
 
 class _Outcome(object):
@@ -1402,12 +1397,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 __author__ = "Wai Yip Tung && Eason Han"
 __version__ = "0.8.4"
 
-import datetime
-import io
-import sys
-import unittest
-from xml.sax import saxutils
-
 
 def to_unicode(s):
     try:
@@ -1415,6 +1404,7 @@ def to_unicode(s):
     except UnicodeDecodeError:
         # s is non ascii byte string
         return s.decode('unicode_escape')
+
 
 class OutputRedirect(object):
     """ Wrapper to redirect stdout or stderr """
